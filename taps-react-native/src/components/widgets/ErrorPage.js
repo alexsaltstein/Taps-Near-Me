@@ -12,7 +12,7 @@ const ErrorPage = ({
     <View style={styles.container}>
       <BackButton navigation={navigation}/>
       <Text style={styles.title}>{title}</Text>
-      <Text>{message}</Text>
+      <Text style={styles.message}>{message}</Text>
       <Image source={dancingBottles} style={styles.gif} />
     </View>
   );
@@ -26,8 +26,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
   },
   title: {
-    fontWeight: 'bold',
     fontSize: 20,
+    fontFamily: 'open-sans-semi'
+  },
+  message: {
+    fontFamily: 'open-sans'
   },
   gif: {
     width: 200,
