@@ -7,7 +7,7 @@ import settings from '../../../assets/navigation/settings.png';
 const NavIcons = ({ source, to, navigation }) => {
   return (
     <TouchableOpacity
-      onPress = {()=>navigation.navigate(to)}
+      onPress={() => navigation.navigate(to)}
       style={styles.navButton}>
       <Image
         source={source}
@@ -25,10 +25,11 @@ const HomeScreen = ({ navigation }) => {
           {
             [{ icon: filter, to: 'Filter' },
             { icon: settings, to: 'Settings' }].map(i => (
-              <NavIcons 
-              source={i.icon} 
-              to={i.to} 
-              navigation={navigation}/>
+              <NavIcons
+                key={i.to}
+                source={i.icon}
+                to={i.to}
+                navigation={navigation} />
             ))
           }
         </View>
