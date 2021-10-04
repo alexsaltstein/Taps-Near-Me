@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'flex-start',
     left: 10,
-    top: 50,
+    top: 5,
   },
   backImage: {
     width: 30,

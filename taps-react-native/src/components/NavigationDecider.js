@@ -20,6 +20,7 @@ const NavigationDecider = () => {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="Filter" component={FilterScreen} />
+        <Stack.Screen name="ERROR" component={ErrorPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

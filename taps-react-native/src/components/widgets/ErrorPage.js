@@ -10,10 +10,12 @@ const ErrorPage = ({
   navigation }) => {
   return (
     <View style={styles.container}>
-      <BackButton navigation={navigation}/>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.message}>{message}</Text>
-      <Image source={dancingBottles} style={styles.gif} />
+      <View>
+        <BackButton navigation={navigation} />
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.message}>{message}</Text>
+        <Image source={dancingBottles} style={styles.gif} />
+      </View>
     </View>
   );
 };

@@ -6,6 +6,7 @@ const COLORS = {
   purple: '#A36BD3',
   gray: '#707070',
   red: '#E24242',
+  transWhite: '#FFFFFF20'
 }
 
 export { COLORS }
