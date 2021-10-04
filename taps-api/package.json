@@ -1,0 +1,20 @@
+{
+  "name": "taps-api",
+  "version": "1.0.0",
+  "description": "This is the api repo for taps near me",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "seedBeers": "node ./tasks/seedBeers.js"
+  },
+  "author": "Taps Near Me",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^4.1.2",
+    "uuid": "^8.3.2"
+  }
+}
