@@ -5,7 +5,7 @@ const insertBeer = async (beer) => {
   const { name } = beer;
   try {
     await beersData.createBeer(name);
-    console.log('inserted movie:', name);
+    console.log('inserted beer:', name);
   } catch (e) {
     console.log('ERROR:', e.message, 'for beer', name);
   }
