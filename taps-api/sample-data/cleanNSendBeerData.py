@@ -9,6 +9,8 @@ Module for:
 from typing import List, Dict, IO
 import json
 import os
+from pymongo import MongoClient, InsertOne
+import pymongo
 
 def clean_beer_data(beer_data_file, cleaned_data_file):
 
@@ -51,3 +53,23 @@ def clean_beer_data(beer_data_file, cleaned_data_file):
     json.dump(json_beer_data, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
 
     new_file.close()
+
+def send_beer_data(cleaned_data):
+
+    """ Sends the craft beer data to MongoDB """
+
+    #initialize information about MongoDB database
+
+    client: MongoClient = MongoClient("mongodb://localhost:3000")
+    db = client.[DATABASE]
+    collection = db.[beers]
+
+    #push data
+
+    with open(cleaned_data) as fp:
+
+        beer_data: List[Dict] = json.load(fp)
+
+    collection.insert_many(beer_data)
+
+    client.close()
