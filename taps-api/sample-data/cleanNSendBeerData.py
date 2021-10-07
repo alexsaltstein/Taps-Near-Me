@@ -85,7 +85,9 @@ def get_beer_data(cleaned_beer_data_file, beer_only_data_file):
         beer_dict['global_rating_score'] = beer['global_rating_score']
         beer_dict['venue_name'] = beer['venue_name']
 
-        beer_info.append(beer_dict)
+        if beer_dict not in beer_info:
+
+            beer_info.append(beer_dict)
 
         #load (dump) data into new json file
 
@@ -116,7 +118,9 @@ def get_venue_data(cleaned_beer_data_file, venue_only_data_file):
         venue_dict['lat'] = beer['venue_lat']
         venue_dict['lng'] = beer['venue_lng']
 
-        venue_info.append(venue_dict)
+        if venue_dict not in venue_info:
+
+            venue_info.append(venue_dict)
 
         #load (dump) data into new json file
 
