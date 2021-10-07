@@ -1,0 +1,18 @@
+Venue: {
+id,
+name,
+lat,
+lng,
+website,
+phone,
+beersAvailable: [ids of beers]
+}
+
+Beer: {
+  id,
+  name,
+  abv,
+  rating,
+  beer_url,
+  type
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Stella Artois",
+    "brewery_name": "Stella Artois",
+    "type": "Pilsner - Other",
+    "abv": "5",
+    "ibu": "24",
+    "untappd_website": "https://untappd.com/beer/4010",
+    "brewery_url": "https://untappd.com/brewery/265",
+    "brewery_country": "Belgium",
+    "brewery_city": "Leuven",
+    "brewery_state": "Vlaanderen",
+    "flavor_profiles": "",
+    "serving_type": "Draft",
+    "bid": "4010",
+    "brewery_id": "265",
+    "global_rating_score": 3.26,
+    "venue_name": "Thatcher McGhee's"
+  },
+  {
+    "name": "Stella Artois",
+    "brewery_name": "Stella Artois",
+    "type": "Pilsner - Other",
+    "abv": "5",
+    "ibu": "24",
+    "untappd_website": "https://untappd.com/beer/4010",
+    "brewery_url": "https://untappd.com/brewery/265",
+    "brewery_country": "Belgium",
+    "brewery_city": "Leuven",
+    "brewery_state": "Vlaanderen",
+    "flavor_profiles": "",
+    "serving_type": "Draft",
+    "bid": "4010",
+    "brewery_id": "265",
+    "global_rating_score": 3.26,
+    "venue_name": "Venueu2"
+  }
+]

@@ -1,7 +1,10 @@
 const uuid = require('uuid');
 const mongoCollections = require('../config/mongoCollections');
+const { SERVING_TYPES } = require('./consts');
+const { isValidimgURL, isValidURL } = require('./utils');
+const { getVenueByName, getVenueById } = require('./venues');
 
-const { beers } = mongoCollections;
+const { beers, venues } = mongoCollections;
 
 module.exports = {
   async getBeerById(id) {
@@ -19,20 +22,89 @@ module.exports = {
     return beersArr;
   },
 
+  async getBeerByName(name) {
+    if (!name) throw new Error('No name provided');
+    const beersCollection = await beers();
+    const beer = await beersCollection.findOne({ name: name });
+    if (!beer) throw new Error('No beer found with that name');
+    return beer;
+  },
+
   async getBeersByFilter() {
 
   },
 
-  async createBeer(name) {
-    const beersCollection = await beers();
+  async addBeerToVenue(venueName, beerId) {
+    if (!venueName) throw new Error('No name provided');
+    if (!beerId) throw new Error('No beerId provided');
+    await this.getBeerById(beerId);
 
-    const newBeer = {
-      _id: uuid.v4(),
-      name,
-    };
+    const venue = await getVenueByName(venueName);
 
-    const insertedInfo = await beersCollection.insertOne(newBeer);
-    const newId = insertedInfo.insertedId;
-    return this.getBeerById(newId);
+    const venuesCollection = await venues();
+    const updatedInfo = await venuesCollection.updateOne({ _id: venue._id }, { $addToSet: { beersAvailable: beerId } });
+    if (updatedInfo.modifiedCount === 0) throw new Error('Failed to add beer to venue');
+    return getVenueById(venue._id);
+  },
+
+  async createBeer(name, breweryName,
+    type, abv, ibu, untappdWebsite, breweryUrl,
+    breweryCountry, breweryCity, breweryState,
+    flavorProfiles, servingType, bid, breweryId,
+    gloablRatingScore, venueName) {
+    getVenueByName(venueName);
+    try {
+      const beer = await this.getBeerByName(name);
+      if (beer) {
+        try {
+          await this.addBeerToVenue(venueName, beer._id);
+        } catch {
+          console.log('This beer already exists and is in the venue');
+          return;
+        }
+      }
+    } catch {
+      if (typeof name !== 'string' || name.trim() === '') throw new Error('name must be a non-empty string');
+      if (typeof breweryName !== 'string' || breweryName.trim() === '') throw new Error('breweryName must be a non-empty string');
+      if (typeof type !== 'string' || type.trim() === '') throw new Error('type must be a non-empty string');
+      if (typeof abv !== 'string' || abv.trim() === '') throw new Error('abv must be a non-empty string');
+      if (typeof ibu !== 'string' || ibu.trim() === '') throw new Error('ibu must be a non-empty string');
+      if (typeof untappdWebsite !== 'string' || untappdWebsite.trim() === '') throw new Error('untappdWebsite must be a non-empty string and a valid website');
+      if (typeof breweryUrl !== 'string' || breweryUrl.trim() === '') throw new Error('breweryUrl must be a non-empty string and a valid website');
+      if (typeof breweryCountry !== 'string' || breweryCountry.trim() === '') throw new Error('breweryCountry must be a non-empty string');
+      if (typeof breweryCity !== 'string' || breweryCity.trim() === '') throw new Error('breweryCity must be a non-empty string');
+      if (typeof breweryState !== 'string' || breweryState.trim() === '') throw new Error('breweryState must be a non-empty string');
+      if (typeof flavorProfiles !== 'string') throw new Error('flavorProfiles must be a string');
+      if (typeof servingType !== 'string' || servingType.trim() === '' || !SERVING_TYPES.includes(servingType)) throw new Error('servingType must be a non-empty string within valid types');
+      if (typeof bid !== 'string' || bid.trim() === '') throw new Error('bid must be a non-empty string');
+      if (typeof breweryId !== 'string' || breweryId.trim() === '') throw new Error('breweryId must be a non-empty string');
+      if (typeof gloablRatingScore !== 'number' || gloablRatingScore < 0 || gloablRatingScore > 5) throw new Error('globalRatingScore must be a number between 0 and 5');
+
+      const beersCollection = await beers();
+
+      const newBeer = {
+        _id: uuid.v4(),
+        name,
+        breweryName,
+        type,
+        abv,
+        ibu,
+        untappdWebsite,
+        breweryUrl,
+        breweryCountry,
+        breweryCity,
+        breweryState,
+        flavorProfiles,
+        servingType,
+        bid,
+        breweryId,
+        gloablRatingScore,
+      };
+
+      const insertedInfo = await beersCollection.insertOne(newBeer);
+      const newId = insertedInfo.insertedId;
+      this.addBeerToVenue(venueName, newId);
+      return this.getBeerById(newId);
+    }
   }
 }
