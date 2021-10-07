@@ -2,15 +2,12 @@
 Module for:
 1)loading untappd data
 2)cleaning untappd data
-3)storing cleaned untappd data
-4)sending cleaned untappd data to db
+3)splitting cleaned data
 """
 
 from typing import List, Dict, IO
 import json
 import os
-from pymongo import MongoClient, InsertOne
-import pymongo
 
 def clean_beer_data(beer_data_file, cleaned_data_file):
 
@@ -85,17 +82,19 @@ def get_beer_data(cleaned_beer_data_file, beer_only_data_file):
         beer_dict['global_rating_score'] = beer['global_rating_score']
         beer_dict['venue_name'] = beer['venue_name']
 
-        if beer_dict not in beer_info:
+        for beer in beer_info:
 
-            beer_info.append(beer_dict)
+            if not(beer_dict['name'] == beer['venue_name'] and beer_dict['brewery_name'] == beer['brewery_name']):
 
-        #load (dump) data into new json file
+                beer_info.append(beer)
 
-        new_file = open(beer_only_data_file, "w")
+    #load (dump) data into new json file
 
-        json.dump(beer_info, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
+    new_file = open(beer_only_data_file, "w")
 
-        new_file.close()
+    json.dump(beer_info, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
+
+    new_file.close()
 
 def get_venue_data(cleaned_beer_data_file, venue_only_data_file):
 
@@ -118,17 +117,19 @@ def get_venue_data(cleaned_beer_data_file, venue_only_data_file):
         venue_dict['lat'] = beer['venue_lat']
         venue_dict['lng'] = beer['venue_lng']
 
-        if venue_dict not in venue_info:
+        for venue in venue_info:
 
-            venue_info.append(venue_dict)
+            if not(venue_dict['name'] == venue['venue_name'] and venue_dict['city'] == venue['city'] and venue_dict['state'] == venue['state'] and venue_dict['city'] == venue['city']):
 
-        #load (dump) data into new json file
+                venue_info.append(venue)
 
-        new_file = open(venue_only_data_file, "w")
+    #load (dump) data into new json file
 
-        json.dump(venue_info, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
+    new_file = open(venue_only_data_file, "w")
 
-        new_file.close()
+    json.dump(venue_info, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
+
+    new_file.close()
 
 """
 clean_beer_data('untappd-data-json.json', 'cleaned-untappd-data-json.json')
