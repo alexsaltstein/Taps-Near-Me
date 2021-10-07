@@ -54,24 +54,88 @@ def clean_beer_data(beer_data_file, cleaned_data_file):
 
     new_file.close()
 
-def send_beer_data(cleaned_data):
 
-    """ Sends the craft beer data to MongoDB """
+def get_beer_data(cleaned_beer_data_file, beer_only_data_file):
 
-    #initialize information about MongoDB database
+    """ Get the beer data separated from the file """
 
-    client: MongoClient = MongoClient("mongodb://localhost:3000")
+    #open beer file and create beer info list 
+    fp: IO = open(cleaned_beer_data_file, encoding="utf8")
+    json_beer_data = json.load(fp)
+    beer_info = list()
     
-    db = client.["INSERT DATABASE HERE"]
-    collection = db.["beers"]
+    #create and append new dictionary for each beer 
+    for beer in json_beer_data:
+        
+        beer_dict = dict()
 
-    #push data
+        beer_dict['name'] = beer['beer_name']
+        beer_dict['brewery_name'] = beer['brewery_name']
+        beer_dict['type'] = beer['beer_type']
+        beer_dict['abv'] = beer['beer_abv']
+        beer_dict['ibu'] = beer['beer_ibu']
+        beer_dict['untappd_website'] = beer['beer_url']
+        beer_dict['brewery_country'] = beer['brewery_country']
+        beer_dict['brewery_city'] = beer['brewery_city']
+        beer_dict['brewery_state'] = beer['brewery_state']
+        beer_dict['flavor_profiles'] = beer['flavor_profiles']
+        beer_dict['serving_type'] = beer['serving_type']
+        beer_dict['bid'] = beer['bid']
+        beer_dict['brewery_id'] = beer['brewery_id']
+        beer_dict['global_rating_score'] = beer['global_rating_score']
+        beer_dict['venue_name'] = beer['venue_name']
 
-    with open(cleaned_data) as fp:
+        beer_info.append(beer_dict)
 
-        beer_data: List[Dict] = json.load(fp)
+        #load (dump) data into new json file
 
-    collection.insert_many(beer_data)
+        new_file = open(beer_only_data_file, "w")
 
-    client.close()
+        json.dump(beer_info, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
 
+        new_file.close()
+
+def get_venue_data(cleaned_beer_data_file, venue_only_data_file):
+
+    """ Get the venue data separated from the file """
+
+    #open beer file and create beer info list 
+    fp: IO = open(cleaned_beer_data_file, encoding="utf8")
+    json_beer_data = json.load(fp)
+    venue_info = list()
+    
+    #create and append new dictionary for each beer 
+    for beer in json_beer_data:
+        
+        venue_dict = dict()
+
+        venue_dict['name'] = beer['venue_name']
+        venue_dict['city'] = beer['venue_city']
+        venue_dict['state'] = beer['venue_state']
+        venue_dict['country'] = beer['venue_country']
+        venue_dict['lat'] = beer['venue_lat']
+        venue_dict['lng'] = beer['venue_lng']
+
+        venue_info.append(venue_dict)
+
+        #load (dump) data into new json file
+
+        new_file = open(venue_only_data_file, "w")
+
+        json.dump(venue_info, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
+
+        new_file.close()
+
+"""
+clean_beer_data('untappd-data-json.json', 'cleaned-untappd-data-json.json')
+get_beer_data('cleaned-untappd-data-json.json', 'cleaned-beer-data-json.json')
+get_venue_data('cleaned-untappd-data-json.json', 'cleaned-venue-data-json.json')
+"""
+
+
+
+
+
+
+
+    
