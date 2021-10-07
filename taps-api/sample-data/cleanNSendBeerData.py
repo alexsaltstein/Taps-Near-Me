@@ -61,8 +61,9 @@ def send_beer_data(cleaned_data):
     #initialize information about MongoDB database
 
     client: MongoClient = MongoClient("mongodb://localhost:3000")
-    db = client.[DATABASE]
-    collection = db.[beers]
+    
+    db = client.["INSERT DATABASE HERE"]
+    collection = db.["beers"]
 
     #push data
 
@@ -73,3 +74,4 @@ def send_beer_data(cleaned_data):
     collection.insert_many(beer_data)
 
     client.close()
+
