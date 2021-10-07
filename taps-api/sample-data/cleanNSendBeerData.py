@@ -1,3 +1,11 @@
+"""
+Module for:
+1)loading untappd data
+2)cleaning untappd data
+3)storing cleaned untappd data
+4)sending cleaned untappd data to db
+"""
+
 from typing import List, Dict, IO
 import json
 import os
@@ -43,5 +51,3 @@ def clean_beer_data(beer_data_file, cleaned_data_file):
     json.dump(json_beer_data, new_file, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=6, separators=None, default=None, sort_keys=False)
 
     new_file.close()
-
-clean_beer_data("untappd-data-json.json", "cleaned-untappd-beer-data-json.json")
