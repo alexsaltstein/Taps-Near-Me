@@ -30,8 +30,9 @@ module.exports = {
     return beer;
   },
 
-  async getBeersByFilter() {
-
+  async getBeersByFilter(filter) {
+    console.log('do stuff')
+    return filter;
   },
 
   async addBeerToVenue(venueName, beerId) {
