@@ -31,7 +31,6 @@ module.exports = {
   },
 
   async getBeersByFilter(filter) {
-    console.log('do stuff')
     return filter;
   },
 
