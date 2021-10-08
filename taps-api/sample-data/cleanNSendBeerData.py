@@ -60,6 +60,7 @@ def get_beer_data(cleaned_beer_data_file, beer_only_data_file):
     fp: IO = open(cleaned_beer_data_file, encoding="utf8")
     json_beer_data = json.load(fp)
     beer_info = list()
+    beer_ids = list()
     
     #create and append new dictionary for each beer 
     for beer in json_beer_data:
@@ -82,11 +83,10 @@ def get_beer_data(cleaned_beer_data_file, beer_only_data_file):
         beer_dict['global_rating_score'] = beer['global_rating_score']
         beer_dict['venue_name'] = beer['venue_name']
 
-        for beer in beer_info:
+        if len(beer_info) == 0 or beer_dict['bid'] not in beer_ids:
 
-            if not(beer_dict['name'] == beer['venue_name'] and beer_dict['brewery_name'] == beer['brewery_name']):
-
-                beer_info.append(beer)
+            beer_info.append(beer_dict)
+            beer_ids.append(beer_dict['bid'])
 
     #load (dump) data into new json file
 
@@ -104,6 +104,7 @@ def get_venue_data(cleaned_beer_data_file, venue_only_data_file):
     fp: IO = open(cleaned_beer_data_file, encoding="utf8")
     json_beer_data = json.load(fp)
     venue_info = list()
+    venue_identifier = list()
     
     #create and append new dictionary for each beer 
     for beer in json_beer_data:
@@ -117,12 +118,11 @@ def get_venue_data(cleaned_beer_data_file, venue_only_data_file):
         venue_dict['lat'] = beer['venue_lat']
         venue_dict['lng'] = beer['venue_lng']
 
-        for venue in venue_info:
+        if len(venue_info) == 0 or f"{venue_dict['name']} {venue_dict['city']} {venue_dict['state']}" not in venue_identifier:
 
-            if not(venue_dict['name'] == venue['venue_name'] and venue_dict['city'] == venue['city'] and venue_dict['state'] == venue['state'] and venue_dict['city'] == venue['city']):
-
-                venue_info.append(venue)
-
+            venue_info.append(venue_dict)
+            venue_identifier.append(f"{venue_dict['name']} {venue_dict['city']} {venue_dict['state']}")
+                
     #load (dump) data into new json file
 
     new_file = open(venue_only_data_file, "w")
@@ -131,16 +131,7 @@ def get_venue_data(cleaned_beer_data_file, venue_only_data_file):
 
     new_file.close()
 
-"""
+
 clean_beer_data('untappd-data-json.json', 'cleaned-untappd-data-json.json')
 get_beer_data('cleaned-untappd-data-json.json', 'cleaned-beer-data-json.json')
 get_venue_data('cleaned-untappd-data-json.json', 'cleaned-venue-data-json.json')
-"""
-
-
-
-
-
-
-
-    

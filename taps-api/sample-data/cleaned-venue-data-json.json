@@ -1,0 +1,426 @@
+[
+      {
+            "name": "Thatcher McGhee's",
+            "city": "Pompton Lakes",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "41.0076",
+            "lng": "-74.2951"
+      },
+      {
+            "name": "Kitchen and Beer Bar",
+            "city": "Wanaque",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "41.0283",
+            "lng": "-74.2972"
+      },
+      {
+            "name": "Blu Alehouse",
+            "city": "Riverdale",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9882",
+            "lng": "-74.3241"
+      },
+      {
+            "name": "Franklin Alley Social Club",
+            "city": "Troy",
+            "state": "NY",
+            "country": "United States",
+            "lat": "42.7303",
+            "lng": "-73.6909"
+      },
+      {
+            "name": "Peloton Station",
+            "city": "Charlottesville",
+            "state": "VA",
+            "country": "United States",
+            "lat": "38.0332",
+            "lng": "-78.4941"
+      },
+      {
+            "name": "Draft Taproom",
+            "city": "Charlottesville",
+            "state": "VA",
+            "country": "United States",
+            "lat": "38.0299",
+            "lng": "-78.4785"
+      },
+      {
+            "name": "The Draftsman, Autograph Collection",
+            "city": "Charlottesville",
+            "state": "VA",
+            "country": "United States",
+            "lat": "38.0326",
+            "lng": "-78.4964"
+      },
+      {
+            "name": "Rayz on the Bay",
+            "city": "Sandusky",
+            "state": "OH",
+            "country": "United States",
+            "lat": "41.4698",
+            "lng": "-82.8223"
+      },
+      {
+            "name": "Barley Creek Brewing Company",
+            "city": "Tannersville",
+            "state": "PA",
+            "country": "United States",
+            "lat": "41.048",
+            "lng": "-75.3164"
+      },
+      {
+            "name": "Bangers Basement",
+            "city": "Austin",
+            "state": "TX",
+            "country": "United States",
+            "lat": "30.2589",
+            "lng": "-97.7384"
+      },
+      {
+            "name": "unBARlievable",
+            "city": "Austin",
+            "state": "TX",
+            "country": "United States",
+            "lat": "30.2588",
+            "lng": "-97.7388"
+      },
+      {
+            "name": "Easy Tiger",
+            "city": "Austin",
+            "state": "TX",
+            "country": "United States",
+            "lat": "30.2659",
+            "lng": "-97.7357"
+      },
+      {
+            "name": "T-Bowl",
+            "city": "Wayne",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9646",
+            "lng": "-74.2446"
+      },
+      {
+            "name": "Long Valley Pub & Brewery",
+            "city": "Long Valley",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.7839",
+            "lng": "-74.7804"
+      },
+      {
+            "name": "Samuel Adams Tap Room",
+            "city": "Jamaica Plain",
+            "state": "MA",
+            "country": "United States",
+            "lat": "42.3148",
+            "lng": "-71.1029"
+      },
+      {
+            "name": "Salt Gastropub",
+            "city": "Stanhope",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9358",
+            "lng": "-74.7221"
+      },
+      {
+            "name": "Arooga's Grille House & Sports Bar - Harrisburg",
+            "city": "Harrisburg",
+            "state": "PA",
+            "country": "United States",
+            "lat": "40.3357",
+            "lng": "-76.8254"
+      },
+      {
+            "name": "Eagle Hotel",
+            "city": "Harrisburg",
+            "state": "PA",
+            "country": "United States",
+            "lat": "40.3433",
+            "lng": "-76.7919"
+      },
+      {
+            "name": "Radisson Blu Park Hotel & Conference Centre",
+            "city": "Radebeul",
+            "state": "Sachsen",
+            "country": "Deutschland",
+            "lat": "51.1056",
+            "lng": "13.6739"
+      },
+      {
+            "name": "Applebee's Grill + Bar",
+            "city": "Butler",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9906",
+            "lng": "-74.3368"
+      },
+      {
+            "name": "Anthony's Coal Fired Pizza",
+            "city": "Wayne",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9392",
+            "lng": "-74.2694"
+      },
+      {
+            "name": "The Shepherd & The Knucklehead Pub",
+            "city": "Haledon",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9413",
+            "lng": "-74.1854"
+      },
+      {
+            "name": "District Tap House",
+            "city": "New York",
+            "state": "NY",
+            "country": "United States",
+            "lat": "40.7542",
+            "lng": "-73.9904"
+      },
+      {
+            "name": "Pier 13 - P13R",
+            "city": "Hoboken",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.7518",
+            "lng": "-74.0228"
+      },
+      {
+            "name": "Pilsener Haus & Biergarten",
+            "city": "Hoboken",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.7552",
+            "lng": "-74.0315"
+      },
+      {
+            "name": "Tavern 5 Neighborhood Restaurant",
+            "city": "Pequannock Township",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9723",
+            "lng": "-74.2962"
+      },
+      {
+            "name": "Tr\u00f6egs Independent Brewing",
+            "city": "Hershey",
+            "state": "PA",
+            "country": "United States",
+            "lat": "40.2975",
+            "lng": "-76.6434"
+      },
+      {
+            "name": "Miller's Ale House - Paramus",
+            "city": "Paramus",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9139",
+            "lng": "-74.0502"
+      },
+      {
+            "name": "Seven Tribesmen Brewery",
+            "city": "Wayne",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9229",
+            "lng": "-74.2691"
+      },
+      {
+            "name": "The Fix",
+            "city": "Worcester",
+            "state": "MA",
+            "country": "United States",
+            "lat": "42.2767",
+            "lng": "-71.8014"
+      },
+      {
+            "name": "Rivaaz",
+            "city": "Pequannock",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9519",
+            "lng": "-74.2792"
+      },
+      {
+            "name": "Clemson Bros. Brewery New Paltz",
+            "city": "New Paltz",
+            "state": "NY",
+            "country": "United States",
+            "lat": "41.747",
+            "lng": "-74.0896"
+      },
+      {
+            "name": "The Taphouse - Wayne",
+            "city": "Wayne",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9259",
+            "lng": "-74.2457"
+      },
+      {
+            "name": "Sunset Pub & Grill",
+            "city": "Lincoln Park",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9511",
+            "lng": "-74.3137"
+      },
+      {
+            "name": "Footsy Magoos",
+            "city": "Troy",
+            "state": "NY",
+            "country": "United States",
+            "lat": "42.7305",
+            "lng": "-73.6932"
+      },
+      {
+            "name": "Revolution: A Social Brew House",
+            "city": "Morristown",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.796",
+            "lng": "-74.4809"
+      },
+      {
+            "name": "Maggie's Town Tavern - Wayne",
+            "city": "Wayne",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.9603",
+            "lng": "-74.2382"
+      },
+      {
+            "name": "GCDC Grilled Cheese Bar",
+            "city": "Washington",
+            "state": "D.C.",
+            "country": "United States",
+            "lat": "38.8987",
+            "lng": "-77.0403"
+      },
+      {
+            "name": "Boatyard Bar & Grill",
+            "city": "Annapolis",
+            "state": "MD",
+            "country": "United States",
+            "lat": "38.9714",
+            "lng": "-76.4825"
+      },
+      {
+            "name": "ACME Bar & Grill",
+            "city": "Annapolis",
+            "state": "MD",
+            "country": "United States",
+            "lat": "38.9778",
+            "lng": "-76.4898"
+      },
+      {
+            "name": "Citi Field",
+            "city": "Flushing",
+            "state": "NY",
+            "country": "United States",
+            "lat": "40.7575",
+            "lng": "-73.8459"
+      },
+      {
+            "name": "Yard House",
+            "city": "Wayne",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.89",
+            "lng": "-74.2609"
+      },
+      {
+            "name": "Jason Aldean's Kitchen + Rooftop Bar",
+            "city": "Nashville",
+            "state": "TN",
+            "country": "United States",
+            "lat": "36.1613",
+            "lng": "-86.7763"
+      },
+      {
+            "name": "Wildhorse",
+            "city": "Nashville",
+            "state": "TN",
+            "country": "United States",
+            "lat": "36.1659",
+            "lng": "-86.7844"
+      },
+      {
+            "name": "Hattie B\u2019s Hot Chicken",
+            "city": "Nashville",
+            "state": "TN",
+            "country": "United States",
+            "lat": "36.1604",
+            "lng": "-86.7793"
+      },
+      {
+            "name": "Topgolf",
+            "city": "Edison",
+            "state": "NJ",
+            "country": "United States",
+            "lat": "40.5195",
+            "lng": "-74.3683"
+      },
+      {
+            "name": "Beer Street",
+            "city": "Brooklyn",
+            "state": "NY",
+            "country": "United States",
+            "lat": 40.7173,
+            "lng": -73.9448
+      },
+      {
+            "name": "8th Street Tavern",
+            "city": "Hoboken",
+            "state": "NJ",
+            "country": "United States",
+            "lat": 40.7461,
+            "lng": -74.0284
+      },
+      {
+            "name": "Tria",
+            "city": "Philadelphia",
+            "state": "PA",
+            "country": "United States",
+            "lat": 39.9509,
+            "lng": -75.1704
+      },
+      {
+            "name": "Human Robot",
+            "city": "Philadelphia",
+            "state": "PA",
+            "country": "United States",
+            "lat": 39.9771,
+            "lng": -75.1437
+      },
+      {
+            "name": "Torch & Crown Brewing Company",
+            "city": "New York",
+            "state": "NY",
+            "country": "United States",
+            "lat": 40.7263,
+            "lng": -74.0042
+      },
+      {
+            "name": "Kills Boro Brewing Co",
+            "city": "Staten Island",
+            "state": "NY",
+            "country": "United States",
+            "lat": 40.6363,
+            "lng": -74.0775
+      },
+      {
+            "name": "Mustang Sally's",
+            "city": "New York",
+            "state": "NY",
+            "country": "United States",
+            "lat": "40.7474",
+            "lng": "-73.9935"
+      }
+]
