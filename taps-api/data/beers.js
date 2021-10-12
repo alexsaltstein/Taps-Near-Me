@@ -6,6 +6,7 @@ const { getVenueByName, getVenueById } = require('./venues');
 
 const { beers, venues } = mongoCollections;
 
+
 module.exports = {
   async getBeerById(id) {
     if (!id) throw new Error('No id provided');
