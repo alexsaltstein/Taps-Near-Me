@@ -1,6 +1,6 @@
 import React from 'react';
 import Constants from 'expo-constants';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollViewComponent, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
 import backImage from '../../../assets/navigation/leftArrow.png';
@@ -11,7 +11,7 @@ const SettingsSection = ({ title, subs }) => {
       <Text style={styles.subsectionTitle}>{title}</Text>
       <View style={styles.subsectionContainer}>
         {subs.map((val, index) => (
-          <View>
+          <View key={val + index}>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() => val.onPress()}

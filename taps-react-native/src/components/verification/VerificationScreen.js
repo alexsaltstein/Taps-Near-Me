@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 import { SHADOWS } from '../../styles/shadows';
@@ -6,8 +7,11 @@ import ClickableText from '../widgets/ClickableText';
 import Logo from '../widgets/Logo';
 import SlideInContainer from '../widgets/SlideInContainer';
 import Spacing from '../widgets/Spacing';
+import ErrorToast from '../widgets/ErrorToast';
+import { handleError } from '../utils/ErrorFunctions';
 
 const VerificationScreen = ({ navigation }) => {
+  const [error, setError] = React.useState(null);
   const [text, setText] = React.useState('');
   const [inputFocused, setInputFocused] = React.useState(false);
   const DATE_LENGTH = 8;
@@ -24,54 +28,69 @@ const VerificationScreen = ({ navigation }) => {
 
   const onSubmit = () => {
     // add validation
-    navigation.navigate('Home');
+    if (text.length === DATE_LENGTH) {
+      const years = moment(new Date())
+        .diff(`${text.substring(0, 2)}/${text.substring(2, 4)}/${text.substring(4)}`, 
+        'years', false);
+      if (years >= 21) {
+        navigation.navigate('Home');
+      } else {
+        handleError('Error: You must be 21 to use this app', setError);
+      }
+    } else {
+      handleError('Error: Please input a valid date', setError);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <TextInput
-        ref={ref}
-        value={text}
-        onChangeText={setText}
-        onBlur={handleOnBlur}
-        keyboardType="number-pad"
-        returnKeyType="done"
-        textContentType="oneTimeCode"
-        maxLength={DATE_LENGTH}
-        style={styles.hidden} />
-      <SlideInContainer>
-        <Logo />
-        <Text style={styles.title}>Can I see some ID?</Text>
-        <Text style={styles.subtitle}>You must be of legal drinking age to use this app.</Text>
-        <TouchableOpacity
-          style={styles.dateInputContainer}
-          onPress={() => handleOnPress()}
-          activeOpacity={1}>
-          <Text style={styles.dateText}>
-            {'MMDDYYYY'.split('').map((val, i) => {
-              let ret = '';
-              if (i < text.length) {
-                ret = text.charAt(i);
-              } else {
-                ret = val;
-              }
-              if (i === 1 || i === 3) {
-                ret += '/';
-              }
-              return ret;
-            })}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => onSubmit()}
-          style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>
-            Enter Now
+      <View style={styles.alignment}>
+        <TextInput
+          ref={ref}
+          value={text}
+          onChangeText={setText}
+          onBlur={handleOnBlur}
+          keyboardType="number-pad"
+          returnKeyType="done"
+          textContentType="oneTimeCode"
+          maxLength={DATE_LENGTH}
+          style={styles.hidden} />
+        <SlideInContainer>
+          <ErrorToast
+            error={error} />
+          <Logo />
+          <Text style={styles.title}>Can I see some ID?</Text>
+          <Text style={styles.subtitle}>You must be of legal drinking age to use this app.</Text>
+          <TouchableOpacity
+            style={styles.dateInputContainer}
+            onPress={() => handleOnPress()}
+            activeOpacity={1}>
+            <Text style={styles.dateText}>
+              {'MMDDYYYY'.split('').map((val, i) => {
+                let ret = '';
+                if (i < text.length) {
+                  ret = text.charAt(i);
+                } else {
+                  ret = val;
+                }
+                if (i === 1 || i === 3) {
+                  ret += '/';
+                }
+                return ret;
+              })}
             </Text>
-        </TouchableOpacity>
-        <Spacing vertical={10} />
-        <Text style={styles.legalText}>By entering this app you are agreeing to our <ClickableText text="Terms of Service" url="https://www.google.com" /> and <ClickableText text="Privacy Policy" url="https://www.google.com" /> </Text>
-      </SlideInContainer>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => onSubmit()}
+            style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>
+              Enter Now
+            </Text>
+          </TouchableOpacity>
+          <Spacing vertical={10} />
+          <Text style={styles.legalText}>By entering this app you are agreeing to our <ClickableText text="Terms of Service" url="https://www.google.com" /> and <ClickableText text="Privacy Policy" url="https://www.google.com" /> </Text>
+        </SlideInContainer>
+      </View>
     </View>
   )
 }
@@ -82,6 +101,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.red,
+  },
+  alignment: {
+    flex: 0.65
   },
   hidden: {
     position: 'absolute',

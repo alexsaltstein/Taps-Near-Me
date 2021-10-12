@@ -34,10 +34,10 @@ const HomeScreen = ({ navigation }) => {
           }
         </View>
       </View>
-      <TouchableOpacity onPress={()=>navigation.navigate('ERROR')}>
-        <Text>Error</Text>
-      </TouchableOpacity>
       <Text>What are we looking to drink?</Text>
+      <TouchableOpacity onPress={()=>{navigation.navigate('Map')}}>
+        <Text>Map</Text>
+      </TouchableOpacity>
     </View>
   );
 };
