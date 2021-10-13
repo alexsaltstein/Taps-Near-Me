@@ -28,15 +28,18 @@ module.exports = {
     if (typeof lng !== 'string' || lng.trim() === '') throw new Error('lng must be a non-empty string');
 
     const venuesCollection = await venues();
+    // schmema changed to be in geojson format
     const newVenue = {
-      _id: uuid.v4(),
-      name,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      beersAvailable: []
+      type: "Point",
+      coordinates: [lng, lat],
+      properties: {
+        _id: uuid.v4(),
+        name,
+        city,
+        state,
+        country,
+        beersAvailable: []
+      }
     };
 
     const insertedInfo = await venuesCollection.insertOne(newVenue);
