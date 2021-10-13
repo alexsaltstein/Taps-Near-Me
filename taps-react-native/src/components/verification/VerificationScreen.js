@@ -29,8 +29,11 @@ const VerificationScreen = ({ navigation }) => {
   const onSubmit = () => {
     // add validation
     if (text.length === DATE_LENGTH) {
+      const MM = text.substring(0,2);
+      const DD = text.substring(2, 4);
+      const YYYY = text.substring(4);
       const years = moment(new Date())
-        .diff(`${text.substring(0, 2)}/${text.substring(2, 4)}/${text.substring(4)}`, 
+        .diff(`${YYYY}-${MM}-${DD}`, 
         'years', false);
       if (years >= 21) {
         navigation.navigate('Home');

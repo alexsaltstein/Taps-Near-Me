@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import BackButton from '../widgets/BackButton';
+import Loading from '../widgets/Loading';
 
 const VenueScreen = ({navigation, route}) => {
   const {id} = route.params;
@@ -9,6 +10,7 @@ const VenueScreen = ({navigation, route}) => {
       <BackButton navigation={navigation}/>
       <Text>Venue Screen</Text>
       <Text>id: {id}</Text>
+      <Loading/>
     </View>
   )
 }
