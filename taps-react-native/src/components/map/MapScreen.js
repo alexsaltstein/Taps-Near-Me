@@ -35,7 +35,9 @@ const ScrollPages = ({ title, navigation }) => {
       <TouchableOpacity style={styles.beerResultContainer}
         onPress={() => navigation.navigate('Venue', { id: '1231245' })}
         activeOpacity={1}>
-        <Text>{title}</Text>
+        <Text style={styles.beerResultCarrot}>⟩</Text>
+        <Text style={styles.beerResultTitle}>{title}</Text>
+        <Text>0.7mi</Text>
       </TouchableOpacity>
     </View>
   );
@@ -54,7 +56,6 @@ const MapScreen = ({ navigation }) => {
     const totalWidth = Dimensions.get('window').width;
     const offset = event.nativeEvent.contentOffset.x;
     const newPage = Math.floor(offset / totalWidth);
-    console.log(scrolling);
     if (scrolling && newPage >= 0 && newPage !== page && newPage < mapPoints.length) {
       goToLocation(mapPoints[newPage].lat, mapPoints[newPage].lng);
       setPage(newPage);
@@ -218,9 +219,19 @@ const styles = StyleSheet.create({
   beerResultContainer: {
     backgroundColor: COLORS.white,
     width: '75%',
-    height: 75,
     borderRadius: 20,
     padding: 10
+  },
+  beerResultCarrot: {
+    color: COLORS.lightgray,
+    alignSelf: 'center',
+    fontSize: 20,
+    marginTop: -10,
+    transform: [{rotate: '-90deg'}]
+  },
+  beerResultTitle: {
+    fontSize: 25,
+    fontFamily: 'open-sans-semi'
   },
   indicatorsContainer: {
     position: 'absolute',
