@@ -9,10 +9,12 @@ import SlideInContainer from '../widgets/SlideInContainer';
 import Spacing from '../widgets/Spacing';
 import ErrorToast from '../widgets/ErrorToast';
 import { handleError } from '../utils/ErrorFunctions';
+import useDateOfBirth from './useDateOfBirth';
 
 const VerificationScreen = ({ navigation }) => {
   const [error, setError] = React.useState(null);
-  const [text, setText] = React.useState('');
+  const [dateOfBirth, setDateOfBirth] = useDateOfBirth();
+  const [text, setText] = React.useState(dateOfBirth);
   const [inputFocused, setInputFocused] = React.useState(false);
   const DATE_LENGTH = 8;
   const ref = React.useRef(null);
@@ -33,6 +35,7 @@ const VerificationScreen = ({ navigation }) => {
         .diff(`${text.substring(0, 2)}/${text.substring(2, 4)}/${text.substring(4)}`, 
         'years', false);
       if (years >= 21) {
+        setDateOfBirth(text);
         navigation.navigate('Home');
       } else {
         handleError('Error: You must be 21 to use this app', setError);
@@ -41,7 +44,6 @@ const VerificationScreen = ({ navigation }) => {
       handleError('Error: Please input a valid date', setError);
     }
   };
-
   return (
     <View style={styles.container}>
       <View style={styles.alignment}>
