@@ -28,6 +28,10 @@ module.exports = {
     if (typeof lng !== 'string' || lng.trim() === '') throw new Error('lng must be a non-empty string');
 
     const venuesCollection = await venues();
+    let longitute = parseFloat(lng);
+    let latitude = parseFloat(lat);
+    if (isNaN(longitute) || longitute > 180 || longitute < -180 ) throw 'lng must be a number between -180 and 180!';
+    if (isNaN(latitude) || latitude > 90 || latitude < -90 ) throw 'lat must be a number between -90 and 90!';
     // schmema changed to be in geojson format
     const newVenue = {
       type: "Point",
