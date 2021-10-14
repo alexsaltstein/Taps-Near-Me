@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Image, View, StyleSheet } from 'react-native';
-import dancingBottles from '../../../assets/error/dancingBottles.gif';
+import LottieView from 'lottie-react-native';
+import bottleClink from '../../../assets/lotttie-json/bottle-clink.json'
 import { COLORS } from '../../styles/COLORS';
 import BackButton from './BackButton';
 
@@ -8,14 +9,22 @@ const ErrorPage = ({
   title = 'Sorry, no results found',
   message = 'Looks like our servers went to the bar!',
   navigation }) => {
+  const animationRef = React.useRef(null);
+
+  React.useEffect(() => {
+    animationRef.current?.play();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <View>
         <BackButton navigation={navigation} />
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.message}>{message}</Text>
-        <Image source={dancingBottles} style={styles.gif} />
-      </View>
+        <LottieView
+          ref={animationRef}
+          style={{ width: 200, height: 200 }}
+          source={bottleClink}
+        />
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView, Image } from 'react-native';
 import MapView from 'react-native-maps';
 import { Marker, Callout } from 'react-native-maps';
 import { COLORS } from '../../styles/COLORS';
@@ -11,6 +11,7 @@ import { handleError } from '../utils/ErrorFunctions';
 import ErrorToast from '../widgets/ErrorToast';
 import Loading from '../widgets/Loading';
 import axios from 'axios';
+import markerIcon from '../../../assets/map/marker.png';
 
 const Indicator = ({ width, onPress }) => {
   return (
@@ -106,10 +107,7 @@ const MapScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ErrorToast error={error} />
       {loading ?
-        <View style={styles.loadAlignment}>
-          <BackButton navigation={navigation} />
-          <Loading />
-        </View> :
+        <Loading navigation={navigation} /> :
         <View>
           <MapView style={styles.map}
             ref={mapRef}
@@ -125,9 +123,10 @@ const MapScreen = ({ navigation }) => {
                 key={index}
                 coordinate={{ latitude: marker.lat, longitude: marker.lng }}
               >
-                <TouchableOpacity style={{ backgroundColor: index === page ? COLORS.red : COLORS.white, padding: 10 }}
+                <TouchableOpacity style={{ padding: 10, alignItems: 'center' }}
                   onPress={() => { scrollToPosition(index) }}>
-                  <Text>{marker.title}</Text>
+                  <Text style={{ fontFamily: 'open-sans-semi', backgroundColor: page === index ? COLORS.purple : COLORS.transparent, paddingVertical: page === index ? 2 : 0, paddingHorizontal: 5, color: page === index ? COLORS.white : COLORS.purple, borderRadius: 5, overflow: 'hidden' }}>{marker.title}</Text>
+                  <Image source={markerIcon} style={{ width: 40, height: 40, marginTop: 2 }} />
                 </TouchableOpacity>
               </Marker>
             ))}
@@ -227,7 +226,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 20,
     marginTop: -10,
-    transform: [{rotate: '-90deg'}]
+    transform: [{ rotate: '-90deg' }]
   },
   beerResultTitle: {
     fontSize: 25,
