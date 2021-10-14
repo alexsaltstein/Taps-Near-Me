@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView, Image } from 'react-native';
+import axios from 'axios';
+import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
-import { Marker, Callout } from 'react-native-maps';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
 import NavIcons from '../widgets/NavIcons';
@@ -10,39 +10,10 @@ import { SHADOWS } from '../../styles/shadows';
 import { handleError } from '../utils/ErrorFunctions';
 import ErrorToast from '../widgets/ErrorToast';
 import Loading from '../widgets/Loading';
-import axios from 'axios';
-import markerIcon from '../../../assets/map/marker.png';
-
-const Indicator = ({ width, onPress }) => {
-  return (
-    <TouchableOpacity
-      onPress={() => onPress()}
-      activeOpacity={1}>
-      <View style={{
-        width: width,
-        height: width,
-        borderRadius: width / 2,
-        backgroundColor: COLORS.white,
-        margin: 5
-      }}
-      />
-    </TouchableOpacity>
-  )
-}
-
-const ScrollPages = ({ title, navigation }) => {
-  return (
-    <View style={styles.scrollPage}>
-      <TouchableOpacity style={styles.beerResultContainer}
-        onPress={() => navigation.navigate('Venue', { id: '1231245' })}
-        activeOpacity={1}>
-        <Text style={styles.beerResultCarrot}>⟩</Text>
-        <Text style={styles.beerResultTitle}>{title}</Text>
-        <Text>0.7mi</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+import Indicator from './Indicator';
+import ScrollPages from './ScrollPages';
+import MapMarker from './MapMarker';
+import { SERVER_URL } from '../../../config';
 
 const MapScreen = ({ navigation }) => {
   const [page, setPage] = React.useState(0);
@@ -52,31 +23,41 @@ const MapScreen = ({ navigation }) => {
   const scrollRef = React.useRef(null);
   const mapRef = React.useRef(null);
   const [scrolling, setScrolling] = React.useState(false);
-
+  const [currOff, setCurrOff] = React.useState(0);
   const onScroll = (event) => {
-    const totalWidth = Dimensions.get('window').width;
-    const offset = event.nativeEvent.contentOffset.x;
+    const totalWidth = Math.floor(Dimensions.get('window').width);
+    const offset = Math.floor(event.nativeEvent.contentOffset.x);
     const newPage = Math.floor(offset / totalWidth);
-    if (scrolling && newPage >= 0 && newPage !== page && newPage < mapPoints.length) {
+    if (scrolling && newPage >= 0 && page !== newPage && newPage < mapPoints.length) {
       goToLocation(mapPoints[newPage].lat, mapPoints[newPage].lng);
       setPage(newPage);
       setScrolling(false);
     }
+    setCurrOff(offset);
   }
+
+  React.useEffect(() => {
+    if (!scrolling) {
+      const totalWidth = Math.floor(Dimensions.get('window').width);
+      const currPage = Math.floor(currOff / totalWidth);
+      if (currPage !== page){
+        setPage(currPage);
+        goToLocation(mapPoints[currPage].lat, mapPoints[currPage].lng);
+      }
+    }
+  }, [currOff])
 
   const onScrollBeginDrag = (event) => {
     setScrolling(true);
   }
 
   const goToLocation = async (lat, lng) => {
-    mapRef.current?.animateCamera({
-      center: {
-        latitude: lat,
-        longitude: lng
-      },
-      altitude: 3188556.25721105,
-      zoom: 3188556.25721105
-    }, 10000)
+    mapRef.current?.animateToRegion({
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: 1,
+      longitudeDelta: 1,
+    })
   }
 
   const scrollToPosition = (num) => {
@@ -88,9 +69,10 @@ const MapScreen = ({ navigation }) => {
 
   const getMapData = async () => {
     try {
-      const res = await axios.get('http://192.168.1.6:3000/api/beers/markers');
+      const res = await axios.get(`${SERVER_URL}/api/beers/markers`);
       setMapPoints(res.data.markers);
-    } catch {
+    } catch (e) {
+      console.log(e.message);
       handleError('Error: Problem getting map data', setError);
     }
   }
@@ -111,24 +93,27 @@ const MapScreen = ({ navigation }) => {
         <View>
           <MapView style={styles.map}
             ref={mapRef}
-            initialRegion={{
+            initialRegion={mapPoints.length !== 0 ? {
               latitude: mapPoints[0].lat,
               longitude: mapPoints[0].lng,
               latitudeDelta: mapPoints[0].lat,
               longitudeDelta: mapPoints[0].lng,
-            }
+            } :
+              {
+                latitude: 40.7440,
+                longitude: 74.0325,
+                latitudeDelta: 40.7440,
+                longitudeDelta: 74.0325,
+              }
             }>
             {mapPoints.map((marker, index) => (
-              <Marker
-                key={index}
-                coordinate={{ latitude: marker.lat, longitude: marker.lng }}
-              >
-                <TouchableOpacity style={{ padding: 10, alignItems: 'center' }}
-                  onPress={() => { scrollToPosition(index) }}>
-                  <Text style={{ fontFamily: 'open-sans-semi', backgroundColor: page === index ? COLORS.purple : COLORS.transparent, paddingVertical: page === index ? 2 : 0, paddingHorizontal: 5, color: page === index ? COLORS.white : COLORS.purple, borderRadius: 5, overflow: 'hidden' }}>{marker.title}</Text>
-                  <Image source={markerIcon} style={{ width: 40, height: 40, marginTop: 2 }} />
-                </TouchableOpacity>
-              </Marker>
+              <MapMarker
+                key={'mapMarker-' + index}
+                marker={marker}
+                index={index}
+                page={page}
+                scrollToPosition={scrollToPosition}
+              />
             ))}
           </MapView>
           <View style={styles.header}>
@@ -141,14 +126,14 @@ const MapScreen = ({ navigation }) => {
               ref={scrollRef}
               horizontal
               pagingEnabled
-              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
               onScroll={onScroll}
               onScrollBeginDrag={onScrollBeginDrag}
               scrollEventThrottle={0}>
               {
                 mapPoints.map((val, index) => (
                   <ScrollPages
-                    key={index}
+                    key={'scrollPages-' + index}
                     title={val.title}
                     navigation={navigation} />
                 ))
@@ -161,7 +146,7 @@ const MapScreen = ({ navigation }) => {
                 const width = index === page ? 20 : 10;
                 return (
                   <Indicator
-                    key={index}
+                    key={'indicator-' + index}
                     width={width}
                     onPress={() => scrollToPosition(index)}
                   />
@@ -179,11 +164,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: COLORS.white
-  },
-  loadAlignment: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   map: {
     width: Dimensions.get('window').width,
@@ -210,27 +190,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: 150,
     flex: 1,
-  },
-  scrollPage: {
-    width: Dimensions.get('window').width,
-    alignItems: 'center'
-  },
-  beerResultContainer: {
-    backgroundColor: COLORS.white,
-    width: '75%',
-    borderRadius: 20,
-    padding: 10
-  },
-  beerResultCarrot: {
-    color: COLORS.lightgray,
-    alignSelf: 'center',
-    fontSize: 20,
-    marginTop: -10,
-    transform: [{ rotate: '-90deg' }]
-  },
-  beerResultTitle: {
-    fontSize: 25,
-    fontFamily: 'open-sans-semi'
   },
   indicatorsContainer: {
     position: 'absolute',

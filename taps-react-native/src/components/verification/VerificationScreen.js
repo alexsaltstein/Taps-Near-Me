@@ -31,12 +31,12 @@ const VerificationScreen = ({ navigation }) => {
   const onSubmit = () => {
     // add validation
     if (text.length === DATE_LENGTH) {
-      const MM = text.substring(0,2);
+      const MM = text.substring(0, 2);
       const DD = text.substring(2, 4);
       const YYYY = text.substring(4);
       const years = moment(new Date())
-        .diff(`${YYYY}-${MM}-${DD}`, 
-        'years', false);
+        .diff(`${YYYY}-${MM}-${DD}`,
+          'years', false);
       if (years >= 21) {
         setDateOfBirth(text);
         navigation.navigate('Home');
@@ -47,6 +47,13 @@ const VerificationScreen = ({ navigation }) => {
       handleError('Error: Please input a valid date', setError);
     }
   };
+
+  React.useEffect(() => {
+    if (dateOfBirth !== '') {
+      setText(dateOfBirth);
+    }
+  }, [dateOfBirth]);
+
   return (
     <View style={styles.container}>
       <View style={styles.alignment}>
