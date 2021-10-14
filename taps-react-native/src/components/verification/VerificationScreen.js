@@ -108,9 +108,6 @@ const styles = StyleSheet.create({
     flex: 0.65
   },
   hidden: {
-    position: 'absolute',
-    height: 0,
-    width: 0,
     opacity: 0,
   },
   title: {
