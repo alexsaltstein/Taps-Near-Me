@@ -22,7 +22,7 @@ const ErrorPage = ({
         <Text style={styles.message}>{message}</Text>
         <LottieView
           ref={animationRef}
-          style={{ width: 200, height: 200 }}
+          style={styles.anim}
           source={bottleClink}
         />
     </View>
@@ -43,10 +43,9 @@ const styles = StyleSheet.create({
   message: {
     fontFamily: 'open-sans'
   },
-  gif: {
+  anim: {
     width: 200,
     height: 200,
-    resizeMode: 'center',
   }
 });
 

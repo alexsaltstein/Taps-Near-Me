@@ -12,7 +12,6 @@ const VenueScreen = ({ navigation, route }) => {
 
   const getData = async () => {
     try{
-
     }catch {
       setError(true);
     }
@@ -24,19 +23,19 @@ const VenueScreen = ({ navigation, route }) => {
       await getData();
       setLoading(false);
     })()
-    setLoading(false)
   })
   return (
     <View style={{flex: 1}}>
       { loading ?
-        <Loading /> :
+        <Loading navigation={navigation}/> :
         <View style={{flex: 1}}>
           {
             error ?
               <ErrorPage navigation={navigation} />
               :
               <View style={styles.container}>
-                <BackButton navigation={navigation} />
+                <BackButton navigation={navigation}/>
+                <Text>hii</Text>
                 <Text>Venue Screen</Text>
                 <Text>id: {id}</Text>
               </View>
@@ -48,6 +47,9 @@ const VenueScreen = ({ navigation, route }) => {
 }
 
 const styles = StyleSheet.create({
+  flex1: {
+    flex: 1
+  },
   container: {
     flex: 1,
     alignItems: 'center',

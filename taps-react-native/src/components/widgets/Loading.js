@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
 import BeerAnim from '../../../assets/lotttie-json/loading-beer.json';
 import { COLORS } from '../../styles/COLORS';
@@ -14,17 +14,38 @@ const Loading = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={{flex: 1, width: '100%', alignItems: 'center'}}>
+    <View style={styles.container}>
       <BackButton navigation={navigation} />
-      <View style={{ justifyContent: 'center', backgroundColor: COLORS.blue, paddingBottom: 20, paddingRight: 10, borderRadius: 15, marginTop: '50%' }}>
+      <View style={styles.animContainer}>
         <LottieView
           ref={animationRef}
-          style={{ width: 150, height: 150 }}
+          style={styles.anim}
           source={BeerAnim}
         />
       </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    width: '100%', 
+    alignItems: 'center',
+    backgroundColor: COLORS.white
+  },
+  animContainer: {
+    justifyContent: 'center', 
+    backgroundColor: COLORS.blue, 
+    paddingBottom: 20, 
+    paddingRight: 10, 
+    borderRadius: 15, 
+    marginTop: '50%' 
+  },
+  anim: {
+    width: 150, 
+    height: 150
+  }
+})
 
 export default Loading
