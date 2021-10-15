@@ -12,6 +12,7 @@ const VenueScreen = ({ navigation, route }) => {
 
   const getData = async () => {
     try{
+      throw 'hio'
     }catch {
       setError(true);
     }
