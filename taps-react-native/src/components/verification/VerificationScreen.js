@@ -10,12 +10,16 @@ import Spacing from '../widgets/Spacing';
 import ErrorToast from '../widgets/ErrorToast';
 import { handleError } from '../utils/ErrorFunctions';
 import useDateOfBirth from './useDateOfBirth';
+import setStatusBarColor from '../utils/StatusBarColorFunctions';
+
 
 const VerificationScreen = ({ navigation }) => {
   const [error, setError] = React.useState(null);
   const [dateOfBirth, setDateOfBirth] = useDateOfBirth();
   const [text, setText] = React.useState(dateOfBirth);
   const [inputFocused, setInputFocused] = React.useState(false);
+  const [setColor] = setStatusBarColor();
+
   const DATE_LENGTH = 8;
   const ref = React.useRef(null);
 
@@ -53,6 +57,10 @@ const VerificationScreen = ({ navigation }) => {
       setText(dateOfBirth);
     }
   }, [dateOfBirth]);
+  
+  React.useEffect(() => {
+    setColor(COLORS.red);
+  },[])
 
   return (
     <View style={styles.container}>

@@ -4,8 +4,21 @@ import Logo from '../widgets/Logo';
 import filter from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
 import NavIcons from '../widgets/NavIcons';
+import setStatusBarColor from '../utils/StatusBarColorFunctions';
+import { COLORS } from '../../styles/COLORS';
 
 const HomeScreen = ({ navigation }) => {
+  const [setColor] = setStatusBarColor();
+
+  React.useEffect(() => {
+    navigation.addListener(
+      'focus',
+      () => {
+        setColor(COLORS.white);
+      },
+    );
+  },[])
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import LottieView from 'lottie-react-native';
-import BeerAnim from '../../../assets/lotttie-json/loading-beer.json';
+import BeerAnim from '../../../assets/lotttie-json/bottle-clink.json';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
 
 
-const ErrorPage = ({ navigation }) => {
+const ErrorPage = ({ title = 'Sorry, no results found!', message = "Looks like our servers went to the bar", navigation }) => {
   const animationRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -16,35 +16,36 @@ const ErrorPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <BackButton navigation={navigation} />
-      <View style={styles.animContainer}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.message}>{message}</Text>
         <LottieView
           ref={animationRef}
           style={styles.anim}
           source={BeerAnim}
         />
-      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
-    width: '100%', 
+    flex: 1,
+    width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: COLORS.white
   },
-  animContainer: {
-    justifyContent: 'center', 
-    backgroundColor: COLORS.blue, 
-    paddingBottom: 20, 
-    paddingRight: 10, 
-    borderRadius: 15, 
-    marginTop: '50%' 
+  title: {
+    fontFamily: 'open-sans-semi',
+    fontSize: 20,
+  },
+  message: {
+    fontFamily: 'open-sans',
+    fontSize: 15
   },
   anim: {
-    width: 150, 
-    height: 150
+    width: 200,
+    height: 200
   }
 })
 

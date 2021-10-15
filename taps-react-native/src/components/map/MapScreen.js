@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Platform, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
@@ -14,6 +14,7 @@ import Indicator from './Indicator';
 import ScrollPages from './ScrollPages';
 import MapMarker from './MapMarker';
 import { SERVER_URL } from '../../../config';
+import setStatusBarColor from '../utils/StatusBarColorFunctions';
 
 const MapScreen = ({ navigation }) => {
   const [page, setPage] = React.useState(0);
@@ -24,6 +25,8 @@ const MapScreen = ({ navigation }) => {
   const mapRef = React.useRef(null);
   const [scrolling, setScrolling] = React.useState(false);
   const [currOff, setCurrOff] = React.useState(0);
+  const [setColor] = setStatusBarColor();
+
   const onScroll = (event) => {
     const totalWidth = Math.floor(Dimensions.get('window').width);
     const offset = Math.floor(event.nativeEvent.contentOffset.x);
@@ -40,7 +43,7 @@ const MapScreen = ({ navigation }) => {
     if (!scrolling) {
       const totalWidth = Math.floor(Dimensions.get('window').width);
       const currPage = Math.floor(currOff / totalWidth);
-      if (currPage !== page){
+      if (currPage !== page) {
         setPage(currPage);
         goToLocation(mapPoints[currPage].lat, mapPoints[currPage].lng);
       }
@@ -83,6 +86,12 @@ const MapScreen = ({ navigation }) => {
       await getMapData();
       setLoading(false);
     })();
+    navigation.addListener(
+      'focus',
+      () => {
+        setColor(COLORS.white, COLORS.purple);
+      },
+    );
   }, []);
 
   return (
@@ -186,14 +195,14 @@ const styles = StyleSheet.create({
   },
   bottom: {
     position: 'absolute',
-    bottom: 40,
+    bottom: Platform.OS === 'android' ? 20 : 45,
     width: Dimensions.get('window').width,
     height: 150,
     flex: 1,
   },
   indicatorsContainer: {
     position: 'absolute',
-    bottom: 85,
+    bottom: Platform.OS === 'android' ? 50 : 85,
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',

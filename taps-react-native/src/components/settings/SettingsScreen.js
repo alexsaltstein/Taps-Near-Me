@@ -5,6 +5,8 @@ import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
 import backImage from '../../../assets/navigation/leftArrow.png';
 import { SECTIONS } from './consts';
+import setStatusBarColor from '../utils/StatusBarColorFunctions';
+
 const SettingsSection = ({ title, subs }) => {
   return (
     <View style={styles.padding}>
@@ -31,6 +33,17 @@ const SettingsSection = ({ title, subs }) => {
 }
 
 const SettingsScreen = ({ navigation }) => {
+  const [setColor] = setStatusBarColor();
+
+  React.useEffect(() => {
+    navigation.addListener(
+      'focus',
+      () => {
+        setColor(COLORS.red);
+      },
+    );
+  },[])
+
   return (
     <View style={styles.container}>
       <BackButton navigation={navigation} color={COLORS.white} />
