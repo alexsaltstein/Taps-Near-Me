@@ -46,9 +46,10 @@ module.exports = {
     if (updatedInfo.modifiedCount === 0) throw new Error('Failed to add beer to venue');
     return getVenueById(venue._id);
   },
-
+  
+  
   async createBeer(name, breweryName,
-    type, abv, ibu, untappdWebsite, breweryUrl,
+    type, abv, ibu, untappdWebsite,
     breweryCountry, breweryCity, breweryState,
     flavorProfiles, servingType, bid, breweryId,
     gloablRatingScore, venueName) {
@@ -67,19 +68,18 @@ module.exports = {
       if (typeof name !== 'string' || name.trim() === '') throw new Error('name must be a non-empty string');
       if (typeof breweryName !== 'string' || breweryName.trim() === '') throw new Error('breweryName must be a non-empty string');
       if (typeof type !== 'string' || type.trim() === '') throw new Error('type must be a non-empty string');
-      if (typeof abv !== 'string' || abv.trim() === '') throw new Error('abv must be a non-empty string');
-      if (typeof ibu !== 'string' || ibu.trim() === '') throw new Error('ibu must be a non-empty string');
+      if (typeof abv !== 'number' || abv < 0) throw new Error('abv must be a number greater than or equal to 0');
+      if (typeof ibu !== 'number' || ibu < 0) throw new Error('ibu must be a number greater than or equal to 0');
       if (typeof untappdWebsite !== 'string' || untappdWebsite.trim() === '') throw new Error('untappdWebsite must be a non-empty string and a valid website');
-      if (typeof breweryUrl !== 'string' || breweryUrl.trim() === '') throw new Error('breweryUrl must be a non-empty string and a valid website');
       if (typeof breweryCountry !== 'string' || breweryCountry.trim() === '') throw new Error('breweryCountry must be a non-empty string');
       if (typeof breweryCity !== 'string' || breweryCity.trim() === '') throw new Error('breweryCity must be a non-empty string');
-      if (typeof breweryState !== 'string' || breweryState.trim() === '') throw new Error('breweryState must be a non-empty string');
+      if (typeof breweryState !== 'string' || breweryState.trim() === '') throw new Error(`breweryState must be a non-empty string: ${breweryState.length}`);
       if (typeof flavorProfiles !== 'string') throw new Error('flavorProfiles must be a string');
-      if (typeof servingType !== 'string' || servingType.trim() === '' || !SERVING_TYPES.includes(servingType)) throw new Error('servingType must be a non-empty string within valid types');
+      if (typeof servingType !== 'string' && !SERVING_TYPES.includes(servingType)) throw new Error('servingType must be a non-empty string within valid types');
       if (typeof bid !== 'string' || bid.trim() === '') throw new Error('bid must be a non-empty string');
       if (typeof breweryId !== 'string' || breweryId.trim() === '') throw new Error('breweryId must be a non-empty string');
       if (typeof gloablRatingScore !== 'number' || gloablRatingScore < 0 || gloablRatingScore > 5) throw new Error('globalRatingScore must be a number between 0 and 5');
-
+    }
       const beersCollection = await beers();
 
       const newBeer = {
@@ -90,7 +90,6 @@ module.exports = {
         abv,
         ibu,
         untappdWebsite,
-        breweryUrl,
         breweryCountry,
         breweryCity,
         breweryState,
@@ -100,11 +99,9 @@ module.exports = {
         breweryId,
         gloablRatingScore,
       };
-
       const insertedInfo = await beersCollection.insertOne(newBeer);
       const newId = insertedInfo.insertedId;
       this.addBeerToVenue(venueName, newId);
       return this.getBeerById(newId);
     }
   }
-}
