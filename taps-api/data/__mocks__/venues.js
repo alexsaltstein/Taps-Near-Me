@@ -38,7 +38,64 @@ const fakeVenues = [
         "lng":"-74.2951",
         "beersAvailable":["51d6d03b-f243-4a1c-bb8e-f3297f01043d"]
     }
-]
+];
+
+const fakeBeers = [
+    {
+        "_id": "1", 
+        "abv": "5", 
+        "bid": "4010", 
+        "breweryCity": "Leuven", 
+        "breweryCountry": "Belgium", 
+        "breweryId": "265", 
+        "breweryName": "Stella Artois", 
+        "breweryState": "Vlaanderen", 
+        "breweryUrl": "https://untappd.com/brewery/265", 
+        "flavorProfiles": "", 
+        "gloablRatingScore": 3.26, 
+        "ibu": "24", 
+        "name": "Stella Artois", 
+        "servingType": "Draft", 
+        "type": "Pilsner - Other", 
+        "untappdWebsite": "https://untappd.com/beer/4010"
+    },
+    {
+        "_id": "2", 
+        "abv": "5", 
+        "bid": "4010", 
+        "breweryCity": "Leuven", 
+        "breweryCountry": "Belgium", 
+        "breweryId": "265", 
+        "breweryName": "Artois Stella", 
+        "breweryState": "Vlaanderen", 
+        "breweryUrl": "https://untappd.com/brewery/265", 
+        "flavorProfiles": "", 
+        "gloablRatingScore": 3.26, 
+        "ibu": "24", 
+        "name": "Artois Stella", 
+        "servingType": "Draft", 
+        "type": "Pilsner - Other", 
+        "untappdWebsite": "https://untappd.com/beer/4010"
+    },
+    {
+        "_id": "3", 
+        "abv": "5", 
+        "bid": "4010", 
+        "breweryCity": "Leuven", 
+        "breweryCountry": "Belgium", 
+        "breweryId": "265", 
+        "breweryName": "Stella Stella", 
+        "breweryState": "Vlaanderen", 
+        "breweryUrl": "https://untappd.com/brewery/265", 
+        "flavorProfiles": "", 
+        "gloablRatingScore": 3.26, 
+        "ibu": "24", 
+        "name": "Stella Stella", 
+        "servingType": "Draft", 
+        "type": "Pilsner - Other", 
+        "untappdWebsite": "https://untappd.com/beer/4010"
+    }
+];
 
 
 
