@@ -49,7 +49,7 @@ module.exports = {
   
   
   async createBeer(name, breweryName,
-    type, abv, ibu, untappdWebsite,
+    type, abv, ibu, untappdWebsite, breweryUrl,
     breweryCountry, breweryCity, breweryState,
     flavorProfiles, servingType, bid, breweryId,
     gloablRatingScore, venueName) {
@@ -71,9 +71,10 @@ module.exports = {
       if (typeof abv !== 'number' || abv < 0) throw new Error('abv must be a number greater than or equal to 0');
       if (typeof ibu !== 'number' || ibu < 0) throw new Error('ibu must be a number greater than or equal to 0');
       if (typeof untappdWebsite !== 'string' || untappdWebsite.trim() === '') throw new Error('untappdWebsite must be a non-empty string and a valid website');
+      if (typeof breweryUrl !== 'string' || breweryUrl.trim() === '') throw new Error('breweryUrl must be a non-empty string and a valid website');
       if (typeof breweryCountry !== 'string' || breweryCountry.trim() === '') throw new Error('breweryCountry must be a non-empty string');
       if (typeof breweryCity !== 'string' || breweryCity.trim() === '') throw new Error('breweryCity must be a non-empty string');
-      if (typeof breweryState !== 'string' || breweryState.trim() === '') throw new Error(`breweryState must be a non-empty string: ${breweryState.length}`);
+      if (typeof breweryState !== 'string' || breweryState.trim() === '') throw new Error('breweryState must be a non-empty string');
       if (typeof flavorProfiles !== 'string') throw new Error('flavorProfiles must be a string');
       if (typeof servingType !== 'string' && !SERVING_TYPES.includes(servingType)) throw new Error('servingType must be a non-empty string within valid types');
       if (typeof bid !== 'string' || bid.trim() === '') throw new Error('bid must be a non-empty string');
@@ -90,6 +91,7 @@ module.exports = {
         abv,
         ibu,
         untappdWebsite,
+        breweryUrl,
         breweryCountry,
         breweryCity,
         breweryState,

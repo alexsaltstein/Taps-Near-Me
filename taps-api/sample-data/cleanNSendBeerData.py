@@ -73,6 +73,7 @@ def get_beer_data(cleaned_beer_data_file, beer_only_data_file):
         beer_dict['abv'] = float(beer['beer_abv'])
         beer_dict['ibu'] = float(beer['beer_ibu'])
         beer_dict['untappd_website'] = beer['beer_url']
+        beer_dict['brewery_url'] = beer['brewery_url']
         beer_dict['brewery_country'] = beer['brewery_country']
         beer_dict['brewery_city'] = beer['brewery_city']
         beer_dict['brewery_state'] = beer['brewery_state']
