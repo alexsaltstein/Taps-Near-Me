@@ -11,31 +11,31 @@ const VenueScreen = ({ navigation, route }) => {
   const [loading, setLoading] = React.useState(true);
 
   const getData = async () => {
-    try{
-    }catch {
+    try {
+    } catch {
       setError(true);
     }
   }
 
-  React.useEffect(()=> {
+  React.useEffect(() => {
     (async () => {
       setLoading(true);
       await getData();
       setLoading(false);
     })()
   }, []);
-  
+
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       { loading ?
-        <Loading navigation={navigation}/> :
-        <View style={{flex: 1}}>
+        <Loading navigation={navigation} /> :
+        <View style={{ flex: 1 }}>
           {
             error ?
               <ErrorPage navigation={navigation} />
               :
               <View style={styles.container}>
-                <BackButton navigation={navigation}/>
+                <BackButton navigation={navigation} />
                 <Text>hii</Text>
                 <Text>Venue Screen</Text>
                 <Text>id: {id}</Text>
