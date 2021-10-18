@@ -1,7 +1,9 @@
 const SERVING_TYPES = [
   'Draft',
   'Can',
-  'Bottle'
+  'Bottle',
+  '',
+  'Taster',
 ];
 
 module.exports = {
