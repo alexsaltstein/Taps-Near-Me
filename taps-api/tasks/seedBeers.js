@@ -15,7 +15,7 @@ const insertBeer = async (beer) => {
       global_rating_score, venue_name);
     console.log('inserted beer:', name);
   } catch (e) {
-    console.log('ERROR:', e.message, 'for beer', name);
+    console.log("ERROR:", e.message, "for", name);
   }
 };
 
@@ -28,4 +28,4 @@ const seedAllBeers = async (data) => {
   process.exit(0);
 }
 
-seedAllBeers(require('../sample-data/testBeers.json'));
+seedAllBeers(require('../sample-data/cleaned-beer-data-json'));
