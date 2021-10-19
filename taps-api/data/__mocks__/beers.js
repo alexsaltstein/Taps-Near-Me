@@ -183,8 +183,8 @@ const addBeerToVenue = (venueName, beerId) => {
             throw new Error('Failed to add beer to venue');
         }
         else {
-            venue["beersAvailable"].push(beer["beerId"]);
-            return Promise.resolve(getVenueById(venue["_id"]));
+            Promise.resolve(venue["beersAvailable"].push(beerId));
+            return Promise.resolve(venue);
         }
 
     }

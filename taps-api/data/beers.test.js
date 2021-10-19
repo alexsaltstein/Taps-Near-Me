@@ -79,6 +79,39 @@ const fakeBeers = [
 
 const emptyBeers = [];
 
+const fakeVenues = [
+    {
+        "_id":"1",
+        "name":"Thatcher McGhee's",
+        "city":"Pompton Lakes",
+        "state":"NJ",
+        "country":"United States",
+        "lat":"41.0076",
+        "lng":"-74.2951",
+        "beersAvailable":["51d6d03b-f243-4a1c-bb8e-f3297f01043d"]
+    },
+    {
+        "_id":"2",
+        "name":"Thatcher Thatcher's",
+        "city":"Pompton Lakes",
+        "state":"NJ",
+        "country":"United States",
+        "lat":"41.0076",
+        "lng":"-74.2951",
+        "beersAvailable":["51d6d03b-f243-4a1c-bb8e-f3297f01043d"]
+    },
+    {
+        "_id":"3",
+        "name":"Thatcher",
+        "city":"Pompton Lakes",
+        "state":"NJ",
+        "country":"United States",
+        "lat":"41.0076",
+        "lng":"-74.2951",
+        "beersAvailable":["51d6d03b-f243-4a1c-bb8e-f3297f01043d"]
+    }
+];
+
 describe('test get beers by ID', () => {
     test('output the beers by their ID', async () => {
         getBeerById('1').then(result => {
@@ -129,7 +162,7 @@ describe('test add beer to venue', () => {
 
     test('add beer to venue', async () => {
         addBeerToVenue('Thatcher', '2').then(result => {
-            expect(result["beersAvailable"]).toBe(2);
+            expect(result["beersAvailable"].length).toBe(2);
         });
     });
 
@@ -161,7 +194,28 @@ describe('test creating a new beer', () => {
         createBeer('Zach IPA','My Brewery', 'IPA - American', 5.5, 60, 'http://untappd.com/bid/fakeid', 
         'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
         'Draft','29','12345',4.5,'My Brewery').then(result => {
-            expect(result['_id']).toBe('29');
-        })
-    })
-})
+            expect(result['_id']).toBe('4');
+        });
+    });
+    
+
+    test('throw error if input is a string when expecting a number', async () => {
+        expect(() => createBeer('Zach IPA',1234, 'IPA - American', 5.5, 60, 'http://untappd.com/bid/fakeid', 
+        'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
+        'Draft','29','12345',4.5,'My Brewery').toThrow('breweryName must be a non-empty string'))
+    });
+
+    test('throw error if input is a number when expecting a string', async () => {
+        expect(() => createBeer('Zach IPA','My Brewery', 'IPA - American', '5.5', 60, 'http://untappd.com/bid/fakeid', 
+        'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
+        'Draft','29','12345',4.5,'My Brewery').toThrow('abv must be a number greater than or equal to 0'));
+
+    });
+
+    test('throw error if input is a number when expecting a string', async () => {
+        expect(() => createBeer('Zach IPA','My Brewery', 'IPA - American', -1, 60, 'http://untappd.com/bid/fakeid', 
+        'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
+        'Draft','29','12345',4.5,'My Brewery').toThrow('abv must be a number greater than or equal to 0'));
+
+    });
+});
