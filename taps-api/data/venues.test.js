@@ -5,7 +5,7 @@ const uuid = require('uuid');
 const { beers, venues } = require('../config/mongoCollections');
 const { SERVING_TYPES } = require('./consts');
 const { isValidimgURL, isValidURL } = require('./utils');
-const { getVenueByName, getVenueById } = require('./venues');
+const { getVenueByName, getVenueById, createVenue } = require('./venues');
 const mongoCollections = require('../config/mongoCollections');
 const { MongoClient } = require('mongodb')
 
@@ -37,6 +37,7 @@ describe('test get venues by ID', () => {
 });
 
 describe('test get venues by name', () => {
+
     test('output the venues by their name', async () => {
         getVenueByName('Thatcher').then(result => {
             expect(result["name"]).toBe('Thatcher');
@@ -53,5 +54,14 @@ describe('test get venues by name', () => {
 
         expect(() => getVenueByName('Foo')).toThrow("No venue found with that name");
         
+    });
+});
+
+describe('test the createVenue function', () => {
+
+    test('add new venue successfully', async () => {
+        createVenue('My Bar', 'Hoboken', 'NJ', 'USA', '41.0000', '70.0000').then(result => {
+            expect(result['_id'].toBe('4'));
+        });
     });
 });

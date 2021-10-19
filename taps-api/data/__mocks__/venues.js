@@ -136,8 +136,37 @@ const getVenueByName = (name) => {
     }
 }
 
+const createVenue = (name, city, state, country, lat, lng) => {
+        
+    if (typeof name !== 'string' || name.trim() === '') throw new Error('name must be a non-empty string');
+    if (typeof city !== 'string' || city.trim() === '') throw new Error('city must be a non-empty string');
+    if (typeof state !== 'string' || state.trim() === '') throw new Error('state must be a non-empty string');
+    if (typeof country !== 'string' || country.trim() === '') throw new Error('country must be a non-empty string');
+    if (typeof lat !== 'string' || lat.trim() === '') throw new Error('lat must be a non-empty string');
+    if (typeof lng !== 'string' || lng.trim() === '') throw new Error('lng must be a non-empty string');
+
+        const newVenue = {
+            _id: (fakeVenues.length + 1).toString(),
+            name,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            beersAvailable: []
+        }
+
+        fakeVenues.push(newVenue);
+        
+        return Promise.resolve(getVenueById(newVenue["_id"]));
+
+
+
+    }
+
 
 module.exports = {
     getVenueById,
-    getVenueByName
+    getVenueByName, 
+    createVenue
 }

@@ -212,10 +212,16 @@ describe('test creating a new beer', () => {
 
     });
 
-    test('throw error if input is a number when expecting a string', async () => {
+    test('throw error if numeric input is out of bounds', async () => {
         expect(() => createBeer('Zach IPA','My Brewery', 'IPA - American', -1, 60, 'http://untappd.com/bid/fakeid', 
         'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
         'Draft','29','12345',4.5,'My Brewery').toThrow('abv must be a number greater than or equal to 0'));
 
     });
+
+    test('throw error if empty string', async () => {
+        expect(() => createBeer('Zach IPA','My Brewery', '', 5, 60, 'http://untappd.com/bid/fakeid', 
+        'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
+        'Draft','29','12345',4.5,'My Brewery').toThrow('style must be a non=empty string'));
+    })
 });
