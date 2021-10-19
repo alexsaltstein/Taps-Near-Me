@@ -7,7 +7,7 @@ const { SERVING_TYPES } = require('./consts');
 const { isValidimgURL, isValidURL } = require('./utils');
 const { getVenueByName, getVenueById } = require('./venues');
 const mongoCollections = require('../config/mongoCollections');
-const { getBeerById, getBeerByName, getAllBeers, addBeerToVenue } = require('./beers');
+const { getBeerById, getBeerByName, getAllBeers, addBeerToVenue, getBeersByFilter, createBeer } = require('./beers');
 const { MongoDBNamespace, MongoClient } = require('mongodb');
 
 //const { beers, venues } = mongoCollections;
@@ -129,7 +129,7 @@ describe('test add beer to venue', () => {
 
     test('add beer to venue', async () => {
         addBeerToVenue('Thatcher', '2').then(result => {
-            expect(result.length).toBe(4);
+            expect(result["beersAvailable"]).toBe(2);
         });
     });
 
@@ -146,3 +146,22 @@ describe('test add beer to venue', () => {
     });
 });
 
+describe('test getting beers by filter', () => {
+
+    test('get filtered beer list', async () => {
+        getBeersByFilter().then(result => {
+            expect(result.length).toBe(1);  
+        });
+    });
+});
+
+describe('test creating a new beer', () => {
+
+    test('create a new beer successfully', async () => {
+        createBeer('Zach IPA','My Brewery', 'IPA - American', 5.5, 60, 'http://untappd.com/bid/fakeid', 
+        'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
+        'Draft','29','12345',4.5,'My Brewery').then(result => {
+            expect(result['_id']).toBe('29');
+        })
+    })
+})
