@@ -92,6 +92,13 @@ const VerificationScreen = ({ navigation }) => {
           <Spacing vertical={10} />
           <Text style={styles.legalText}>By entering this app you are agreeing to our <ClickableText text="Terms of Service" url="https://www.google.com" /> and <ClickableText text="Privacy Policy" url="https://www.google.com" /> </Text>
         </SlideInContainer>
+        <Spacing vertical={30} />
+      </View>
+      <View style={styles.noteContainer}>
+        <SlideInContainer>
+          <Text style={styles.subtitle}>Note:</Text>
+          <Text style={styles.legalText}>You must be at least 21 years of age to drink alcoholic beverages. Do not drink and drive, drink to excess or drink with certain medications or medical conditions. For more information, please visit <ClickableText text="http://www.cdc.gov/alcohol/index.htm" url="http://www.cdc.gov/alcohol/index.htm"/> or contact your health provider.</Text>
+        </SlideInContainer>
       </View>
     </View>
   )
@@ -103,6 +110,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: COLORS.red,
+  },
+  noteContainer: {
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   alignment: {
     flex: 0.65
@@ -119,6 +130,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: 8,
     fontSize: 15,
+    paddingTop: 8
   },
   dateInputContainer: {
     padding: 20
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingHorizontal: 8,
     fontSize: 12,
-    textAlign: 'center',
+    textAlign: 'center'
   }
 })
 
