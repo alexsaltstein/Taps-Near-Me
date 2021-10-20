@@ -99,10 +99,9 @@ const fakeBeers = [
 
 
 
-const getVenueById = (id) => {
+const getVenueById = async (id) => {
     if (id === null) {
         throw new Error('No id provided');
-        return Promise.reject();
     }
     else {
         for (let i = 0; i < fakeVenues.length; i++) {
@@ -113,15 +112,13 @@ const getVenueById = (id) => {
     }
 
     throw new Error('No venue found with that id');
-    return Promise.reject();
 
 }
     
 
-const getVenueByName = (name) => {
+const getVenueByName = async (name) => {
     if (name === null) {
         throw new Error('No name provided');
-        return Promise.reject();
     }
     else {
         for (let i = 0; i < fakeVenues.length; i++) {
@@ -132,11 +129,10 @@ const getVenueByName = (name) => {
         }
 
         throw new Error('No venue found with that name');
-        return Promise.reject();
     }
 }
 
-const createVenue = (name, city, state, country, lat, lng) => {
+const createVenue = async (name, city, state, country, lat, lng) => {
         
     if (typeof name !== 'string' || name.trim() === '') throw new Error('name must be a non-empty string');
     if (typeof city !== 'string' || city.trim() === '') throw new Error('city must be a non-empty string');

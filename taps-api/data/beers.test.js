@@ -111,11 +111,11 @@ describe('test get beers by ID', () => {
     });
 
     test('output an error if no id input is given', async() => {
-        expect(() => getBeerById(null)).toThrow("No id provided");
+        expect(() => getBeerById(null)).rejects.toThrowError("No id provided");
     });
 
     test('output an error if id not found', async() => {
-        expect(() => getBeerById('0')).toThrow("No beer with that id found");
+        expect(() => getBeerById('0')).rejects.toThrowError("No beer with that id found");
     });
 });
 
@@ -127,11 +127,11 @@ describe('test get beers by name', () => {
     });
 
     test('output an error if no name input is given', async() => {
-        expect(() => getBeerByName(null)).toThrow("No name provided");
+        expect(() => getBeerByName(null)).rejects.toThrowError("No name provided");
     });
 
     test('output an error if name not found', async() => {
-        expect(() => getBeerByName('Water')).toThrow("No beer with that name found");
+        expect(() => getBeerByName('Water')).rejects.toThrowError("No beer with that name found");
     });
 });
 
@@ -145,7 +145,7 @@ describe('test get all beers', () => {
 
     test('throw error when list is empty', async () => {
 
-        expect(() => getAllBeers(emptyBeers).toThrow('No beers found'));
+        expect(() => getAllBeers(emptyBeers).rejects.toThrowError('No beers found'));
     })
 });
 
@@ -158,23 +158,24 @@ describe('test add beer to venue', () => {
     });
 
     test('throw error if beer is in venue', async () => {
-        expect(() => addBeerToVenue('Thatcher', '51d6d03b-f243-4a1c-bb8e-f3297f01043d').toThrow('Failed to add beer to venue'));
+        expect(() => addBeerToVenue('Thatcher', '51d6d03b-f243-4a1c-bb8e-f3297f01043d').rejects.toThrowError('Failed to add beer to venue'));
     });
 
     test('throw error if no name input', async () => {
-        expect(() => addBeerToVenue(null, '1').toThrow('No name provided'));
+        expect(() => addBeerToVenue(null, '1').rejects.toThrowError('No name provided'));
     });
 
     test('throw error if no id input', async () => {
-        expect(() => addBeerToVenue('Thatcher', null).toThrow('No id provided'));
+        expect(() => addBeerToVenue('Thatcher', null).rejects.toThrowError('No id provided'));
     });
 });
 
 describe('test getting beers by filter', () => {
 
     test('get filtered beer list', async () => {
-        getBeersByFilter().then(result => {
-            expect(result.length).toBe(1);  
+        getBeersByFilter(true).then(result => {
+            console.log(result);
+            expect(result).toBe('waiting for beer function test');  
         });
     });
 });
@@ -193,26 +194,26 @@ describe('test creating a new beer', () => {
     test('throw error if input is a string when expecting a number', async () => {
         expect(() => createBeer('Zach IPA',1234, 'IPA - American', 5.5, 60, 'http://untappd.com/bid/fakeid', 
         'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
-        'Draft','29','12345',4.5,'My Brewery').toThrow('breweryName must be a non-empty string'))
+        'Draft','29','12345',4.5,'My Brewery').rejects.toThrowError('breweryName must be a non-empty string'))
     });
 
     test('throw error if input is a number when expecting a string', async () => {
         expect(() => createBeer('Zach IPA','My Brewery', 'IPA - American', '5.5', 60, 'http://untappd.com/bid/fakeid', 
         'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
-        'Draft','29','12345',4.5,'My Brewery').toThrow('abv must be a number greater than or equal to 0'));
+        'Draft','29','12345',4.5,'My Brewery').rejects.toThrowError('abv must be a number greater than or equal to 0'));
 
     });
 
     test('throw error if numeric input is out of bounds', async () => {
         expect(() => createBeer('Zach IPA','My Brewery', 'IPA - American', -1, 60, 'http://untappd.com/bid/fakeid', 
         'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
-        'Draft','29','12345',4.5,'My Brewery').toThrow('abv must be a number greater than or equal to 0'));
+        'Draft','29','12345',4.5,'My Brewery').rejects.toThrowError('abv must be a number greater than or equal to 0'));
 
     });
 
     test('throw error if empty string', async () => {
         expect(() => createBeer('Zach IPA','My Brewery', '', 5, 60, 'http://untappd.com/bid/fakeid', 
         'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
-        'Draft','29','12345',4.5,'My Brewery').toThrow('style must be a non=empty string'));
+        'Draft','29','12345',4.5,'My Brewery').rejects.toThrowError('style must be a non=empty string'));
     });
 });

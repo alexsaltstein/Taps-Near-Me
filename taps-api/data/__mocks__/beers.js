@@ -107,9 +107,8 @@ const SERVING_TYPES = [
     'Bottle'
   ];
 
-const getBeerById = (id) => {
+const getBeerById = async (id) => {
     if (id === null) {
-        Promise.reject(new Error("No id provided"));
         throw new Error("No id provided");
     }
     else {
@@ -118,14 +117,12 @@ const getBeerById = (id) => {
                 return Promise.resolve(fakeBeers[i]);
             }
         }
-        Promise.reject(new Error("No beer with that id found"));
         throw new Error("No beer with that id found")
     }
 }
 
-const getBeerByName = (name) => {
+const getBeerByName = async (name) => {
     if (name === null) {
-        Promise.reject(new Error("No name provided"));
         throw new Error("No name provided");
         
     }
@@ -135,15 +132,13 @@ const getBeerByName = (name) => {
                 return Promise.resolve(fakeBeers[i]);
             }
         }
-        Promise.reject(new Error("No beer with that name found"));
         throw new Error("No beer with that name found");
         
     }
 }
 
-const getAllBeers = (beers) => {
+const getAllBeers = async (beers) => {
     if (beers.length === 0) {
-        Promise.reject(new Error("No beers found"));
         throw new Error("No beers found");
     }
     else {
@@ -151,13 +146,11 @@ const getAllBeers = (beers) => {
     }
 }
 
-const addBeerToVenue = (venueName, beerId) => {
+const addBeerToVenue = async (venueName, beerId) => {
     if(venueName === null) {
-        Promise.reject(new Error("No name provided"));
         throw new Error("No name provided");
     }
     else if (beerId === null) {
-        Promise.reject();
         throw new Error("No beerId provided");
     }
     else {
@@ -179,7 +172,6 @@ const addBeerToVenue = (venueName, beerId) => {
         }
         
         if (venue['beersAvailable'].includes(beer["beerId"])) {
-            Promise.reject();
             throw new Error('Failed to add beer to venue');
         }
         else {
@@ -190,8 +182,13 @@ const addBeerToVenue = (venueName, beerId) => {
     }
 }
 
-const getBeersByFilter = () => {
-
+const getBeersByFilter = async (filter) => {
+    if (filter === true) {
+        return Promise.resolve('waiting for beer filter function test');
+    }
+    else {
+        throw new Error('no filter provided');
+    }
 }
 
 const createBeer = (name, breweryName,
