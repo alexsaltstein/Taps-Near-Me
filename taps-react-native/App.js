@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TextInput } from 'react-native';
+import { RecoilRoot } from 'recoil';
 import NavigationDecider from './src/components/NavigationDecider';
 import { useFonts, Poppins_400Regular, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import { OpenSans_400Regular, OpenSans_600SemiBold } from '@expo-google-fonts/open-sans';
@@ -20,12 +21,14 @@ export default function App() {
   });
 
   return (
-    <BasicLayout>
-      {
-        (!fontsLoaded) ?
-          <AppLoading /> :
-          <NavigationDecider />
-      }
-    </BasicLayout>
+    <RecoilRoot>
+      <BasicLayout>
+        {
+          (!fontsLoaded) ?
+            <AppLoading /> :
+            <NavigationDecider />
+        }
+      </BasicLayout>
+    </RecoilRoot>
   )
 }

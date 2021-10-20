@@ -4,10 +4,10 @@ import backImage from '../../../assets/navigation/leftArrow.png';
 import { COLORS } from '../../styles/COLORS';
 
 
-const BackButton = ({ color = COLORS.black, navigation }) => {
+const BackButton = ({ color = COLORS.black, navigation, relative = false }) => {
   return (
     <TouchableOpacity 
-    style={styles.container}
+    style={relative ? {position: 'relative'}: styles.container}
     onPress={()=>navigation.goBack()}>
       <Image style={[{ tintColor: color }, styles.backImage]} source={backImage} />
     </TouchableOpacity>

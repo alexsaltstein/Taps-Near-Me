@@ -16,7 +16,7 @@ const Logo = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    paddingHorizontal: 15,
   },
   border: {
     flexDirection: 'row',

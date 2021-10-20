@@ -20,4 +20,4 @@ const seedAllVenues = async (data) => {
   process.exit(0);
 }
 
-seedAllVenues(require('../sample-data/testVenues.json'));
+seedAllVenues(require('../sample-data/cleaned-venue-data-json.json'));

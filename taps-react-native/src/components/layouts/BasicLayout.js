@@ -1,16 +1,35 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { View, SafeAreaView, StyleSheet, StatusBar, Platform } from 'react-native';
+import { useRecoilState } from 'recoil';
+import { statusBarColor, bottomBarColor } from '../../atoms';
 
-const BasicLayout = ({children}) => {
+const BasicLayout = ({ children }) => {
+  const [statusColor] = useRecoilState(statusBarColor);
+  const [bottomColor] = useRecoilState(bottomBarColor);
+
   return (
-    <SafeAreaView style={styles.container}>
-      {children}
+    <View style={styles.flex1}>
+    <SafeAreaView style={{ ...styles.flex0, backgroundColor: statusColor }} />
+    <SafeAreaView style={{ ...styles.flex1, backgroundColor: Platform.OS === 'android' ? statusColor:bottomColor }}>
+      <View style={styles.flex1}>
+        <StatusBar
+          barStyle='dark-content'
+          translucent
+          backgroundColor={Platform.OS === 'android' ? statusColor:bottomColor}
+        />
+        {Platform.OS === 'android' && <View style={{paddingTop: 25}}/>}
+        {children}
+      </View>
     </SafeAreaView>
+    </View>
   )
 }
 const styles = StyleSheet.create({
-  container: {
-    flex:1
+  flex1: {
+    flex: 1,
+  },
+  flex0:{
+    flex: 0,
   }
 })
 

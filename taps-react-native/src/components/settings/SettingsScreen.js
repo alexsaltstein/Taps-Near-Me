@@ -1,17 +1,19 @@
 import React from 'react';
 import Constants from 'expo-constants';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollViewComponent, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
 import backImage from '../../../assets/navigation/leftArrow.png';
 import { SECTIONS } from './consts';
+import setStatusBarColor from '../utils/StatusBarColorFunctions';
+
 const SettingsSection = ({ title, subs }) => {
   return (
     <View style={styles.padding}>
       <Text style={styles.subsectionTitle}>{title}</Text>
       <View style={styles.subsectionContainer}>
         {subs.map((val, index) => (
-          <View>
+          <View key={val + index}>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() => val.onPress()}
@@ -31,6 +33,17 @@ const SettingsSection = ({ title, subs }) => {
 }
 
 const SettingsScreen = ({ navigation }) => {
+  const [setColor] = setStatusBarColor();
+
+  React.useEffect(() => {
+    navigation.addListener(
+      'focus',
+      () => {
+        setColor(COLORS.red);
+      },
+    );
+  },[])
+
   return (
     <View style={styles.container}>
       <BackButton navigation={navigation} color={COLORS.white} />
