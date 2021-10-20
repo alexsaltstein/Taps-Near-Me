@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "This is the api repo for taps near me",
   "main": "app.js",
-  "type": "module",
   "scripts": {
     "test": "jest",
     "start": "node server.js",
