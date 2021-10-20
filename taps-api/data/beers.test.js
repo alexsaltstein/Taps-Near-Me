@@ -223,5 +223,5 @@ describe('test creating a new beer', () => {
         expect(() => createBeer('Zach IPA','My Brewery', '', 5, 60, 'http://untappd.com/bid/fakeid', 
         'http://untappd.com/breweryid/foo', 'USA', 'New York City', 'NY', 'hoppy,smooth,bitter', 
         'Draft','29','12345',4.5,'My Brewery').toThrow('style must be a non=empty string'));
-    })
+    });
 });

@@ -64,4 +64,12 @@ describe('test the createVenue function', () => {
             expect(result['_id'].toBe('4'));
         });
     });
+
+    test('throw error when input is not string', async () => {
+        expect(() => createVenue(('My Bar', 'Hoboken', 'NJ', 'USA', '41.0000', 70.0000).toThrow('lng must be a non-empty string')));
+    });
+
+    test('throw error when input is empty', async () => {
+        expect(() => createVenue(('', 'Hoboken', 'NJ', 'USA', '41.0000', '70.0000').toThrow('name must be a non-empty string')));
+    });
 });
