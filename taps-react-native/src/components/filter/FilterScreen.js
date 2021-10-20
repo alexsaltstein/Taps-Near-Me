@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
 import ImageInput from './ImageInput';
 import NumberInput2 from './NumberInput2';
 
 const FilterScreen = ({ navigation }) => {
+
+  const [type, setType] = React.useState('');
+
+  const [radius, setRadius] = React.useState(-1);
+
+  const [rating, setRating] = React.useState(-1);
 
   const [maxABVIndex, setMaxABVIndex] = React.useState(-1);
   const [minABVIndex, setMinABVIndex] = React.useState(-1);
@@ -18,25 +25,28 @@ const FilterScreen = ({ navigation }) => {
     <View style={styles.container}>
       <BackButton navigation={navigation} />
       <Text>Filter Screen</Text>
-      <Text>Rating:</Text>
+      <Text>Type (in form "style - substyle"):</Text>
+      <TextInput
+        style={{ width: 200, height: 30, borderWidth: 1, borderColor: COLORS.black }}
+        value={type}
+        onChangeText={(val) => setType(val)} />
+      <Text>Radius:</Text>
+      <Text>Minimum Rating:</Text>
       <ImageInput />
-      {/* need to change to be an inclusive range rather than exclusive
-        for example if individual min and max then the rang displays correct however if its both 
-        min must be less than max and highlight the values between min and max. 
-       */}
       <NumberInput2
         minIndex={minABVIndex}
         setMinIndex={setMinABVIndex}
         maxIndex={maxABVIndex}
         setMaxIndex={setMaxABVIndex}
-        vals={['<4', '5', '6', '7', '8>']} />
-
+        vals={['<4', '5', '6', '7', '8>']}
+        label="abv" />
       <NumberInput2
         minIndex={minIndex}
         setMinIndex={setMinIndex}
         maxIndex={maxIndex}
         setMaxIndex={setMaxIndex}
-        vals={['<20', '30', '40', '50', '60>']} />
+        vals={['<20', '30', '40', '50', '60>']}
+        label="ibu" />
 
     </View>
   )

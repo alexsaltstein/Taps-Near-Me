@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 import { SHADOWS } from '../../styles/shadows';
 
-const NumberInput2 = ({ minIndex, maxIndex, setMinIndex, setMaxIndex, vals, isMax }) => {
+const NumberInput2 = ({ minIndex, maxIndex, setMinIndex, setMaxIndex, vals, label}) => {
   return (
     <View>
-      <Text>Min abv:</Text>
+      <Text>Min {label}:</Text>
       <View style={styles.container}>
         {
           vals.map((val, index) => (
@@ -33,7 +33,7 @@ const NumberInput2 = ({ minIndex, maxIndex, setMinIndex, setMaxIndex, vals, isMa
           ))
         }
       </View>
-      <Text>Max abv:</Text>
+      <Text>Max {label}:</Text>
       <View style={styles.container}>
         {
           vals.map((val, index) => (
