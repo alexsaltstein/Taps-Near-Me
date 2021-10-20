@@ -1,6 +1,4 @@
-//import { getBeerById } from "./beers";
 const beersMod = require('./beers');
-const axios = require('axios');
 const uuid = require('uuid');
 const { beers, venues } = require('../config/mongoCollections');
 const { SERVING_TYPES } = require('./consts');
@@ -9,13 +7,6 @@ const { getVenueByName, getVenueById } = require('./venues');
 const mongoCollections = require('../config/mongoCollections');
 const { getBeerById, getBeerByName, getAllBeers, addBeerToVenue, getBeersByFilter, createBeer } = require('./beers');
 const { MongoDBNamespace, MongoClient } = require('mongodb');
-
-//const { beers, venues } = mongoCollections;
-
-//const { render, screen, waitFor } = require('@testing-library/react');
-
-
-//jest.mock('../config/mongoCollections');
 
 jest.mock('./beers');
 jest.mock('./venues')
