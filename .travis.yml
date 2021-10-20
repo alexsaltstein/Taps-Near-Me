@@ -1,4 +1,4 @@
 language: node_js
 node_js:
  - "node"
-script: npm run test '/taps-api/beers.test.js'
+script: npm run test
