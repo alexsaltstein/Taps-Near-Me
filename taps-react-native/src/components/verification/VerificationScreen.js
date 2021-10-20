@@ -95,10 +95,10 @@ const VerificationScreen = ({ navigation }) => {
         <Spacing vertical={30} />
       </View>
       <View style={styles.noteContainer}>
-        <SlideInContainer>
-          <Text style={styles.subtitle}>Note:</Text>
-          <Text style={styles.legalText}>You must be at least 21 years of age to drink alcoholic beverages. Do not drink and drive, drink to excess or drink with certain medications or medical conditions. For more information, please visit <ClickableText text="http://www.cdc.gov/alcohol/index.htm" url="http://www.cdc.gov/alcohol/index.htm"/> or contact your health provider.</Text>
-        </SlideInContainer>
+        {/* <SlideInContainer> */}
+          {/* <Text style={styles.subtitle}>Note:</Text> */}
+          <Text style={styles.legalText}>You must be at least 21 years of age to drink alcoholic beverages. Do not drink and drive, drink to excess or drink with certain medications or medical conditions. For more information, please visit <ClickableText text="cdc.gov" url="http://www.cdc.gov/alcohol/index.htm"/> or contact your health provider.</Text>
+        {/* </SlideInContainer> */}
       </View>
     </View>
   )
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.red,
   },
   noteContainer: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    position: 'absolute',
+    bottom: 0,
   },
   alignment: {
     flex: 0.65
