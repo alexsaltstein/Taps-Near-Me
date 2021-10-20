@@ -1,5 +1,7 @@
 language: node_js
 node_js:
  - "node"
-before_script: cd taps-api/data
+before_script:
+ - cd taps-api/data
+ - npm install jest
 script: npm run test
