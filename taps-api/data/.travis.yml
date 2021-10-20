@@ -1,4 +1,4 @@
 language: node_js
 node_js:
  - 14.7.6
-script: npm run test '/taps-api/data'
+script: npm run test '/taps-api/beers.test.js'
