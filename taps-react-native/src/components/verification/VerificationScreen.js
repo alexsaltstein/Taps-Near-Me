@@ -10,12 +10,16 @@ import Spacing from '../widgets/Spacing';
 import ErrorToast from '../widgets/ErrorToast';
 import { handleError } from '../utils/ErrorFunctions';
 import useDateOfBirth from './useDateOfBirth';
+import setStatusBarColor from '../utils/StatusBarColorFunctions';
+
 
 const VerificationScreen = ({ navigation }) => {
   const [error, setError] = React.useState(null);
   const [dateOfBirth, setDateOfBirth] = useDateOfBirth();
   const [text, setText] = React.useState(dateOfBirth);
   const [inputFocused, setInputFocused] = React.useState(false);
+  const [setColor] = setStatusBarColor();
+
   const DATE_LENGTH = 8;
   const ref = React.useRef(null);
 
@@ -31,9 +35,12 @@ const VerificationScreen = ({ navigation }) => {
   const onSubmit = () => {
     // add validation
     if (text.length === DATE_LENGTH) {
+      const MM = text.substring(0, 2);
+      const DD = text.substring(2, 4);
+      const YYYY = text.substring(4);
       const years = moment(new Date())
-        .diff(`${text.substring(0, 2)}/${text.substring(2, 4)}/${text.substring(4)}`, 
-        'years', false);
+        .diff(`${YYYY}-${MM}-${DD}`,
+          'years', false);
       if (years >= 21) {
         setDateOfBirth(text);
         navigation.navigate('Home');
@@ -44,6 +51,17 @@ const VerificationScreen = ({ navigation }) => {
       handleError('Error: Please input a valid date', setError);
     }
   };
+
+  React.useEffect(() => {
+    if (dateOfBirth !== '') {
+      setText(dateOfBirth);
+    }
+  }, [dateOfBirth]);
+  
+  React.useEffect(() => {
+    setColor(COLORS.red);
+  },[])
+
   return (
     <View style={styles.container}>
       <View style={styles.alignment}>
