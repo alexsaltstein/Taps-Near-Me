@@ -1,22 +1,24 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import Logo from '../widgets/Logo';
 import filter from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
-
-const NavIcons = ({ source, to, navigation }) => {
-  return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(to)}
-      style={styles.navButton}>
-      <Image
-        source={source}
-        style={styles.navIcon} />
-    </TouchableOpacity>
-  )
-};
+import NavIcons from '../widgets/NavIcons';
+import setStatusBarColor from '../utils/StatusBarColorFunctions';
+import { COLORS } from '../../styles/COLORS';
 
 const HomeScreen = ({ navigation }) => {
+  const [setColor] = setStatusBarColor();
+
+  React.useEffect(() => {
+    navigation.addListener(
+      'focus',
+      () => {
+        setColor(COLORS.white);
+      },
+    );
+  },[])
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -48,7 +50,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    paddingTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
@@ -57,12 +58,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  navButton: {
-    paddingHorizontal: 15,
-  },
-  navIcon: {
-    width: 40,
-    height: 40,
-  }
 })
 export default HomeScreen;
