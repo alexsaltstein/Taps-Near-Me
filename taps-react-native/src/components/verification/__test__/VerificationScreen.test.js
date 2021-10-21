@@ -1,10 +1,10 @@
 import '../../../matchMedia.mock';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import FilterScreen from '../FilterScreen';
+import VerificationScreen from '../VerificationScreen';
 import ReactDOM from 'react-dom';
 
 test('renders correctly', () => {
-  const tree = renderer.create(<FilterScreen />).toJSON();
+  const tree = renderer.create(<VerificationScreen />).toJSON();
   expect(tree).toMatchSnapshot();
 });
