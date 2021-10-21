@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.red,
   },
   noteContainer: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    position: 'absolute',
+    bottom: 0,
   },
   alignment: {
     flex: 0.65
