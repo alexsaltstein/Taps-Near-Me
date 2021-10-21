@@ -19,6 +19,28 @@ module.exports = {
     return venue;
   },
 
+  async getVenuesByRadius(location, radius) {
+    if (!location) throw new Error('No location provided');
+    if (!radius) throw new Error('No radius provided');
+    const userlocation = location.map(item => parseFloat(item));
+    const radiusinput = parseInt(radius);
+    if (userlocation.length != 2) throw new Error('location must be an array of length 2 ([lng, lat])');
+    if (isNaN(userlocation[0]) || isNaN(userlocation[1])) throw new Error('location input for lng & lat must be numbers!');
+    if (isNaN(radiusinput)) throw new Error('radius input must be a number');
+    if (userlocation[0] > 180 || userlocation[0] < -180) throw new Error('lng must be a number between -180 and 180!');
+    if (userlocation[1] > 90 || userlocation[1] < -90) throw new Error('lat must be a number between -90 and 90!');
+    const venuesCollection = await venues();
+    const venuesArr = await venuesCollection.find({
+      coordinates:
+      {
+        $geoWithin:
+          { $centerSphere: [[userlocation[0], userlocation[1]], radius / 3963.2] }
+      }
+    }).toArray();
+    if (!venuesArr || venuesArr.length === 0) throw new Error(`No venues found with a ${radiusinput} mile radius`);
+    return venuesArr;
+  },
+
   async createVenue(name, city, state, country, lat, lng) {
     if (typeof name !== 'string' || name.trim() === '') throw new Error('name must be a non-empty string');
     if (typeof city !== 'string' || city.trim() === '') throw new Error('city must be a non-empty string');
