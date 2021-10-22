@@ -182,27 +182,32 @@ const addBeerToVenue = (venueName, beerId) => {
     }
 }
 
-const getBeersByFilter = (filter) => {
-    console.log(Object.keys(filter));
-    for (let i = 0; i < Object.keys(filter).length; i++) {
-        if (filter.keys[i] === null) {
-            filter.keys[i] = true;
-        }
-    }
 
-    let beerList = [];
 
-    if (filter === null) {
+const getBeersByFilter = (filters) => {
+
+    let beerList;
+
+    if (filters === null) {
         throw new Error('You must provide a filter to query') 
     }
     else {
+        beerList = fakeBeers.filter(beer => filters['type'] === undefined ? beer : beer['type'].toLowerCase().includes(filters['type'].toLowerCase()))
+                            .filter(beer => filters['gloablRatingScore'] === undefined ? beer : beer['gloablRatingScore'] >= filters['gloablRatingScore'])
+                            .filter(beer => filters['minAbv'] === undefined ? beer : beer['abv'] >= filters['minAbv'])
+                            .filter(beer => filters['maxAbv'] === undefined ? beer : beer['abv'] <= filters['maxAbv'])
+                            .filter(beer => filters['minIbu'] === undefined ? beer : beer['ibu'] >= filters['minIbu'])
+                            .filter(beer => filters['maxIbu'] === undefined ? beer : beer['ibu'] <= filters['maxIbu'])
 
     }
+
     if (beerList.length === 0 ) {
-        throw new Error('No beers found with that filter');
-    }
 
-    return Promise.resolve(beerList);
+        throw new Error('No beers found with that filter');
+    } 
+    else {
+        return Promise.resolve(beerList);
+    }
 
 
 

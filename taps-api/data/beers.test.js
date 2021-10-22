@@ -181,9 +181,15 @@ describe('test add beer to venue', () => {
 
 describe('test getting beers by filter', () => {
 
-    test('get filtered beer list with one criterion', async () => {
-        getBeersByFilter( {gloablRatingScore: 2 } ).then(result => {
-            expect(result.length).toBe(1);  
+    test('get filtered beer list with one filter', async () => {
+        getBeersByFilter( {type: 'IPA'} ).then(result => {
+            expect(result[0]['name']).toBe('Artois Stella');  
+        });
+    });
+
+    test('get filtered beer list with all filters', async () => {
+        getBeersByFilter( {type: 'Sour', minAbv: 2.0, maxAbv: 4.0, minIbu: 0, maxIbu: 10, gloablRatingScore: 3.0}).then(result => {
+            expect(result[0]['name']).toBe('Stella Stella');
         });
     });
 });
