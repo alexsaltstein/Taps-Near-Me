@@ -12,7 +12,7 @@ const { getVenueById, getVenueByName } = require('./venues');
 const fakeBeers = [
     {
         "_id": "1", 
-        "abv": "5", 
+        "abv": 5, 
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -22,7 +22,7 @@ const fakeBeers = [
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
         "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "ibu": 24, 
         "name": "Stella Artois", 
         "servingType": "Draft", 
         "type": "Pilsner - Other", 
@@ -30,7 +30,7 @@ const fakeBeers = [
     },
     {
         "_id": "2", 
-        "abv": "5", 
+        "abv": 7, 
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -39,16 +39,16 @@ const fakeBeers = [
         "breweryState": "Vlaanderen", 
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
-        "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "gloablRatingScore": 3.66, 
+        "ibu": 55, 
         "name": "Artois Stella", 
         "servingType": "Draft", 
-        "type": "Pilsner - Other", 
+        "type": "IPA - American", 
         "untappdWebsite": "https://untappd.com/beer/4010"
     },
     {
         "_id": "3", 
-        "abv": "5", 
+        "abv": 3, 
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -58,10 +58,10 @@ const fakeBeers = [
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
         "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "ibu": 5, 
         "name": "Stella Stella", 
         "servingType": "Draft", 
-        "type": "Pilsner - Other", 
+        "type": "Sour - Berliner Weisse", 
         "untappdWebsite": "https://untappd.com/beer/4010"
     }
 ];
@@ -109,7 +109,6 @@ const SERVING_TYPES = [
 
 const getBeerById = (id) => {
     if (id === null) {
-        Promise.reject(new Error("No id provided"));
         throw new Error("No id provided");
     }
     else {
@@ -118,14 +117,12 @@ const getBeerById = (id) => {
                 return Promise.resolve(fakeBeers[i]);
             }
         }
-        Promise.reject(new Error("No beer with that id found"));
         throw new Error("No beer with that id found")
     }
 }
 
 const getBeerByName = (name) => {
     if (name === null) {
-        Promise.reject(new Error("No name provided"));
         throw new Error("No name provided");
         
     }
@@ -135,7 +132,6 @@ const getBeerByName = (name) => {
                 return Promise.resolve(fakeBeers[i]);
             }
         }
-        Promise.reject(new Error("No beer with that name found"));
         throw new Error("No beer with that name found");
         
     }
@@ -143,7 +139,6 @@ const getBeerByName = (name) => {
 
 const getAllBeers = (beers) => {
     if (beers.length === 0) {
-        Promise.reject(new Error("No beers found"));
         throw new Error("No beers found");
     }
     else {
@@ -153,11 +148,9 @@ const getAllBeers = (beers) => {
 
 const addBeerToVenue = (venueName, beerId) => {
     if(venueName === null) {
-        Promise.reject(new Error("No name provided"));
         throw new Error("No name provided");
     }
     else if (beerId === null) {
-        Promise.reject();
         throw new Error("No beerId provided");
     }
     else {
@@ -179,7 +172,6 @@ const addBeerToVenue = (venueName, beerId) => {
         }
         
         if (venue['beersAvailable'].includes(beer["beerId"])) {
-            Promise.reject();
             throw new Error('Failed to add beer to venue');
         }
         else {
@@ -190,7 +182,29 @@ const addBeerToVenue = (venueName, beerId) => {
     }
 }
 
-const getBeersByFilter = () => {
+const getBeersByFilter = (filter) => {
+    console.log(Object.keys(filter));
+    for (let i = 0; i < Object.keys(filter).length; i++) {
+        if (filter.keys[i] === null) {
+            filter.keys[i] = true;
+        }
+    }
+
+    let beerList = [];
+
+    if (filter === null) {
+        throw new Error('You must provide a filter to query') 
+    }
+    else {
+
+    }
+    if (beerList.length === 0 ) {
+        throw new Error('No beers found with that filter');
+    }
+
+    return Promise.resolve(beerList);
+
+
 
 }
 

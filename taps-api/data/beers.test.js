@@ -23,7 +23,7 @@ jest.mock('./venues')
 const fakeBeers = [
     {
         "_id": "1", 
-        "abv": "5", 
+        "abv": 5,
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -33,7 +33,7 @@ const fakeBeers = [
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
         "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "ibu": 24,
         "name": "Stella Artois", 
         "servingType": "Draft", 
         "type": "Pilsner - Other", 
@@ -41,7 +41,7 @@ const fakeBeers = [
     },
     {
         "_id": "2", 
-        "abv": "5", 
+        "abv": 6,
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -50,16 +50,16 @@ const fakeBeers = [
         "breweryState": "Vlaanderen", 
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
-        "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "gloablRatingScore": 3.60, 
+        "ibu": "48", 
         "name": "Artois Stella", 
         "servingType": "Draft", 
-        "type": "Pilsner - Other", 
+        "type": "IPA - American", 
         "untappdWebsite": "https://untappd.com/beer/4010"
     },
     {
         "_id": "3", 
-        "abv": "5", 
+        "abv": 2.5, 
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -69,10 +69,10 @@ const fakeBeers = [
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
         "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "ibu": 10, 
         "name": "Stella Stella", 
         "servingType": "Draft", 
-        "type": "Pilsner - Other", 
+        "type": "Sour - Gose", 
         "untappdWebsite": "https://untappd.com/beer/4010"
     }
 ];
@@ -181,8 +181,8 @@ describe('test add beer to venue', () => {
 
 describe('test getting beers by filter', () => {
 
-    test('get filtered beer list', async () => {
-        getBeersByFilter().then(result => {
+    test('get filtered beer list with one criterion', async () => {
+        getBeersByFilter( {gloablRatingScore: 2 } ).then(result => {
             expect(result.length).toBe(1);  
         });
     });
