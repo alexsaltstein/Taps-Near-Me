@@ -12,7 +12,7 @@ const { getVenueById, getVenueByName } = require('./venues');
 const fakeBeers = [
     {
         "_id": "1", 
-        "abv": "5", 
+        "abv": 5, 
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -22,7 +22,7 @@ const fakeBeers = [
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
         "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "ibu": 24, 
         "name": "Stella Artois", 
         "servingType": "Draft", 
         "type": "Pilsner - Other", 
@@ -30,7 +30,7 @@ const fakeBeers = [
     },
     {
         "_id": "2", 
-        "abv": "5", 
+        "abv": 7, 
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -39,16 +39,16 @@ const fakeBeers = [
         "breweryState": "Vlaanderen", 
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
-        "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "gloablRatingScore": 3.66, 
+        "ibu": 55, 
         "name": "Artois Stella", 
         "servingType": "Draft", 
-        "type": "Pilsner - Other", 
+        "type": "IPA - American", 
         "untappdWebsite": "https://untappd.com/beer/4010"
     },
     {
         "_id": "3", 
-        "abv": "5", 
+        "abv": 3, 
         "bid": "4010", 
         "breweryCity": "Leuven", 
         "breweryCountry": "Belgium", 
@@ -58,10 +58,10 @@ const fakeBeers = [
         "breweryUrl": "https://untappd.com/brewery/265", 
         "flavorProfiles": "", 
         "gloablRatingScore": 3.26, 
-        "ibu": "24", 
+        "ibu": 5, 
         "name": "Stella Stella", 
         "servingType": "Draft", 
-        "type": "Pilsner - Other", 
+        "type": "Sour - Berliner Weisse", 
         "untappdWebsite": "https://untappd.com/beer/4010"
     }
 ];
@@ -182,13 +182,35 @@ const addBeerToVenue = async (venueName, beerId) => {
     }
 }
 
-const getBeersByFilter = async (filter) => {
-    if (filter === true) {
-        return Promise.resolve('waiting for beer filter function test');
+
+
+const getBeersByFilter = (filters) => {
+
+    let beerList;
+
+    if (filters === null) {
+        throw new Error('You must provide a filter to query') 
     }
     else {
-        throw new Error('no filter provided');
+        beerList = fakeBeers.filter(beer => filters['type'] === undefined ? beer : beer['type'].toLowerCase().includes(filters['type'].toLowerCase()))
+                            .filter(beer => filters['gloablRatingScore'] === undefined ? beer : beer['gloablRatingScore'] >= filters['gloablRatingScore'])
+                            .filter(beer => filters['minAbv'] === undefined ? beer : beer['abv'] >= filters['minAbv'])
+                            .filter(beer => filters['maxAbv'] === undefined ? beer : beer['abv'] <= filters['maxAbv'])
+                            .filter(beer => filters['minIbu'] === undefined ? beer : beer['ibu'] >= filters['minIbu'])
+                            .filter(beer => filters['maxIbu'] === undefined ? beer : beer['ibu'] <= filters['maxIbu'])
+
     }
+
+    if (beerList.length === 0 ) {
+
+        throw new Error('No beers found with that filter');
+    } 
+    else {
+        return Promise.resolve(beerList);
+    }
+
+
+
 }
 
 const createBeer = (name, breweryName,

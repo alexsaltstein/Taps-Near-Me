@@ -6,6 +6,7 @@ exports[`renders correctly 1`] = `
 >
   <div
     className="css-view-1dbjc4n r-alignSelf-k200y r-cursor-1loqt21 r-justifyContent-1777fci r-left-1t68eob r-position-u8s1d r-top-12pp1o0 r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr"
+    data-focusable={true}
     onClick={[Function]}
     onContextMenu={[Function]}
     onKeyDown={[Function]}
@@ -34,7 +35,6 @@ exports[`renders correctly 1`] = `
             "filter": "url(#tint-0)",
           }
         }
-        suppressHydrationWarning={true}
       />
       <svg
         style={
@@ -66,6 +66,7 @@ exports[`renders correctly 1`] = `
   <div
     className="css-text-901oao"
     dir="auto"
+    onClick={[Function]}
   >
     Filter Screen
   </div>
