@@ -192,6 +192,14 @@ describe('test getting beers by filter', () => {
             expect(result[0]['name']).toBe('Stella Stella');
         });
     });
+
+    test('throw error if no filter is provided', async () => {
+        expect(() => getBeersByFilter(null).toThrow('No filter provided'));
+    });
+
+    test('throw error if no beers of that filter are found', async () => {
+        expect(() => getBeersByFilter( {gloablRatingScore: 4.99} )).toThrow('No beers found');
+    })
 });
 
 describe('test creating a new beer', () => {

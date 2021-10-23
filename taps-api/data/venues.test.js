@@ -61,7 +61,7 @@ describe('test the createVenue function', () => {
 
     test('add new venue successfully', async () => {
         createVenue('My Bar', 'Hoboken', 'NJ', 'USA', '41.0000', '70.0000').then(result => {
-            expect(result['_id'].toBe('4'));
+            expect(result['_id']).toBe('4');
         });
     });
 
