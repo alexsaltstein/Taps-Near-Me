@@ -14,6 +14,5 @@ export default setStatusBarColor = () => {
       setBottomColor(top);
     }
   }
-
   return [setColor];
 }

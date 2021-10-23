@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import BackButton from '../widgets/BackButton';
+  
 
 const FilterScreen = ({navigation}) => {
+
   return (
     <View style={styles.container}>
       <BackButton navigation={navigation}/>
