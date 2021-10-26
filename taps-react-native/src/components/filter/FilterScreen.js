@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
+<<<<<<< HEAD
 import ImageInput from './ImageInput';
 import NumberInput from './NumberInput';
 import SliderInput from './SliderInput';
@@ -30,6 +31,12 @@ const FilterScreen = ({ navigation }) => {
     })
   }, [])
 
+=======
+  
+
+const FilterScreen = ({navigation}) => {
+
+>>>>>>> 0d83c962f916e7acd4c1ccf5797e8bc0fbd99779
   return (
     <View style={styles.container}>
       <BackButton navigation={navigation} color={COLORS.white} />
