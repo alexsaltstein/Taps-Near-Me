@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0, 
     textAlign: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: 5,
   }
 })
 
