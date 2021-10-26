@@ -85,7 +85,9 @@ const VerificationScreen = ({ navigation }) => {
             style={styles.dateInputContainer}
             onPress={() => handleOnPress()}
             activeOpacity={1}>
-            <Text style={styles.dateText}>
+            <Text
+            style={styles.dateText}
+            testID='Verification.DOB'>
               {'MMDDYYYY'.split('').map((val, i) => {
                 let ret = '';
                 if (i < text.length) {
@@ -101,6 +103,7 @@ const VerificationScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            testID='Verification.Submit'
             onPress={() => onSubmit()}
             style={styles.buttonContainer}>
             <Text style={styles.buttonText}>

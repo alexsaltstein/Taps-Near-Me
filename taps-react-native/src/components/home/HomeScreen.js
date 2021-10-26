@@ -26,18 +26,18 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.buttonsContainer}>
           {
             [{ icon: filter, to: 'Filter' },
-            { icon: settings, to: 'Settings' }].map(i => (
+            { icon: settings, to: 'Settings'}].map(i => (
               <NavIcons
                 key={i.to}
                 source={i.icon}
                 to={i.to}
-                navigation={navigation} />
+                navigation={navigation}/>
             ))
           }
         </View>
       </View>
       <Text>What are we looking to drink?</Text>
-      <TouchableOpacity onPress={()=>{navigation.navigate('Map')}}>
+      <TouchableOpacity testID='Map.Button' onPress={()=>{navigation.navigate('Map')}}>
         <Text>Map</Text>
       </TouchableOpacity>
     </View>

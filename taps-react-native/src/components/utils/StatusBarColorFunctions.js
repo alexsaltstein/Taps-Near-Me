@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { statusBarColor, bottomBarColor } from '../../atoms';
 
-export default setStatusBarColor = () => {
+const setStatusBarColor = () => {
   const [statusColor, setStatusColor] = useRecoilState(statusBarColor);
   const [bottomColor, setBottomColor] = useRecoilState(bottomBarColor);
 
@@ -16,3 +16,5 @@ export default setStatusBarColor = () => {
   }
   return [setColor];
 }
+
+export default setStatusBarColor;
