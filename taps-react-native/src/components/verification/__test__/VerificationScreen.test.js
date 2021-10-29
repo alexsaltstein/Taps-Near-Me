@@ -3,7 +3,8 @@ import React from 'react';
 import renderer, { act } from 'react-test-renderer';
 import VerificationScreen from '../VerificationScreen';
 import { RecoilRoot } from 'recoil';
-import { render, fireEvent, screen } from '@testing-library/react-native'
+import { render, fireEvent } from '@testing-library/react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import ReactDOM from 'react-dom';
 
 const mockNavigation = {
@@ -24,8 +25,8 @@ test('renders default elements', () => {
 
 });
 
-test('display error if the user is not 21', () => {
-  const { getByTestId } = render(<RecoilRoot><VerificationScreen navigation= {mockNavigation}/></RecoilRoot>);
-  fireEvent.changeText(getByTestId('Verification.DOB'), '10012021');
-  fireEvent.press(getByTestId('Verification.Submit'));
-})
+// test('display error if the user is not 21', () => {
+//   const { getByTestId } = render(<RecoilRoot><VerificationScreen navigation= {mockNavigation}/></RecoilRoot>);
+//   fireEvent.changeText(getByTestId('Verification.DOB'), '10012021');
+//   fireEvent.press(getByTestId('Verification.Submit'));
+// })

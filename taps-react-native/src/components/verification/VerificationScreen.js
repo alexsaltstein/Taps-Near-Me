@@ -111,7 +111,7 @@ const VerificationScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
           <Spacing vertical={10} />
-          <Text style={styles.legalText}>By entering this app you are agreeing to our <ClickableText text="Terms of Service" url="https://www.google.com" /> and <ClickableText text="Privacy Policy" url="https://www.google.com" /> </Text>
+          <Text style={styles.legalText}>By entering this app you are agreeing to our <ClickableText text="Terms of Service" url="https://www.google.com" testID='Click.Service'/> and <ClickableText text="Privacy Policy" url="https://www.google.com" /> </Text>
         </SlideInContainer>
       </View>
       <Text style={styles.disclaimerText}>
