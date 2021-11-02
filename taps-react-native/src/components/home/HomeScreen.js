@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
 import Logo from '../widgets/Logo';
 import filter from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
@@ -38,19 +38,23 @@ const HomeScreen = ({ navigation }) => {
           }
         </View>
       </View>
-      <Text>How to Use Taps Near Me</Text>
-      <Text>1. Click on the Filter Icon</Text>
-      <Text>2. Choose your desired search flter</Text>
-      <Text>ABV Range: How strong do you want your beer to be?</Text>
-      <Text>IBU Range: How bitter do you want your beer to be?</Text>
-      <Text>Style: What type do you want your beer to be?</Text>
-      <Text>Minimum Global Rating: How good do you want your beer to be?</Text>
-      <Text>Distance: How far do you want your beer to be?</Text>
-      <Text>3. Save your search flter</Text>
-      <Text>4. Click on the Map Icon</Text>
-      <Text>5. Find where the taps are near you!</Text>
-      <Text>No taps found? No problem! Just refine your search until taps are found.</Text>
-      <Text>There are currently over 150 beers available!</Text>
+      <Text style={styles.headlineText}>How to Use</Text>
+      <View style={styles.filterContainer}>
+        <Text style={styles.filterDescriptionText}>1. Click on the Filter Icon <Image style={styles.filterIconDisplay} source={filter}/></Text>
+        <Text style={styles.filterDescriptionText}>2. Select your desired search filter</Text>
+        <View style={styles.filterOptionsDisplay}>
+          <Text>ABV Range</Text>
+          <Text>IBU Range</Text>
+          <Text>Style</Text>
+          <Text>Minimum Global Rating</Text>
+          <Text>Distance</Text>
+        </View>
+        <Text style={styles.filterDescriptionText}>3. Save your search filter by pressing "Save"</Text>
+        <Text style={styles.filterDescriptionText}>4. Click on the Map Icon <Image style={styles.filterIconDisplay} source={map}/></Text>
+        <Text style={styles.filterDescriptionText}>5. Find where the taps are near you!</Text>
+        <Text style={styles.additionalText}>No taps found? No problem! Just refine your search until taps are found.</Text>
+        <Text style={styles.additionalText}>There are currently over 150 beers available!</Text>
+      </View>
     </View>
   );
 };
@@ -67,7 +71,26 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center', 
+    justifyContent: 'flex-start'
+  }, 
+  headlineText: {
+    fontSize: 32, 
+    padding: 8
+  },
+  filterDescriptionText: {
+    fontSize: 20,
+    paddingBottom: 8,
+  },
+  filterIconDisplay: {
+    width: 20,
+    height: 20
+  },
+  filterOptionsDisplay: {
+    paddingHorizontal: 22
+  },
+  additionalText: {
+    fontSize: 24
   }
 })
 export default HomeScreen;

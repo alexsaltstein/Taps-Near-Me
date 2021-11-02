@@ -15,7 +15,7 @@ const NavIcons = ({ source, to, navigation }) => {
 
 const styles = StyleSheet.create({
   navButton: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 8,
   },
   navIcon: {
     width: 40,
