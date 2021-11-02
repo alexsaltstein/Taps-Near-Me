@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 import { SHADOWS } from '../../styles/shadows';
@@ -11,9 +10,10 @@ import ErrorToast from '../widgets/ErrorToast';
 import { handleError } from '../utils/ErrorFunctions';
 import useDateOfBirth from './useDateOfBirth';
 import setStatusBarColor from '../utils/StatusBarColorFunctions';
+import getAge from './utils/getAge';
 
 
-const VerificationScreen = ({ navigation }) => {
+const VerificationScreen = ({ navigation, ...props }) => {
   const [error, setError] = React.useState(null);
   const [dateOfBirth, setDateOfBirth] = useDateOfBirth();
   const [text, setText] = React.useState(dateOfBirth);
@@ -35,12 +35,7 @@ const VerificationScreen = ({ navigation }) => {
   const onSubmit = () => {
     // add validation
     if (text.length === DATE_LENGTH) {
-      const MM = text.substring(0, 2);
-      const DD = text.substring(2, 4);
-      const YYYY = text.substring(4);
-      const years = moment(new Date())
-        .diff(`${YYYY}-${MM}-${DD}`,
-          'years', false);
+      const years = getAge(text);
       if (years >= 21) {
         setDateOfBirth(text);
         navigation.navigate('Home');
@@ -86,8 +81,7 @@ const VerificationScreen = ({ navigation }) => {
             onPress={() => handleOnPress()}
             activeOpacity={1}>
             <Text
-            style={styles.dateText}
-            testID='Verification.DOB'>
+            style={styles.dateText}>
               {'MMDDYYYY'.split('').map((val, i) => {
                 let ret = '';
                 if (i < text.length) {
@@ -103,7 +97,6 @@ const VerificationScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            testID='Verification.Submit'
             onPress={() => onSubmit()}
             style={styles.buttonContainer}>
             <Text style={styles.buttonText}>

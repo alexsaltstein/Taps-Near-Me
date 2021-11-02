@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n r-cursor-1loqt21 r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr"
+  data-focusable={true}
+  onClick={[Function]}
+  onContextMenu={[Function]}
+  onKeyDown={[Function]}
+  style={
+    Object {
+      "WebkitTransitionDuration": "0s",
+      "transitionDuration": "0s",
+    }
+  }
+  tabIndex="0"
+>
+  <div
+    className="css-view-1dbjc4n"
+    style={
+      Object {
+        "backgroundColor": "rgba(255,255,255,1.00)",
+        "borderBottomLeftRadius": "2.5px",
+        "borderBottomRightRadius": "2.5px",
+        "borderTopLeftRadius": "2.5px",
+        "borderTopRightRadius": "2.5px",
+        "height": "5px",
+        "marginBottom": "5px",
+        "marginLeft": "5px",
+        "marginRight": "5px",
+        "marginTop": "5px",
+        "width": "5px",
+      }
+    }
+  />
+</div>
+`;

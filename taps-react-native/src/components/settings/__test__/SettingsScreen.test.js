@@ -4,12 +4,13 @@ import renderer, { act } from 'react-test-renderer';
 import SettingsScreen from '../SettingsScreen';
 import { render, fireEvent } from '@testing-library/react-native'
 import { RecoilRoot } from 'recoil';
+import Constants from 'expo-constants';
 import ReactDOM from 'react-dom';
 
 const mockNavigation = {
     navigate: jest.fn(),
     addListener: jest.fn()
-}
+};
 
 test('renders correctly', () => {
     const tree = renderer.create(<RecoilRoot><SettingsScreen navigation={mockNavigation}/></RecoilRoot>).toJSON();
