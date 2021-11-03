@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import Logo from '../widgets/Logo';
 import filter from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
@@ -43,11 +43,13 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.filterDescriptionText}>1. Click on the Filter Icon <Image style={styles.filterIconDisplay} source={filter}/></Text>
         <Text style={styles.filterDescriptionText}>2. Select your desired search filter</Text>
         <View style={styles.filterOptionsDisplay}>
-          <Text>ABV Range</Text>
-          <Text>IBU Range</Text>
-          <Text>Style</Text>
-          <Text>Minimum Global Rating</Text>
-          <Text>Distance</Text>
+          <ul>
+            <Text>ABV Range</Text>
+            <Text>IBU Range</Text>
+            <Text>Style</Text>
+            <Text>Minimum Global Rating</Text>
+            <Text>Distance</Text>
+          </ul>
         </View>
         <Text style={styles.filterDescriptionText}>3. Save your search filter by pressing "Save"</Text>
         <Text style={styles.filterDescriptionText}>4. Click on the Map Icon <Image style={styles.filterIconDisplay} source={map}/></Text>
