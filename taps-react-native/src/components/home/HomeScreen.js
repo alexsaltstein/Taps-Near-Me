@@ -40,23 +40,22 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <Text style={styles.headlineText}>How to Use</Text>
       <View style={styles.filterContainer}>
-        <Text style={styles.filterDescriptionText}>1. Click on the Filter Icon <Image style={styles.filterIconDisplay} source={filter}/></Text>
+        <Text style={styles.filterDescriptionText}>1. Tap on the Filter Icon    <Image style={styles.filterIconDisplay} source={filter}/></Text>
         <Text style={styles.filterDescriptionText}>2. Select your desired search filter</Text>
         <View style={styles.filterOptionsDisplay}>
-          <ul>
-            <Text>ABV Range</Text>
-            <Text>IBU Range</Text>
-            <Text>Style</Text>
-            <Text>Minimum Global Rating</Text>
-            <Text>Distance</Text>
-          </ul>
+            <Text style={styles.filterDescriptionText}>{'\u2022'}  ABV Range</Text>
+            <Text style={styles.filterDescriptionText}>{'\u2022'}  IBU Range</Text>
+            <Text style={styles.filterDescriptionText}>{'\u2022'}  Style</Text>
+            <Text style={styles.filterDescriptionText}>{'\u2022'}  Minimum Global Rating</Text>
+            <Text style={styles.filterDescriptionText}>{'\u2022'}  Distance</Text>
         </View>
         <Text style={styles.filterDescriptionText}>3. Save your search filter by pressing "Save"</Text>
-        <Text style={styles.filterDescriptionText}>4. Click on the Map Icon <Image style={styles.filterIconDisplay} source={map}/></Text>
+        <Text style={styles.filterDescriptionText}>4. Tap on the Map Icon   <Image style={styles.filterIconDisplay} source={map}/></Text>
         <Text style={styles.filterDescriptionText}>5. Find where the taps are near you!</Text>
-        <Text style={styles.additionalText}>No taps found? No problem! Just refine your search until taps are found.</Text>
-        <Text style={styles.additionalText}>There are currently over 150 beers available!</Text>
       </View>
+      <Text style={styles.additionalText}>No taps found? No problem!</Text> 
+      <Text style={styles.additionalText}>Just refine your search until taps are found.</Text>
+      <Text style={styles.additionalText}>There are currently over 150 beers available!</Text>
     </View>
   );
 };
@@ -64,7 +63,9 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'flex-start',
+    backgroundColor: COLORS.green,
+    alignItems: 'center', 
+    justifyContent: 'flex-start'
   },
   header: {
     flexDirection: 'row',
@@ -78,21 +79,32 @@ const styles = StyleSheet.create({
   }, 
   headlineText: {
     fontSize: 32, 
-    padding: 8
+    paddingBottom: 16,
+    paddingVertical: 8,
+    textAlign: 'left', 
+    justifyContent: 'flex-start'
   },
   filterDescriptionText: {
     fontSize: 20,
-    paddingBottom: 8,
+    paddingVertical: 8, 
+    paddingHorizontal: 12
   },
   filterIconDisplay: {
     width: 20,
     height: 20
   },
   filterOptionsDisplay: {
-    paddingHorizontal: 22
+    paddingLeft: 22
   },
   additionalText: {
-    fontSize: 24
+    fontSize: 24, 
+    paddingHorizontal: 22, 
+    textAlign: 'left'
+  }, 
+  filterContainer: {
+    backgroundColor: COLORS.white,
+    paddingVertical: 8, 
+    borderRadius: 5
   }
 })
 export default HomeScreen;
