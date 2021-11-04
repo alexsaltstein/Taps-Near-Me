@@ -6,23 +6,23 @@ import ImageInput from './ImageInput';
 import NumberInput from './NumberInput';
 import SliderInput from './SliderInput';
 import setStatusBarColor from '../utils/StatusBarColorFunctions';
+import useFilter from '../utils/useFilterFunctions';
 import TypeInput from './TypeInput';
 import { SHADOWS } from '../../styles/shadows';
+import { ABVS, IBUS } from './consts';
 
 const FilterScreen = ({ navigation }) => {
   const [setColor] = setStatusBarColor();
+  const [filter, setFilter] = useFilter();
 
-  const [type, setType] = React.useState('');
+  const [type, setType] = React.useState(filter.type || '');
+  const [radius, setRadius] = React.useState(filter.radius || 0);
+  const [rating, setRating] = React.useState(filter.rating || -1);
+  const [minABVIndex, setMinABVIndex] = React.useState(filter.minABV ? ABVS.indexOf(filter.minABV) : -1);
+  const [maxABVIndex, setMaxABVIndex] = React.useState(filter.maxABV ? ABVS.indexOf(filter.maxABV) : -1);
+  const [minIBUIndex, setMinIBUIndex] = React.useState(filter.minIBU ? IBUS.indexOf(filter.minIBU) : -1);
+  const [maxIBUIndex, setMaxIBUIndex] = React.useState(filter.maxIBU ? IBUS.indexOf(filter.maxIBU) : -1);
 
-  const [radius, setRadius] = React.useState(0);
-
-  const [rating, setRating] = React.useState(-1);
-
-  const [maxABVIndex, setMaxABVIndex] = React.useState(-1);
-  const [minABVIndex, setMinABVIndex] = React.useState(-1);
-
-  const [maxIndex, setMaxIndex] = React.useState(-1);
-  const [minIndex, setMinIndex] = React.useState(-1);
 
 
   React.useEffect(() => {
@@ -32,11 +32,27 @@ const FilterScreen = ({ navigation }) => {
   }, []);
 
   const doReset = () => {
-    alert('reset');
+    setFilter({});
+    setType('');
+    setRadius(0);
+    setRating(-1);
+    setMinABVIndex(-1);
+    setMaxABVIndex(-1);
+    setMinIBUIndex(-1);
+    setMaxIBUIndex(-1);
   }
 
   const doSubmit = () => {
-    alert('submit');
+    //do error check of max and min here
+    setFilter({
+      ...(type !== '' && {type}),
+      ...(radius !== 0 && {radius}),
+      ...(rating !== -1 && {rating}),
+      ...(minABVIndex !== -1 && {minABV: ABVS[minABVIndex]}),
+      ...(maxABVIndex !== -1 && {maxABV: ABVS[maxABVIndex]}),
+      ...(minIBUIndex !== -1 && {minIBU: IBUS[minIBUIndex]}),
+      ...(maxIBUIndex !== -1 && {maxIBU: IBUS[maxIBUIndex]}),
+    })
   }
 
   return (
@@ -61,14 +77,14 @@ const FilterScreen = ({ navigation }) => {
           setMinIndex={setMinABVIndex}
           maxIndex={maxABVIndex}
           setMaxIndex={setMaxABVIndex}
-          vals={['<4', '5', '6', '7', '8>']}
+          vals={ABVS}
           label="abv" />
         <NumberInput
-          minIndex={minIndex}
-          setMinIndex={setMinIndex}
-          maxIndex={maxIndex}
-          setMaxIndex={setMaxIndex}
-          vals={['<20', '30', '40', '50', '60>']}
+          minIndex={minIBUIndex}
+          setMinIndex={setMinIBUIndex}
+          maxIndex={maxIBUIndex}
+          setMaxIndex={setMaxIBUIndex}
+          vals={IBUS}
           label="ibu" />
       </View>
       <View style={styles.buttonsContainer}>

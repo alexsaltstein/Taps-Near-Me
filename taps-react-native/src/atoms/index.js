@@ -21,7 +21,7 @@ export const userLocation = atom({
   default: null
 })
 
-export const filter = atom({
-  key: 'filter',
+export const filterData = atom({
+  key: 'filterData',
   default: {}
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import Logo from '../widgets/Logo';
-import filter from '../../../assets/navigation/adjust-alt.png';
+import filterIcon from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
 import NavIcons from '../widgets/NavIcons';
 import setStatusBarColor from '../utils/StatusBarColorFunctions';
@@ -10,12 +10,14 @@ import { handleError } from '../utils/ErrorFunctions';
 import ErrorToast from '../widgets/ErrorToast';
 import { COLORS } from '../../styles/COLORS';
 import useUserLocation from '../utils/useUserLocationFunctions';
+import useFilter from '../utils/useFilterFunctions';
 import LoadingPartial from '../widgets/LoadingPartial';
 
 const HomeScreen = ({ navigation }) => {
   const [setColor] = setStatusBarColor();
   const [error, setError] = React.useState(null);
   const [location, setLocation] = useUserLocation();
+  const [filter, setFilter] = useFilter();
 
   React.useEffect(() => {
     (async () => {
@@ -46,7 +48,7 @@ const HomeScreen = ({ navigation }) => {
         <Logo />
         <View style={styles.buttonsContainer}>
           {
-            [{ icon: filter, to: 'Filter' },
+            [{ icon: filterIcon, to: 'Filter' },
             { icon: settings, to: 'Settings' }].map(i => (
               <NavIcons
                 key={i.to}
@@ -66,6 +68,14 @@ const HomeScreen = ({ navigation }) => {
           <LoadingPartial /> :
           <Text>{`lat: ${location.lat}, lng: ${location.lng}`}</Text>
         }
+      </View>
+      <View>
+        {Object.keys(filter).map(f => {
+          return (
+            <Text key={f}>{f} : {filter[f]}</Text>
+          )
+        })}
+        {Object.keys(filter).length === 0 && <Text>No filter</Text>}
       </View>
     </View >
   );

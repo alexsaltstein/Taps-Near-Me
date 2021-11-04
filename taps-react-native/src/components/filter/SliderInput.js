@@ -9,6 +9,10 @@ const SliderInput = ({ label, curr, setCurr }) => {
   const [thumbColor, setThumbColor] = React.useState(COLORS.white);
   const [display, setDisplay] = React.useState(curr);
 
+  React.useEffect(() => {
+    setDisplay(curr);
+  },[curr])
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -17,7 +21,7 @@ const SliderInput = ({ label, curr, setCurr }) => {
       </View>
       <Slider
         style={styles.sliderContainer}
-        minimumValue={1}
+        minimumValue={0}
         step={1}
         maximumValue={100}
         minimumTrackTintColor={COLORS.white}
