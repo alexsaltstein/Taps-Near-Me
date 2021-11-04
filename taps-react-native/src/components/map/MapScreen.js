@@ -32,7 +32,7 @@ const MapScreen = ({ navigation }) => {
     const offset = Math.floor(event.nativeEvent.contentOffset.x);
     const newPage = Math.floor(offset / totalWidth);
     if (scrolling && newPage >= 0 && page !== newPage && newPage < mapPoints.length) {
-      goToLocation(mapPoints[newPage].lat, mapPoints[newPage].lng);
+      goToLocation(mapPoints[newPage].coordinates[1], mapPoints[newPage].coordinates[0]);
       setPage(newPage);
       setScrolling(false);
     }
@@ -45,7 +45,7 @@ const MapScreen = ({ navigation }) => {
       const currPage = Math.floor(currOff / totalWidth);
       if (currPage !== page) {
         setPage(currPage);
-        goToLocation(mapPoints[currPage].lat, mapPoints[currPage].lng);
+        goToLocation(mapPoints[currPage].coordinates[1], mapPoints[currPage].coordinates[0]);
       }
     }
   }, [currOff])
@@ -58,15 +58,15 @@ const MapScreen = ({ navigation }) => {
     mapRef.current?.animateToRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: 1,
-      longitudeDelta: 1,
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05,
     })
   }
 
   const scrollToPosition = (num) => {
     const pos = num * Dimensions.get('window').width;
     scrollRef.current?.scrollTo({ x: pos, y: 0, animated: true });
-    goToLocation(mapPoints[num].lat, mapPoints[num].lng);
+    goToLocation(mapPoints[num].coordinates[1], mapPoints[num].coordinates[0]);
     setPage(num);
   }
 
@@ -103,16 +103,16 @@ const MapScreen = ({ navigation }) => {
           <MapView style={styles.map}
             ref={mapRef}
             initialRegion={mapPoints.length !== 0 ? {
-              latitude: mapPoints[0].lat,
-              longitude: mapPoints[0].lng,
-              latitudeDelta: mapPoints[0].lat,
-              longitudeDelta: mapPoints[0].lng,
+              latitude: mapPoints[0].coordinates[1],
+              longitude: mapPoints[0].coordinates[0],
+              latitudeDelta: 0.1,
+              longitudeDelta: 0.1,
             } :
               {
                 latitude: 40.7440,
-                longitude: 74.0325,
-                latitudeDelta: 40.7440,
-                longitudeDelta: 74.0325,
+                longitude: -74.0325,
+                latitudeDelta: 1,
+                longitudeDelta: 1,
               }
             }>
             {mapPoints.map((marker, index) => (
@@ -143,8 +143,9 @@ const MapScreen = ({ navigation }) => {
                 mapPoints.map((val, index) => (
                   <ScrollPages
                     key={'scrollPages-' + index}
-                    title={val.title}
-                    navigation={navigation} />
+                    title={val.name}
+                    navigation={navigation}
+                    id={val._id} />
                 ))
               }
             </ScrollView>

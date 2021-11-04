@@ -10,6 +10,8 @@ const COLORS = {
   lightgray: '#bbbbbb',
   red: '#E24242',
   blue: '#3490dc',
+  gold: '#DAA520',
+  transgray: '#bbbbbb40',
   transWhite: '#FFFFFF20'
 }
 

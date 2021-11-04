@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import * as Location from 'expo-location';
 import Logo from '../widgets/Logo';
 import filter from '../../../assets/navigation/adjust-alt.png';
@@ -9,11 +9,13 @@ import setStatusBarColor from '../utils/StatusBarColorFunctions';
 import { handleError } from '../utils/ErrorFunctions';
 import ErrorToast from '../widgets/ErrorToast';
 import { COLORS } from '../../styles/COLORS';
+import useUserLocation from '../utils/useUserLocationFunctions';
+import LoadingPartial from '../widgets/LoadingPartial';
 
 const HomeScreen = ({ navigation }) => {
   const [setColor] = setStatusBarColor();
   const [error, setError] = React.useState(null);
-  const [location, setLocation] = React.useState(null);
+  const [location, setLocation] = useUserLocation();
 
   React.useEffect(() => {
     (async () => {
@@ -24,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      setLocation(location.coords.latitude, location.coords.longitude);
     })();
   }, []);
 
@@ -35,11 +37,11 @@ const HomeScreen = ({ navigation }) => {
         setColor(COLORS.white);
       },
     );
-  },[])
+  }, [])
 
   return (
     <View style={styles.container}>
-      <ErrorToast error={error}/>
+      <ErrorToast error={error} />
       <View style={styles.header}>
         <Logo />
         <View style={styles.buttonsContainer}>
@@ -56,12 +58,16 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
       <Text>What are we looking to drink?</Text>
-      <TouchableOpacity onPress={()=>{navigation.navigate('Map')}}>
+      <TouchableOpacity onPress={() => { navigation.navigate('Map') }}>
         <Text>Map</Text>
-        <Text>{location?.coords && 
-              `lat: ${location.coords.latitude}, lng: ${location.coords.longitude}`}</Text>
       </TouchableOpacity>
-    </View>
+      <View>
+        {!location ?
+          <LoadingPartial /> :
+          <Text>{`lat: ${location.lat}, lng: ${location.lng}`}</Text>
+        }
+      </View>
+    </View >
   );
 };
 

@@ -19,7 +19,6 @@ const NumberInput = ({ minIndex, maxIndex, setMinIndex, setMaxIndex, vals, label
                   (minIndex > maxIndex ? COLORS.gray :
                     (index < maxIndex && index >= minIndex) || (minIndex <= maxIndex && index === minIndex) ? COLORS.lightpurple : COLORS.white) :
                   minIndex !== -1 && index >= minIndex ? COLORS.lightpurple : COLORS.white,
-                ...SHADOWS.button,
                 paddingHorizontal: 20,
                 paddingVertical: 10,
                 borderRadius: 5,
@@ -47,7 +46,6 @@ const NumberInput = ({ minIndex, maxIndex, setMinIndex, setMaxIndex, vals, label
                   (minIndex > maxIndex ? COLORS.gray :
                     (index > minIndex && index <= maxIndex) || (minIndex <= maxIndex && index === maxIndex) ? COLORS.lightpurple : COLORS.white) :
                   maxIndex !== -1 && index <= maxIndex ? COLORS.lightpurple : COLORS.white,
-                ...SHADOWS.button,
                 paddingHorizontal: 20,
                 paddingVertical: 10,
                 borderRadius: 5,

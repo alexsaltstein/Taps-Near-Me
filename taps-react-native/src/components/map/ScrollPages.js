@@ -2,15 +2,14 @@ import React from 'react';
 import { View, TouchableOpacity, Text, Dimensions, StyleSheet } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 
-const ScrollPages = ({ title, distance = '0.7mi', navigation }) => {
+const ScrollPages = ({ title, navigation, id }) => {
   return (
     <View style={styles.scrollPage}>
       <TouchableOpacity style={styles.beerResultContainer}
-        onPress={() => navigation.navigate('Venue', { id: '1231245' })}
+        onPress={() => navigation.navigate('Venue', { id: id })}
         activeOpacity={1}>
         <Text style={styles.beerResultCarrot}>⟩</Text>
         <Text style={styles.beerResultTitle}>{title}</Text>
-        <Text>{distance}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '-90deg' }]
   },
   beerResultTitle: {
-    fontSize: 25,
+    fontSize: 18,
     fontFamily: 'open-sans-semi'
   },
 });

@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
-<<<<<<< HEAD
 import ImageInput from './ImageInput';
 import NumberInput from './NumberInput';
 import SliderInput from './SliderInput';
 import setStatusBarColor from '../utils/StatusBarColorFunctions';
 import TypeInput from './TypeInput';
+import { SHADOWS } from '../../styles/shadows';
 
 const FilterScreen = ({ navigation }) => {
   const [setColor] = setStatusBarColor();
@@ -29,16 +29,18 @@ const FilterScreen = ({ navigation }) => {
     navigation.addListener('focus', () => {
       setColor(COLORS.purple);
     })
-  }, [])
+  }, []);
 
-=======
-  
+  const doReset = () => {
+    alert('reset');
+  }
 
-const FilterScreen = ({navigation}) => {
+  const doSubmit = () => {
+    alert('submit');
+  }
 
->>>>>>> 0d83c962f916e7acd4c1ccf5797e8bc0fbd99779
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <BackButton navigation={navigation} color={COLORS.white} />
       <Text style={styles.title}>Map Filter</Text>
       <View style={styles.formContainer}>
@@ -69,7 +71,19 @@ const FilterScreen = ({navigation}) => {
           vals={['<20', '30', '40', '50', '60>']}
           label="ibu" />
       </View>
-    </View>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity
+          onPress={() => doReset()}
+          style={[styles.button, { backgroundColor: COLORS.red }]}>
+          <Text style={styles.buttonText}>Reset</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => doSubmit()}
+          style={[styles.button, { backgroundColor: COLORS.green }]}>
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   )
 }
 
@@ -88,6 +102,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  button: {
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    borderRadius: 5,
+    ...SHADOWS.button
+  },
+  buttonText: {
+    color: COLORS.white,
+    fontSize: 20,
+    fontFamily: 'open-sans-semi'
+  }
 })
 
 export default FilterScreen;
