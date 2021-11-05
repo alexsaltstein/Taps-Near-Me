@@ -22,8 +22,20 @@ router.get('/filter', async (req, res) => {
     if (req.query.type) {
       filter.type = req.query.type;
     }
-    if (req.query.minGlobalRatingScore) {
-      filter.minGlobalRatingScore = req.query.minGlobalRatingScore;
+    if (req.query.minRating) {
+      filter.minRating = req.query.minRating;
+    }
+    if (req.query.minABV) {
+      filter.minABV = req.query.minABV;
+    }
+    if (req.query.maxABV) {
+      filter.maxABV = req.query.maxABV;
+    }
+    if (req.query.minIBU) {
+      filter.minIBU = req.query.minIBU;
+    }
+    if (req.query.maxIBU) {
+      filter.maxIBU = req.query.maxIBU;
     }
     const beer = await beersData.getBeersByFilter(filter);
     return res.status(200).json({
