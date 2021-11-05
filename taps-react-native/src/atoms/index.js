@@ -15,3 +15,13 @@ export const bottomBarColor = atom({
   key: 'bottomBarColor',
   default: COLORS.white
 });
+
+export const userLocation = atom({
+  key: 'userLocation',
+  default: null
+})
+
+export const filterData = atom({
+  key: 'filterData',
+  default: {}
+});
