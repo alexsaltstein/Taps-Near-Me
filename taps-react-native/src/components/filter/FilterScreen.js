@@ -44,7 +44,7 @@ const FilterScreen = ({ navigation }) => {
   }
 
   const doSubmit = () => {
-    //do error check of max and min here
+    // when filtering need to remove the < and > before sending
     if (minABVIndex !== -1 && maxABVIndex !== -1 && minABVIndex > maxABVIndex) {
       handleError('Error: min ABV must be less than max ABV', setError)
     } else if (minIBUIndex !== -1 && maxIBUIndex !== -1 && minIBUIndex > maxIBUIndex) {
