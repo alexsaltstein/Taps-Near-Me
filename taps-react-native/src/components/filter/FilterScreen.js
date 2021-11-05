@@ -10,10 +10,13 @@ import useFilter from '../utils/useFilterFunctions';
 import TypeInput from './TypeInput';
 import { SHADOWS } from '../../styles/shadows';
 import { ABVS, IBUS } from './consts';
+import { handleError } from '../utils/ErrorFunctions';
+import ErrorToast from '../widgets/ErrorToast';
 
 const FilterScreen = ({ navigation }) => {
   const [setColor] = setStatusBarColor();
   const [filter, setFilter] = useFilter();
+  const [error, setError] = React.useState(null);
 
   const [type, setType] = React.useState(filter.type || '');
   const [radius, setRadius] = React.useState(filter.radius || 0);
@@ -22,8 +25,6 @@ const FilterScreen = ({ navigation }) => {
   const [maxABVIndex, setMaxABVIndex] = React.useState(filter.maxABV ? ABVS.indexOf(filter.maxABV) : -1);
   const [minIBUIndex, setMinIBUIndex] = React.useState(filter.minIBU ? IBUS.indexOf(filter.minIBU) : -1);
   const [maxIBUIndex, setMaxIBUIndex] = React.useState(filter.maxIBU ? IBUS.indexOf(filter.maxIBU) : -1);
-
-
 
   React.useEffect(() => {
     navigation.addListener('focus', () => {
@@ -44,19 +45,28 @@ const FilterScreen = ({ navigation }) => {
 
   const doSubmit = () => {
     //do error check of max and min here
-    setFilter({
-      ...(type !== '' && {type}),
-      ...(radius !== 0 && {radius}),
-      ...(rating !== -1 && {rating}),
-      ...(minABVIndex !== -1 && {minABV: ABVS[minABVIndex]}),
-      ...(maxABVIndex !== -1 && {maxABV: ABVS[maxABVIndex]}),
-      ...(minIBUIndex !== -1 && {minIBU: IBUS[minIBUIndex]}),
-      ...(maxIBUIndex !== -1 && {maxIBU: IBUS[maxIBUIndex]}),
-    })
+    if (minABVIndex !== -1 && maxABVIndex !== -1 && minABVIndex > maxABVIndex) {
+      handleError('Error: min ABV must be less than max ABV', setError)
+    } else if (minIBUIndex !== -1 && maxIBUIndex !== -1 && minIBUIndex > maxIBUIndex) {
+      handleError('Error: min IBU must be less than max IBU', setError)
+    } else {
+      setFilter({
+        ...(type !== '' && { type }),
+        ...(radius !== 0 && { radius }),
+        ...(rating !== -1 && { rating }),
+        ...(minABVIndex !== -1 && { minABV: ABVS[minABVIndex] }),
+        ...(maxABVIndex !== -1 && { maxABV: ABVS[maxABVIndex] }),
+        ...(minIBUIndex !== -1 && { minIBU: IBUS[minIBUIndex] }),
+        ...(maxIBUIndex !== -1 && { maxIBU: IBUS[maxIBUIndex] }),
+      })
+    }
   }
 
   return (
     <ScrollView style={styles.container}>
+      <View style={styles.center}>
+        <ErrorToast error={error} />
+      </View>
       <BackButton navigation={navigation} color={COLORS.white} />
       <Text style={styles.title}>Map Filter</Text>
       <View style={styles.formContainer}>
@@ -107,6 +117,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.purple,
+  },
+  center: {
+    width: '100%',
+    alignItems: 'center',
+    zIndex: 100
   },
   title: {
     fontFamily: 'open-sans-semi',
