@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image, ScrollView } from 'react-native';
 import Logo from '../widgets/Logo';
 import filter from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
@@ -7,6 +7,7 @@ import map from '../../../assets/navigation/map.png'
 import NavIcons from '../widgets/NavIcons';
 import setStatusBarColor from '../utils/StatusBarColorFunctions';
 import { COLORS } from '../../styles/COLORS';
+import { SHADOWS } from '../../styles/shadows';
 
 const HomeScreen = ({ navigation }) => {
   const [setColor] = setStatusBarColor();
@@ -38,24 +39,32 @@ const HomeScreen = ({ navigation }) => {
           }
         </View>
       </View>
-      <Text style={styles.headlineText}>How to Use</Text>
-      <View style={styles.filterContainer}>
-        <Text style={styles.filterDescriptionText}>1. Tap on the Filter Icon    <Image style={styles.filterIconDisplay} source={filter}/></Text>
-        <Text style={styles.filterDescriptionText}>2. Select your desired search filter</Text>
-        <View style={styles.filterOptionsDisplay}>
-            <Text style={styles.filterDescriptionText}>{'\u2022'}  ABV Range</Text>
-            <Text style={styles.filterDescriptionText}>{'\u2022'}  IBU Range</Text>
-            <Text style={styles.filterDescriptionText}>{'\u2022'}  Style</Text>
-            <Text style={styles.filterDescriptionText}>{'\u2022'}  Minimum Global Rating</Text>
-            <Text style={styles.filterDescriptionText}>{'\u2022'}  Distance</Text>
+      <ScrollView>
+        <Text style={styles.headlineText}>How to Use</Text>
+        <View style={styles.filterContainer}>
+          <View style={styles.imageTextContainer}>
+          <Text style={styles.filterDescriptionText}>1. Tap on the Filter Icon</Text>
+          <Image style={styles.filterIconDisplay} source={filter}/>
         </View>
-        <Text style={styles.filterDescriptionText}>3. Save your search filter by pressing "Save"</Text>
-        <Text style={styles.filterDescriptionText}>4. Tap on the Map Icon   <Image style={styles.filterIconDisplay} source={map}/></Text>
-        <Text style={styles.filterDescriptionText}>5. Find where the taps are near you!</Text>
-      </View>
-      <Text style={styles.additionalText}>No taps found? No problem!</Text> 
-      <Text style={styles.additionalText}>Just refine your search until taps are found.</Text>
-      <Text style={styles.additionalText}>There are currently over 150 beers available!</Text>
+          <Text style={styles.filterDescriptionText}>2. Select your desired search filter</Text>
+          <View style={styles.filterOptionsDisplay}>
+              <Text style={styles.filterDescriptionText}>{'\u2022'}  ABV Range</Text>
+              <Text style={styles.filterDescriptionText}>{'\u2022'}  IBU Range</Text>
+              <Text style={styles.filterDescriptionText}>{'\u2022'}  Style</Text>
+              <Text style={styles.filterDescriptionText}>{'\u2022'}  Minimum Global Rating</Text>
+              <Text style={styles.filterDescriptionText}>{'\u2022'}  Distance</Text>
+          </View>
+          <Text style={styles.filterDescriptionText}>3. Save your search filter by pressing "Save"</Text>
+          <View style={styles.imageTextContainer}>
+            <Text style={styles.filterDescriptionText}>4. Tap on the Map Icon</Text>
+            <Image style={styles.filterIconDisplay} source={map}/>
+          </View>
+          <Text style={styles.filterDescriptionText}>5. Find where the taps are near you!</Text>
+        </View>
+        <Text style={styles.additionalText}>No taps found? No problem!</Text> 
+        <Text style={styles.additionalText}>Just refine your search until taps are found.</Text>
+        <Text style={styles.additionalText}>There are currently over 150 beers available!</Text>
+      </ScrollView>
     </View>
   );
 };
@@ -81,13 +90,13 @@ const styles = StyleSheet.create({
     fontSize: 32, 
     paddingBottom: 16,
     paddingVertical: 8,
-    textAlign: 'left', 
-    justifyContent: 'flex-start'
+    paddingHorizontal: 12,
+    alignSelf: 'flex-start'
   },
   filterDescriptionText: {
     fontSize: 20,
-    paddingVertical: 8, 
-    paddingHorizontal: 12
+    paddingVertical: 12, 
+    paddingHorizontal: 12, 
   },
   filterIconDisplay: {
     width: 20,
@@ -103,8 +112,12 @@ const styles = StyleSheet.create({
   }, 
   filterContainer: {
     backgroundColor: COLORS.white,
-    paddingVertical: 8, 
-    borderRadius: 5
+    borderRadius: 5,
+    ...SHADOWS.button
+  }, 
+  imageTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 })
 export default HomeScreen;
