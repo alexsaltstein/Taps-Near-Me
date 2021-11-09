@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     paddingVertical: 8,
     paddingHorizontal: 12,
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start', 
+    color: COLORS.white
   },
   filterDescriptionText: {
     fontSize: 20,
@@ -106,9 +107,12 @@ const styles = StyleSheet.create({
     paddingLeft: 22
   },
   additionalText: {
-    fontSize: 24, 
-    paddingHorizontal: 22, 
-    textAlign: 'left'
+    fontSize: 20, 
+    paddingHorizontal: 12, 
+    paddingTop: 20,
+    paddingBottom: 24,
+    textAlign: 'left', 
+    color: COLORS.white,
   }, 
   filterContainer: {
     backgroundColor: COLORS.white,
