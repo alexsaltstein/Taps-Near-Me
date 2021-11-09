@@ -1,11 +1,13 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, StyleSheet, Image, ScrollView } from 'react-native';
 import Logo from '../widgets/Logo';
-import filterIcon from '../../../assets/navigation/adjust-alt.png';
+import filters from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
 import map from '../../../assets/navigation/map.png'
 import NavIcons from '../widgets/NavIcons';
 import setStatusBarColor from '../utils/StatusBarColorFunctions';
+import useUserLocation from '../utils/useUserLocationFunctions'
+import useFilter from '../utils/useFilterFunctions'
 import { handleError } from '../utils/ErrorFunctions';
 import ErrorToast from '../widgets/ErrorToast';
 import { COLORS } from '../../styles/COLORS';
@@ -46,7 +48,7 @@ const HomeScreen = ({ navigation }) => {
         <Logo />
         <View style={styles.buttonsContainer}>
           {
-            [{ icon: filter, to: 'Filter' },
+            [{ icon: filters, to: 'Filter' },
             { icon: settings, to: 'Settings' }, 
             { icon: map, to: 'Map'}].map(i => (
               <NavIcons
