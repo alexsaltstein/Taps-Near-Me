@@ -45,12 +45,13 @@ module.exports = {
   {
     type,
     minGlobalRatingScore,
+
   }
   */
   async getBeersByFilter(filter) {
     if (!filter) throw new Error('You must provide a filter to query');
     const beersCollection = await beers();
-    const beersArr = await beersCollection.find({
+    const query = {
       ...(
         filter.type && {
           type: {
@@ -59,12 +60,44 @@ module.exports = {
           }
         }),
       ...(
-        filter.minGlobalRatingScore && {
+        filter.minRating && {
           gloablRatingScore: {
-            $gte: parseFloat(filter.minGlobalRatingScore),
+            $gte: parseFloat(filter.minRating),
           }
-        })
-    }).toArray();
+        }),
+    };
+
+    if (filter.minABV && filter.maxABV){
+      query.abv = {
+        $gte: parseFloat(filter.minABV),
+        $lte: parseFloat(filter.maxABV),
+      }
+    }else if (filter.minABV){
+      query.abv = {
+        $gte: parseFloat(filter.minABV),
+      }
+    }else if (filter.maxABV){
+      query.abv = {
+        $lte: parseFloat(filter.maxABV),
+      }
+    }
+
+    if (filter.minIBU && filter.maxIBU){
+      query.ibu = {
+        $gte: parseFloat(filter.minIBU),
+        $lte: parseFloat(filter.maxIBU),
+      }
+    }else if (filter.minIBU){
+      query.ibu = {
+        $gte: parseFloat(filter.minIBU),
+      }
+    }else if (filter.maxIBU){
+      query.ibu = {
+        $lte: parseFloat(filter.maxIBU),
+      }
+    }
+    const beersArr = await beersCollection.find(query).toArray();
+    console.log(filter);
     if (!beersArr || beersArr.length === 0) throw new Error('No beers found with that filter');
     return beersArr;
   },
