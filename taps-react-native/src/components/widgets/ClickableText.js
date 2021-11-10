@@ -4,7 +4,8 @@ import {Linking, StyleSheet, Text, TouchableWithoutFeedback} from 'react-native'
 const ClickableText = ({text, url}) => {
   return (
     <TouchableWithoutFeedback
-      onPress={()=>Linking.openURL(url)}>
+      onPress={()=>Linking.openURL(url)}
+      testID={'ClickableText.Open'}>
       <Text style={styles.text}>
         {text}
       </Text>

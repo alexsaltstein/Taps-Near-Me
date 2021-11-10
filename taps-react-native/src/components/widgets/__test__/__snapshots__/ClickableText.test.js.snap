@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-text-901oao r-textDecorationLine-1ddef8g"
+  data-focusable={true}
+  data-testid="ClickableText.Open"
+  dir="auto"
+  onClick={[Function]}
+  onContextMenu={[Function]}
+  onKeyDown={[Function]}
+  tabIndex="0"
+/>
+`;
