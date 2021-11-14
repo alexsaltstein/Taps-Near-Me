@@ -4,6 +4,7 @@ import { TouchableOpacity, Image, StyleSheet } from 'react-native';
 const NavIcons = ({ source, to, navigation }) => {
   return (
     <TouchableOpacity
+      testID = {'NavIcons.Button'}
       onPress={() => navigation.navigate(to)}
       style={styles.navButton}>
       <Image

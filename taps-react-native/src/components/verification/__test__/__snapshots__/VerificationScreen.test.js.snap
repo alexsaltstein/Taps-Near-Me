@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n r-alignItems-1awozwy r-backgroundColor-11gtz8v r-flex-13awgt0 r-justifyContent-1777fci"
+>
+  <div
+    className="css-view-1dbjc4n r-flex-1qq2a9e"
+  >
+    <input
+      autoCapitalize="sentences"
+      autoComplete="on"
+      autoCorrect="on"
+      className="css-textinput-11aywtz r-opacity-orgf3d"
+      data-focusable={true}
+      dir="auto"
+      enterkeyhint="done"
+      inputMode="numeric"
+      maxLength={8}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onSelect={[Function]}
+      readOnly={false}
+      spellCheck={true}
+      value=""
+    />
+    <div
+      className="css-view-1dbjc4n r-alignItems-1awozwy r-justifyContent-1777fci"
+      style={
+        Object {
+          "WebkitTransform": "translateY(0px)",
+          "backgroundColor": "rgba(255,255,255,1.00)",
+          "borderBottomLeftRadius": "15px",
+          "borderBottomRightRadius": "15px",
+          "borderTopLeftRadius": "15px",
+          "borderTopRightRadius": "15px",
+          "boxShadow": "0px 5px 20px rgba(0,0,0,0.15)",
+          "transform": "translateY(0px)",
+          "width": "75%",
+        }
+      }
+    >
+      <div
+        className="css-view-1dbjc4n r-position-u8s1d r-top-1ki14p2 r-zIndex-1s3egr7"
+      />
+      <div
+        className="css-view-1dbjc4n r-paddingHorizontal-1j3t67a"
+      >
+        <div
+          className="css-view-1dbjc4n r-alignItems-obd0qt r-borderBottomColor-mbada r-borderBottomWidth-opedn5 r-flexDirection-18u37iz r-paddingHorizontal-utggzx r-paddingVertical-atwnbb"
+        >
+          <div
+            className="css-view-1dbjc4n r-flexBasis-1mlwlqe r-overflow-1udh08x r-zIndex-417010"
+            style={
+              Object {
+                "height": "50px",
+                "width": "50px",
+              }
+            }
+          >
+            <div
+              className="css-view-1dbjc4n r-backgroundColor-1niwhzg r-backgroundPosition-vvn4in r-backgroundRepeat-u6sd8q r-backgroundSize-ehq7j7 r-bottom-1p0dtai r-height-1pi2tsx r-left-1d2f490 r-position-u8s1d r-right-zchlnj r-top-ipm5af r-width-13qz1uu r-zIndex-1wyyakw"
+            />
+          </div>
+          <div
+            className="css-text-901oao r-fontFamily-1cu1fuh r-fontSize-adyw6z"
+            dir="auto"
+            onClick={[Function]}
+          >
+            Taps near me
+          </div>
+        </div>
+      </div>
+      <div
+        className="css-text-901oao r-fontFamily-18ismyl r-fontSize-1i10wst"
+        dir="auto"
+        onClick={[Function]}
+      >
+        Can I see some ID?
+      </div>
+      <div
+        className="css-text-901oao r-fontFamily-cnezl3 r-fontSize-a023e6 r-paddingHorizontal-1pn2ns4 r-paddingTop-tskmnb r-textAlign-q4m81j"
+        dir="auto"
+        onClick={[Function]}
+      >
+        You must be of legal drinking age to use this app.
+      </div>
+      <div
+        className="css-view-1dbjc4n r-cursor-1loqt21 r-padding-1pcd2l5 r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr"
+        data-focusable={true}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onKeyDown={[Function]}
+        style={
+          Object {
+            "WebkitTransitionDuration": "0s",
+            "transitionDuration": "0s",
+          }
+        }
+        tabIndex="0"
+      >
+        <div
+          className="css-text-901oao r-fontFamily-cnezl3 r-fontSize-1ra0lkn"
+          data-testid="Verification.DOB"
+          dir="auto"
+          onClick={[Function]}
+        >
+          M
+          M/
+          D
+          D/
+          Y
+          Y
+          Y
+          Y
+        </div>
+      </div>
+      <div
+        className="css-view-1dbjc4n r-backgroundColor-1gpbwnf r-borderRadius-1f0042m r-boxShadow-1w7efqn r-cursor-1loqt21 r-elevation-1quu1zo r-paddingHorizontal-1p1nz3t r-paddingVertical-atwnbb r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr"
+        data-focusable={true}
+        data-testid="Verification.Submit"
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onKeyDown={[Function]}
+        style={
+          Object {
+            "WebkitTransitionDuration": "0s",
+            "transitionDuration": "0s",
+          }
+        }
+        tabIndex="0"
+      >
+        <div
+          className="css-text-901oao r-color-jwli3a r-fontFamily-18ismyl r-fontSize-1i10wst"
+          dir="auto"
+          onClick={[Function]}
+        >
+          Enter Now
+        </div>
+      </div>
+      <div
+        className="css-view-1dbjc4n"
+        style={
+          Object {
+            "paddingBottom": "10px",
+            "paddingTop": "10px",
+          }
+        }
+      />
+      <div
+        className="css-text-901oao r-fontFamily-cnezl3 r-fontSize-1enofrn r-paddingBottom-k8qxaj r-paddingHorizontal-1pn2ns4 r-textAlign-q4m81j"
+        dir="auto"
+        onClick={[Function]}
+      >
+        By entering this app you are agreeing to our 
+        <span
+          className="css-text-901oao css-textHasAncestor-16my406 r-textDecorationLine-1ddef8g"
+          data-focusable={true}
+          onClick={[Function]}
+          onContextMenu={[Function]}
+          onKeyDown={[Function]}
+          tabIndex="0"
+        >
+          Terms of Service
+        </span>
+         and 
+        <span
+          className="css-text-901oao css-textHasAncestor-16my406 r-textDecorationLine-1ddef8g"
+          data-focusable={true}
+          onClick={[Function]}
+          onContextMenu={[Function]}
+          onKeyDown={[Function]}
+          tabIndex="0"
+        >
+          Privacy Policy
+        </span>
+         
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-text-901oao r-bottom-1p0dtai r-fontFamily-cnezl3 r-fontSize-1enofrn r-justifyContent-1777fci r-position-u8s1d r-textAlign-q4m81j"
+    dir="auto"
+    onClick={[Function]}
+  >
+    You must be at least 21 years of age to drink alcoholic beverages. Do not drink and drive, drink to excess or drink with certain medications or medical conditions. For more information, please visit 
+    <span
+      className="css-text-901oao css-textHasAncestor-16my406 r-textDecorationLine-1ddef8g"
+      data-focusable={true}
+      onClick={[Function]}
+      onContextMenu={[Function]}
+      onKeyDown={[Function]}
+      tabIndex="0"
+    >
+      this website
+    </span>
+     or contact your health provider.
+  </div>
+</div>
+`;

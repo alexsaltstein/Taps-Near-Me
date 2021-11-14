@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "WebkitAlignItems": "center",
+      "WebkitBoxAlign": "center",
+      "WebkitBoxPack": "center",
+      "WebkitJustifyContent": "center",
+      "WebkitTransform": "translateY(0px)",
+      "alignItems": "center",
+      "backgroundColor": "rgba(255,255,255,1.00)",
+      "borderBottomLeftRadius": "15px",
+      "borderBottomRightRadius": "15px",
+      "borderTopLeftRadius": "15px",
+      "borderTopRightRadius": "15px",
+      "boxShadow": "0px 5px 20px rgba(0,0,0,0.15)",
+      "justifyContent": "center",
+      "msFlexAlign": "center",
+      "msFlexPack": "center",
+      "transform": "translateY(0px)",
+      "width": "75%",
+    }
+  }
+/>
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n r-position-u8s1d r-top-1ki14p2 r-zIndex-1s3egr7"
+/>
+`;

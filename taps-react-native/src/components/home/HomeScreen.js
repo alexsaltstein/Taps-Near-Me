@@ -55,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
                 key={i.to}
                 source={i.icon}
                 to={i.to}
-                navigation={navigation} />
+                navigation={navigation}/>
             ))
           }
         </View>
