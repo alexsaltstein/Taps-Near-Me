@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { dateOfBirthState } from '../../atoms';
 
-export default useDateOfBirth = () => {
+const useDateOfBirth = () => {
  
   const [dateOfBirth, setDateOfBirth] = useRecoilState(dateOfBirthState);
 
@@ -24,3 +24,5 @@ export default useDateOfBirth = () => {
 
   return [dateOfBirth, persistSetDateOfBirth];
 }
+
+export default useDateOfBirth;

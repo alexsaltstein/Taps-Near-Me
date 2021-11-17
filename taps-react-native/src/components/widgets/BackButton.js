@@ -8,7 +8,8 @@ const BackButton = ({ color = COLORS.black, navigation, relative = false }) => {
   return (
     <TouchableOpacity 
     style={relative ? {position: 'relative'}: styles.container}
-    onPress={()=>navigation.goBack()}>
+    onPress={()=>navigation.goBack()}
+    testID={'BackButton.Navigate'}>
       <Image style={[{ tintColor: color }, styles.backImage]} source={backImage} />
     </TouchableOpacity>
   );

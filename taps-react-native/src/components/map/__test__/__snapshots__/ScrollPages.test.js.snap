@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-view-1dbjc4n r-alignItems-1awozwy r-width-16k0tzm"
+>
+  <div
+    className="css-view-1dbjc4n r-backgroundColor-14lw9ot r-borderRadius-y47klf r-cursor-1loqt21 r-padding-1sp51qo r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr r-width-xaq1zp"
+    data-focusable={true}
+    onClick={[Function]}
+    onContextMenu={[Function]}
+    onKeyDown={[Function]}
+    style={
+      Object {
+        "WebkitTransitionDuration": "0s",
+        "transitionDuration": "0s",
+      }
+    }
+    tabIndex="0"
+  >
+    <div
+      className="css-text-901oao r-alignSelf-1kihuf0 r-color-16z3b8r r-fontSize-adyw6z r-marginTop-ymp9ed r-transform-ghumyc"
+      dir="auto"
+      onClick={[Function]}
+    >
+      ⟩
+    </div>
+    <div
+      className="css-text-901oao r-fontFamily-18ismyl r-fontSize-h1js2l"
+      dir="auto"
+      onClick={[Function]}
+    />
+    <div
+      className="css-text-901oao"
+      dir="auto"
+      onClick={[Function]}
+    >
+      0.7mi
+    </div>
+  </div>
+</div>
+`;

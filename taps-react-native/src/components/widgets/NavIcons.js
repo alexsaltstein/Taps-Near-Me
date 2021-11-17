@@ -5,6 +5,7 @@ import { COLORS } from '../../styles/COLORS';
 const NavIcons = ({ source, to, navigation }) => {
   return (
     <TouchableOpacity
+      testID = {'NavIcons.Button'}
       onPress={() => navigation.navigate(to)}
       style={styles.navButton}>
       <Image
