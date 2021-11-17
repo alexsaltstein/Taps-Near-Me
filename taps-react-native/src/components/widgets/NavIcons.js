@@ -1,5 +1,6 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image, StyleSheet, Text } from 'react-native';
+import { COLORS } from '../../styles/COLORS';
 
 const NavIcons = ({ source, to, navigation }) => {
   return (

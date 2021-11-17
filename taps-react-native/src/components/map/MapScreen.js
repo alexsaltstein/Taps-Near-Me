@@ -5,7 +5,7 @@ import MapView from 'react-native-maps';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
 import NavIcons from '../widgets/NavIcons';
-import filter from '../../../assets/navigation/adjust-alt.png';
+import filterIcon from '../../../assets/navigation/adjust-alt.png';
 import { SHADOWS } from '../../styles/shadows';
 import { handleError } from '../utils/ErrorFunctions';
 import ErrorToast from '../widgets/ErrorToast';
@@ -15,6 +15,8 @@ import ScrollPages from './ScrollPages';
 import MapMarker from './MapMarker';
 import { SERVER_URL } from '../../../config';
 import setStatusBarColor from '../utils/StatusBarColorFunctions';
+import useUserLocation from '../utils/useUserLocationFunctions'
+import useFilter from '../utils/useFilterFunctions'
 
 const MapScreen = ({ navigation }) => {
   const [page, setPage] = React.useState(0);
@@ -26,6 +28,9 @@ const MapScreen = ({ navigation }) => {
   const [scrolling, setScrolling] = React.useState(false);
   const [currOff, setCurrOff] = React.useState(0);
   const [setColor] = setStatusBarColor();
+  const [userLocation, setLocation] = useUserLocation();
+  const [filter, setFilter] = useFilter();
+  const [locationNotEnabled, setLocationNotEnabled] = React.useState(false);
 
   const onScroll = (event) => {
     const totalWidth = Math.floor(Dimensions.get('window').width);
@@ -72,20 +77,32 @@ const MapScreen = ({ navigation }) => {
 
   const getMapData = async () => {
     try {
-      const res = await axios.get(`${SERVER_URL}/api/beers/markers`);
-      setMapPoints(res.data.markers);
+      setLoading(true);
+      const radius = filter.radius;
+      console.log('here', radius);
+      if (userLocation?.lat === -999) {
+        setLocationNotEnabled(true);
+        setLoading(false);
+      } else if (userLocation?.lat) {
+        const res = await axios.get(`${SERVER_URL}/api/venues/location?radius=${radius ? radius:5}&lat=${userLocation.lat}&lng=${userLocation.lng}`);
+        setMapPoints(res.data.venues);
+        setLoading(false);
+      }
     } catch (e) {
-      console.log(e.message);
       handleError('Error: Problem getting map data', setError);
+      setLoading(false);
     }
   }
-
   React.useEffect(() => {
     (async () => {
-      setLoading(true);
       await getMapData();
-      setLoading(false);
     })();
+    return function cleanup() {
+      setMapPoints([]);
+    }
+  }, [userLocation, filter]);
+
+  React.useEffect(() => {
     navigation.addListener(
       'focus',
       () => {
@@ -99,71 +116,79 @@ const MapScreen = ({ navigation }) => {
       <ErrorToast error={error} />
       {loading ?
         <Loading navigation={navigation} /> :
-        <View>
-          <MapView style={styles.map}
-            ref={mapRef}
-            initialRegion={mapPoints.length !== 0 ? {
-              latitude: mapPoints[0].coordinates[1],
-              longitude: mapPoints[0].coordinates[0],
-              latitudeDelta: 0.1,
-              longitudeDelta: 0.1,
-            } :
-              {
-                latitude: 40.7440,
-                longitude: -74.0325,
-                latitudeDelta: 1,
-                longitudeDelta: 1,
-              }
-            }>
-            {mapPoints.map((marker, index) => (
-              <MapMarker
-                key={'mapMarker-' + index}
-                marker={marker}
-                index={index}
-                page={page}
-                scrollToPosition={scrollToPosition}
-              />
-            ))}
-          </MapView>
-          <View style={styles.header}>
-            <BackButton navigation={navigation} relative />
-            <Text style={styles.title}>Beer Results</Text>
-            <NavIcons source={filter} to='Filter' navigation={navigation} />
-          </View>
-          <View style={styles.bottom}>
-            <ScrollView
-              ref={scrollRef}
-              horizontal
-              pagingEnabled
-              showsHorizontalScrollIndicator={false}
-              onScroll={onScroll}
-              onScrollBeginDrag={onScrollBeginDrag}
-              scrollEventThrottle={0}>
-              {
-                mapPoints.map((val, index) => (
-                  <ScrollPages
-                    key={'scrollPages-' + index}
-                    title={val.name}
-                    navigation={navigation}
-                    id={val._id} />
-                ))
-              }
-            </ScrollView>
-          </View>
-          <View style={styles.indicatorsContainer}>
-            {
-              mapPoints.map((_, index) => {
-                const width = index === page ? 20 : 10;
-                return (
-                  <Indicator
-                    key={'indicator-' + index}
-                    width={width}
-                    onPress={() => scrollToPosition(index)}
+        <View style={styles.flex1}>
+          {locationNotEnabled ?
+            <View style={styles.flex}>
+              <BackButton navigation={navigation} />
+              <Text style={styles.title}>Location is not enabled</Text>
+              <Text style={styles.subtitle}>Please go to settings and enable location in order to use the map :)</Text>
+            </View> :
+            <View>
+              <MapView style={styles.map}
+                ref={mapRef}
+                initialRegion={mapPoints.length !== 0 ? {
+                  latitude: mapPoints[0].coordinates[1],
+                  longitude: mapPoints[0].coordinates[0],
+                  latitudeDelta: 0.1,
+                  longitudeDelta: 0.1,
+                } :
+                  {
+                    latitude: 40.7440,
+                    longitude: -74.0325,
+                    latitudeDelta: 1,
+                    longitudeDelta: 1,
+                  }
+                }>
+                {mapPoints.map((marker, index) => (
+                  <MapMarker
+                    key={'mapMarker-' + index}
+                    marker={marker}
+                    index={index}
+                    page={page}
+                    scrollToPosition={scrollToPosition}
                   />
-                )
-              })
-            }
-          </View>
+                ))}
+              </MapView>
+              <View style={styles.header}>
+                <BackButton navigation={navigation} relative />
+                <Text style={styles.title}>Beer Results</Text>
+                <NavIcons source={filterIcon} to='Filter' navigation={navigation} />
+              </View>
+              <View style={styles.bottom}>
+                <ScrollView
+                  ref={scrollRef}
+                  horizontal
+                  pagingEnabled
+                  showsHorizontalScrollIndicator={false}
+                  onScroll={onScroll}
+                  onScrollBeginDrag={onScrollBeginDrag}
+                  scrollEventThrottle={0}>
+                  {
+                    mapPoints.map((val, index) => (
+                      <ScrollPages
+                        key={'scrollPages-' + index}
+                        title={val.name}
+                        navigation={navigation}
+                        id={val._id} />
+                    ))
+                  }
+                </ScrollView>
+              </View>
+              <View style={styles.indicatorsContainer}>
+                {
+                  mapPoints.map((_, index) => {
+                    const width = index === page ? 20 : 10;
+                    return (
+                      <Indicator
+                        key={'indicator-' + index}
+                        width={width}
+                        onPress={() => scrollToPosition(index)}
+                      />
+                    )
+                  })
+                }
+              </View>
+            </View>}
         </View>}
     </View >
   )
@@ -174,6 +199,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     backgroundColor: COLORS.white
+  },
+  flex1: {
+    flex: 1,
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+  flex: {
+    flex: 0.75,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   map: {
     width: Dimensions.get('window').width,
@@ -189,10 +224,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     ...SHADOWS.container,
+    flex: 1
   },
   title: {
     fontFamily: 'open-sans-semi',
     fontSize: 25,
+  },
+  subtitle: {
+    fontFamily: 'open-sans-italic',
+    fontSize: 20,
+    color: COLORS.gray,
+    width: '95%',
+    textAlign: 'center'
   },
   bottom: {
     position: 'absolute',

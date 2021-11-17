@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, StyleSheet, Image, ScrollView } from 'react-native';
+import * as Location from 'expo-location';
 import Logo from '../widgets/Logo';
 import filters from '../../../assets/navigation/adjust-alt.png';
 import settings from '../../../assets/navigation/settings.png';
@@ -16,7 +17,7 @@ import { SHADOWS } from '../../styles/shadows';
 const HomeScreen = ({ navigation }) => {
   const [setColor] = setStatusBarColor();
   const [error, setError] = React.useState(null);
-  const [location, setLocation] = useUserLocation();
+  const [userLocation, setLocation] = useUserLocation();
   const [filter, setFilter] = useFilter();
 
   React.useEffect(() => {
@@ -24,6 +25,7 @@ const HomeScreen = ({ navigation }) => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         handleError('Permission to access location was denied', setError);
+        setLocation(-999, -999)
         return;
       }
 
@@ -36,11 +38,11 @@ const HomeScreen = ({ navigation }) => {
     navigation.addListener(
       'focus',
       () => {
-        setColor(COLORS.white);
+        setColor(COLORS.green);
       },
     );
   }, [])
-
+  
   return (
     <View style={styles.container}>
       <ErrorToast error={error} />
@@ -60,7 +62,7 @@ const HomeScreen = ({ navigation }) => {
           }
         </View>
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.headlineText}>How to Use</Text>
         <View style={styles.filterContainer}>
           <View style={styles.imageTextContainer}>
@@ -105,7 +107,8 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     alignItems: 'center', 
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    marginLeft: -10,
   }, 
   headlineText: {
     fontSize: 32, 
