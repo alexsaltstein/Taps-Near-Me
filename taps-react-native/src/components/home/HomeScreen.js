@@ -67,7 +67,7 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.filterContainer}>
           <View style={styles.imageTextContainer}>
           <Text style={styles.filterDescriptionText}>1. Tap on the Filter Icon</Text>
-          <Image style={styles.filterIconDisplay} source={filter}/>
+          <Image style={styles.filterIconDisplay} source={filters}/>
         </View>
           <Text style={styles.filterDescriptionText}>2. Select your desired search filter</Text>
           <View style={styles.filterOptionsDisplay}>

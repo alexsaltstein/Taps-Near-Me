@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Linking, Platform } from 'react-native';
+import ClickableText from '../widgets/ClickableText';
 import { SERVER_URL } from '../../../config';
 import { COLORS } from '../../styles/COLORS';
 import BackButton from '../widgets/BackButton';
@@ -27,6 +28,10 @@ const VenueScreen = ({ navigation, route }) => {
     } catch {
       setError(true);
     }
+  }
+
+  const getWebiste = (name) => {
+    return `https://untappd.com/search?q=${encodeURIComponent(name)}&type=venues&sort=`;
   }
 
   React.useEffect(() => {
@@ -57,6 +62,7 @@ const VenueScreen = ({ navigation, route }) => {
                 <View style={styles.container}>
                   <BackButton navigation={navigation} />
                   <Text style={styles.title}>{venue.name}</Text>
+                  <ClickableText style={styles.title} text="Search for Venue on Untappd" url={ getWebiste(venue.name) }/>
                   <Spacing vertical={5}/>
                   <View style={styles.header}>
                     <Text style={styles.locationText}>Located in: {venue.city}, {venue.state}</Text>
