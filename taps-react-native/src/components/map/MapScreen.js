@@ -79,12 +79,11 @@ const MapScreen = ({ navigation }) => {
     try {
       setLoading(true);
       const radius = filter.radius;
-      console.log('here', radius);
       if (userLocation?.lat === -999) {
         setLocationNotEnabled(true);
         setLoading(false);
       } else if (userLocation?.lat) {
-        const res = await axios.get(`${SERVER_URL}/api/venues/location?radius=${radius ? radius:5}&lat=${userLocation.lat}&lng=${userLocation.lng}`);
+        const res = await axios.get(`${SERVER_URL}/api/venues/location?radius=${radius ? radius : 5}&lat=${userLocation.lat}&lng=${userLocation.lng}`);
         setMapPoints(res.data.venues);
         setLoading(false);
       }
@@ -177,13 +176,17 @@ const MapScreen = ({ navigation }) => {
               <View style={styles.indicatorsContainer}>
                 {
                   mapPoints.map((_, index) => {
-                    const width = index === page ? 20 : 10;
+                    const width = index === page ? 20 : (index <= page + 3 && index >= page - 3) ? 10 : 0;
                     return (
-                      <Indicator
-                        key={'indicator-' + index}
-                        width={width}
-                        onPress={() => scrollToPosition(index)}
-                      />
+                      <View
+                      key={'indicator-' + index}>
+                        {width !== 0 &&
+                          <Indicator
+                            width={width}
+                            onPress={() => scrollToPosition(index)}
+                          />
+                        }
+                      </View>
                     )
                   })
                 }
