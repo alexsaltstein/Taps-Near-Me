@@ -178,10 +178,10 @@ const MapScreen = ({ navigation }) => {
                   mapPoints.map((_, index) => {
                     const width = index === page ? 20 : (index <= page + 3 && index >= page - 3) ? 10 : 0;
                     return (
-                      <View>
+                      <View
+                      key={'indicator-' + index}>
                         {width !== 0 &&
                           <Indicator
-                            key={'indicator-' + index}
                             width={width}
                             onPress={() => scrollToPosition(index)}
                           />
