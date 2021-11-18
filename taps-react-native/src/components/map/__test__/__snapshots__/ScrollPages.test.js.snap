@@ -26,17 +26,10 @@ exports[`renders correctly 1`] = `
       ⟩
     </div>
     <div
-      className="css-text-901oao r-fontFamily-18ismyl r-fontSize-h1js2l"
+      className="css-text-901oao r-fontFamily-18ismyl r-fontSize-1i10wst"
       dir="auto"
       onClick={[Function]}
     />
-    <div
-      className="css-text-901oao"
-      dir="auto"
-      onClick={[Function]}
-    >
-      0.7mi
-    </div>
   </div>
 </div>
 `;

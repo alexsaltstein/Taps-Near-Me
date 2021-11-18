@@ -20,6 +20,7 @@
     "expo-app-loading": "^1.1.2",
     "expo-font": "~9.2.1",
     "expo-haptics": "~10.1.0",
+    "expo-location": "~12.1.2",
     "expo-status-bar": "~1.0.4",
     "lottie-react-native": "^4.0.2",
     "moment": "^2.29.1",
@@ -30,10 +31,9 @@
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-unordered-list": "^1.0.4",
-    "react-native-web": "~0.13.12",
+    "react-native-web": "^0.17.5",
     "react-navigation": "^4.4.4",
-    "recoil": "^0.4.1",
-    "expo-location": "~12.1.2"
+    "recoil": "^0.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

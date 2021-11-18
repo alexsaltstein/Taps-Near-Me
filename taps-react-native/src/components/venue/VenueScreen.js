@@ -29,6 +29,10 @@ const VenueScreen = ({ navigation, route }) => {
     }
   }
 
+  const getWebsite = (name) => {
+    return `https://untappd.com/search?q=${encodeURIComponent(name)}&type=venues&sort=`;
+  }
+
   React.useEffect(() => {
     (async () => {
       setLoading(true);
@@ -57,6 +61,7 @@ const VenueScreen = ({ navigation, route }) => {
                 <View style={styles.container}>
                   <BackButton navigation={navigation} />
                   <Text style={styles.title}>{venue.name}</Text>
+                  <Text style={styles.title}>{getWebsite(venue.name)}</Text>
                   <Spacing vertical={5}/>
                   <View style={styles.header}>
                     <Text style={styles.locationText}>Located in: {venue.city}, {venue.state}</Text>
