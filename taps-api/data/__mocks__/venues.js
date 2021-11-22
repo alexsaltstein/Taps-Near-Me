@@ -160,9 +160,56 @@ const createVenue = async (name, city, state, country, lat, lng) => {
 
     }
 
+const getDistance = (locationA, locationB) => {
+
+    const dlon = (locationB[0] * Math.PI / 180) - (locationA[0] * Math.PI / 180);
+    const dlat = (locationB[1] * Math.PI / 180) - (locationA[1] * Math.PI / 180);
+    const a = Math.pow(Math.sin(dlat / 2), 2) + (Math.cos(locationA[1]) * Math.cos(locationB[1]) * Math.pow(Math.sin(dlon / 2), 2));
+    const c = 2 * Math.asin(Math.min(1, Math.sqrt(a)));
+    const d = 3963.2 * c;
+    return d;
+}
+
+const getVenuesByRadius = async(location, radius) => {
+
+    let goodVenues = [];
+
+    if (!location) throw new Error('No location provided');
+    if (!radius) throw new Error('No radius provided');
+    const userlocation = location.map(item => parseFloat(item));
+    const radiusinput = parseInt(radius);
+    if (userlocation.length != 2) throw new Error('location must be an array of length 2 ([lng, lat])');
+    if (isNaN(userlocation[0]) || isNaN(userlocation[1])) throw new Error('location input for lng & lat must be numbers!');
+    if (isNaN(radiusinput)) throw new Error('radius input must be a number');
+    if (userlocation[0] > 180 || userlocation[0] < -180) throw new Error('lng must be a number between -180 and 180!');
+    if (userlocation[1] > 90 || userlocation[1] < -90) throw new Error('lat must be a number between -90 and 90!');
+
+    for (let i = 0; i < fakeVenues.length; i++) {
+
+        let venueLoc = [fakeVenues[i].lng, fakeVenues[i].lat]
+
+        if (getDistance(location, venueLoc) <= radius) {
+
+            goodVenues.push(fakeVenues[i]);
+
+        }
+    }
+
+    if (!goodVenues || goodVenues.length === 0) {
+        throw new Error(`No venues found with a ${radiusinput} mile radius`);
+    }
+    else {
+        return Promise.resolve(goodVenues);
+    }
+
+
+
+}
+
 
 module.exports = {
     getVenueById,
     getVenueByName, 
-    createVenue
+    createVenue,
+    getVenuesByRadius
 }

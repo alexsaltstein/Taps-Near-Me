@@ -3,9 +3,10 @@ const uuid = require('uuid');
 const { beers, venues } = require('../config/mongoCollections');
 const { SERVING_TYPES } = require('./consts');
 const { isValidimgURL, isValidURL } = require('./utils');
-const { getVenueByName, getVenueById, createVenue } = require('./venues');
+const { getVenueByName, getVenueById, createVenue, getVenuesByRadius } = require('./venues');
 const mongoCollections = require('../config/mongoCollections');
-const { MongoClient } = require('mongodb')
+const { MongoClient } = require('mongodb');
+const { getVenueByRadius } = require('./__mocks__/venues');
 
 jest.mock('./venues')
 
@@ -63,5 +64,32 @@ describe('test the createVenue function', () => {
 
     test('throw error when input is empty', async () => {
         expect(() => createVenue('', 'Hoboken', 'NJ', 'USA', '41.0000', '70.0000').rejects.toThrowError('name must be a non-empty string'));
+    });
+});
+
+describe('get the venues by radius', () => {
+
+    test('find venue within certain radius', async () => {
+
+        getVenuesByRadius([-74.28729, 40.99375], 5).then(result => {
+            expect(result.length).toBe(3);
+        });
+    });
+
+    test('output if no venues within radius', async () => {
+        expect(() => getVenuesByRadius([40.99375, 74.28729], 5).rejects.toThrowError(`No venues found with a 5 mile radius`));
+    });
+
+    test('output if function inputs are missing', async () => {
+        expect(() => getVenuesByRadius(null, 5).rejects.toThrowError('No location provided'));
+        expect(() => getVenuesByRadius([40.99375, 74.28729], null).rejects.toThrowError('No radius provided'));   
+    });
+
+    test('output if function inputs are not complete or incorrect type', async () => {
+        expect(() => getVenuesByRadius([40.99375], 5).rejects.toThrowError('location must be an array of length 2 ([lng, lat])'));
+        expect(() => getVenuesByRadius([40.99375, 'foo'], 5).rejects.toThrowError('location input for lng & lat must be numbers!')); 
+        expect(() => getVenuesByRadius([40.99375, 40.99375], 'foo').rejects.toThrowError('radius input must be a number'));   
+        expect(() => getVenuesByRadius([181, 40], 5).rejects.toThrowError('lng must be a number between -180 and 180!')); 
+        expect(() => getVenuesByRadius([40, 91], 5).rejects.toThrowError('lat must be a number between -90 and 90!')); 
     });
 });
