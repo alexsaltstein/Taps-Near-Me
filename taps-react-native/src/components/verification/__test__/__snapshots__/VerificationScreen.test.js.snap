@@ -103,7 +103,6 @@ exports[`renders correctly 1`] = `
       >
         <div
           className="css-text-901oao r-fontFamily-cnezl3 r-fontSize-1ra0lkn"
-          data-testid="Verification.DOB"
           dir="auto"
           onClick={[Function]}
         >
@@ -120,7 +119,6 @@ exports[`renders correctly 1`] = `
       <div
         className="css-view-1dbjc4n r-backgroundColor-1gpbwnf r-borderRadius-1f0042m r-boxShadow-1w7efqn r-cursor-1loqt21 r-elevation-1quu1zo r-paddingHorizontal-1p1nz3t r-paddingVertical-atwnbb r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr"
         data-focusable={true}
-        data-testid="Verification.Submit"
         onClick={[Function]}
         onContextMenu={[Function]}
         onKeyDown={[Function]}
@@ -158,6 +156,7 @@ exports[`renders correctly 1`] = `
         <span
           className="css-text-901oao css-textHasAncestor-16my406 r-textDecorationLine-1ddef8g"
           data-focusable={true}
+          data-testid="ClickableText.Open"
           onClick={[Function]}
           onContextMenu={[Function]}
           onKeyDown={[Function]}
@@ -169,6 +168,7 @@ exports[`renders correctly 1`] = `
         <span
           className="css-text-901oao css-textHasAncestor-16my406 r-textDecorationLine-1ddef8g"
           data-focusable={true}
+          data-testid="ClickableText.Open"
           onClick={[Function]}
           onContextMenu={[Function]}
           onKeyDown={[Function]}
@@ -181,7 +181,7 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="css-text-901oao r-bottom-1p0dtai r-fontFamily-cnezl3 r-fontSize-1enofrn r-justifyContent-1777fci r-position-u8s1d r-textAlign-q4m81j"
+    className="css-text-901oao r-bottom-1p0dtai r-fontFamily-cnezl3 r-fontSize-1enofrn r-justifyContent-1777fci r-padding-1uu6nss r-position-u8s1d r-textAlign-q4m81j"
     dir="auto"
     onClick={[Function]}
   >
@@ -189,6 +189,7 @@ exports[`renders correctly 1`] = `
     <span
       className="css-text-901oao css-textHasAncestor-16my406 r-textDecorationLine-1ddef8g"
       data-focusable={true}
+      data-testid="ClickableText.Open"
       onClick={[Function]}
       onContextMenu={[Function]}
       onKeyDown={[Function]}

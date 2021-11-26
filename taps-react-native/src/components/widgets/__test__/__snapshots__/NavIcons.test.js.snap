@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="css-view-1dbjc4n r-cursor-1loqt21 r-paddingHorizontal-1j3t67a r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr"
+  className="css-view-1dbjc4n r-cursor-1loqt21 r-paddingHorizontal-1pn2ns4 r-touchAction-1otgn73 r-transitionProperty-1i6wzkk r-userSelect-lrvibr"
   data-focusable={true}
   data-testid="NavIcons.Button"
   onClick={[Function]}

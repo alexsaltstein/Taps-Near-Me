@@ -12,6 +12,8 @@ const mockNavigation = {
     addListener: jest.fn()
 };
 
+jest.mock('expo-constants')
+
 test('renders correctly', () => {
     const tree = renderer.create(<RecoilRoot><SettingsScreen navigation={mockNavigation}/></RecoilRoot>).toJSON();
     expect(tree).toMatchSnapshot();

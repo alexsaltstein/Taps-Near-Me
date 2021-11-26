@@ -6,7 +6,6 @@ const { isValidimgURL, isValidURL } = require('./utils');
 const { getVenueByName, getVenueById, createVenue, getVenuesByRadius } = require('./venues');
 const mongoCollections = require('../config/mongoCollections');
 const { MongoClient } = require('mongodb');
-const { getVenueByRadius } = require('./__mocks__/venues');
 
 jest.mock('./venues')
 
