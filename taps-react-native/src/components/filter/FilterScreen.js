@@ -88,14 +88,14 @@ const FilterScreen = ({ navigation }) => {
           maxIndex={maxABVIndex}
           setMaxIndex={setMaxABVIndex}
           vals={ABVS}
-          label="abv" />
+          label="ABV" />
         <NumberInput
           minIndex={minIBUIndex}
           setMinIndex={setMinIBUIndex}
           maxIndex={maxIBUIndex}
           setMaxIndex={setMaxIBUIndex}
           vals={IBUS}
-          label="ibu" />
+          label="IBU" />
       </View>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
