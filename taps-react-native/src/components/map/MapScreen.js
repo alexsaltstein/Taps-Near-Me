@@ -89,7 +89,6 @@ const MapScreen = ({ navigation }) => {
         setLoading(false);
       }
     } catch (e) {
-      console.log(e.message);
       handleError('Error: Problem getting map data', setError);
       setLoading(false);
     }
