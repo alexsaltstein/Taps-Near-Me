@@ -50,7 +50,7 @@ const MapScreen = ({ navigation }) => {
       const currPage = Math.floor(currOff / totalWidth);
       if (currPage !== page) {
         setPage(currPage);
-        goToLocation(mapPoints[currPage].coordinates[1], mapPoints[currPage].coordinates[0]);
+        goToLocation(mapPoints[currPage]?.coordinates[1], mapPoints[currPage]?.coordinates[0]);
       }
     }
   }, [currOff])
@@ -78,12 +78,13 @@ const MapScreen = ({ navigation }) => {
   const getMapData = async () => {
     try {
       setLoading(true);
-      const radius = filter.radius;
+      const { radius, type, minABV, maxABV, minIBU, maxIBU, rating } = filter;
       if (userLocation?.lat === -999) {
         setLocationNotEnabled(true);
         setLoading(false);
       } else if (userLocation?.lat) {
-        const res = await axios.get(`${SERVER_URL}/api/venues/location?radius=${radius ? radius : 5}&lat=${userLocation.lat}&lng=${userLocation.lng}`);
+        const url = `${SERVER_URL}/api/venues/mappoints?radius=${radius ? radius : 5}&lat=${userLocation.lat}&lng=${userLocation.lng}&type=${type ? encodeURIComponent(type) : ''}&minRating=${rating ? rating : ''}&minABV=${minABV ? minABV : ''}&maxABV=${maxABV ? maxABV : ''}&minIBU=${minIBU ? minIBU : ''}&maxIBU=${maxIBU ? maxIBU : ''}`;
+        const res = await axios.get(url);
         setMapPoints(res.data.venues);
         setLoading(false);
       }
@@ -179,7 +180,7 @@ const MapScreen = ({ navigation }) => {
                     const width = index === page ? 20 : (index <= page + 3 && index >= page - 3) ? 10 : 0;
                     return (
                       <View
-                      key={'indicator-' + index}>
+                        key={'indicator-' + index}>
                         {width !== 0 &&
                           <Indicator
                             width={width}

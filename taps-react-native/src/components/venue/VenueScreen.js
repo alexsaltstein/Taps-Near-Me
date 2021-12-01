@@ -62,22 +62,26 @@ const VenueScreen = ({ navigation, route }) => {
                 <View style={styles.container}>
                   <BackButton navigation={navigation} />
                   <Text style={styles.title}>{venue.name}</Text>
-                  <ClickableText style={styles.title} text="Search for Venue on Untappd" url={ getWebiste(venue.name) }/>
-                  <Spacing vertical={5}/>
+                  <ClickableText style={styles.title} text="Search for Venue on Untappd" url={getWebiste(venue.name)} />
+                  <Spacing vertical={5} />
                   <View style={styles.header}>
-                    <Text style={styles.locationText}>Located in: {venue.city}, {venue.state}</Text>
-                    <TouchableOpacity 
-                    style={styles.directionsButton}
-                    onPress={ () => {
-                      if (Platform.OS === 'ios') Linking.openURL(`http://maps.apple.com/maps?q=${venue.coordinates[1]},${venue.coordinates[0]}`);
-                      else Linking.openURL(`http://maps.google.com/maps?q=${venue.coordinates[1]},${venue.coordinates[0]}`);
-                    }}
+                    <Text style={styles.locationText}>
+                      Located in:
+                    {'\n'}
+                      {venue.city}, {venue.state}
+                    </Text>
+                    <TouchableOpacity
+                      style={styles.directionsButton}
+                      onPress={() => {
+                        if (Platform.OS === 'ios') Linking.openURL(`http://maps.apple.com/maps?q=${venue.coordinates[1]},${venue.coordinates[0]}`);
+                        else Linking.openURL(`http://maps.google.com/maps?q=${venue.coordinates[1]},${venue.coordinates[0]}`);
+                      }}
                     >
                       <Image source={targetIcon} style={styles.directionsImage} />
                       <Text style={styles.directionsText}>Get Directions</Text>
                     </TouchableOpacity>
                   </View>
-                  <Spacing vertical={20}/>
+                  <Spacing vertical={20} />
                   <BeerDisplay
                     beersAvailable={venue.beersAvailable} />
                 </View>
