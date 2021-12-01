@@ -97,7 +97,6 @@ module.exports = {
       }
     }
     const beersArr = await beersCollection.find(query).toArray();
-    console.log(filter);
     if (!beersArr || beersArr.length === 0) throw new Error('No beers found with that filter');
     return beersArr;
   },

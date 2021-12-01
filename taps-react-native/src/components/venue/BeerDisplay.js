@@ -7,6 +7,7 @@ import leftStar from '../../../assets/filter/left_star.png';
 import rightStar from '../../../assets/filter/right_star.png';
 import leftStarFilled from '../../../assets/filter/left_star_filled.png';
 import rightStarFilled from '../../../assets/filter/right_star_filled.png';
+import TruncatingText from '../widgets/TruncatingText';
 
 const BeerDisplay = ({ beersAvailable }) => {
   const [servingTypeVisible, setServingTypeVisible] = React.useState(Object.keys(SERVING_TYPES)[0]);
@@ -65,9 +66,7 @@ const BeerDisplay = ({ beersAvailable }) => {
                 activeOpacity={1}
                 onPress={() => beer.untappdWebsite && Linking.openURL(beer.untappdWebsite)}>
                 <View>
-                  <Text style={styles.beerText}>
-                    {name}
-                  </Text>
+                  <TruncatingText text={name} style={styles.beerText} max={30}/>
                   <Text style={styles.type}>
                     {type}
                   </Text>
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
   },
   beerText: {
     fontSize: 15,
-    fontFamily: 'open-sans-semi'
+    fontFamily: 'open-sans-semi',
   },
   type: {
     fontFamily: 'open-sans-italic',
